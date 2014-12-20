@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 import sys
 
-#Feld = [["1","2","3","4"],["5","6","7","8"],["9","A","B","C"]]
+TestFeld = [["1","2","3","4"],["5","6","7","8"],["9","A","B","C"]]
+print ("TesFeld Länge: ", len(TestFeld), " !")
+
 
 # Feld [x][y]
 Feld = [
@@ -14,7 +16,7 @@ Feld = [
 print ( len(Feld))
 print ( len(Feld[0]))
 
-
+# die Felder sind immer eins kürzer als len() angibt, da die Zählung mit 0 begint
 xlaenge = len (Feld) - 1
 ylaenge = len (Feld[0]) -1
 
