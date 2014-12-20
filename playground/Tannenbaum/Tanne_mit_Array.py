@@ -2,6 +2,8 @@
 import sys
 
 #Feld = [["1","2","3","4"],["5","6","7","8"],["9","A","B","C"]]
+
+# Feld [x][y]
 Feld = [
     [" "," "," "," "," "," "," "],
     [" "," "," "," "," "," "," "],
@@ -9,9 +11,12 @@ Feld = [
     [" "," "," "," "," "," "," "],
     [" "," "," "," "," "," "," "]
     ]
+print ( len(Feld))
+print ( len(Feld[0]))
 
-ylaenge = 4
-xlaenge = 5
+
+xlaenge = len (Feld) - 1
+ylaenge = len (Feld[0]) -1
 
 
 
