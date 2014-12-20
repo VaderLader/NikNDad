@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+import sys
+
+#Feld = [["1","2","3","4"],["5","6","7","8"],["9","A","B","C"]]
+Feld = [
+    [" "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "],
+    [" "," "," "," "," "," "," "]
+    ]
+
+ylaenge = 4
+xlaenge = 5
+
+
+
+# Berechnung
+hoehe = 1 
+zielhoehe = 2
+#x = 2
+#while hoehe < zielhoehe:
+x = 2
+y1 = 2
+y2 = 2
+c = 1
+while x >= 0 :
+    while y1 <= y2:
+        Feld[x][y1] = "0"
+        y1 += 1
+    x -= 1
+    c += c
+    y1 -= c
+    y2 += 1
+
+
+# Ausgabe
+x = xlaenge -1
+y = 0
+while x >= 0:
+    y = 0
+    while y < ylaenge:
+        #sys.stdout.write("Feld[" + str(x)+ "][" + str(y) + "]=" + str(  (Feld[x][y])  )+ " ")
+        sys.stdout.write(str(Feld[x][y])+ "")
+        y += 1
+    sys.stdout.write("\n")
+    x -= 1
+
+
+# while hoehe < zielhoehe:
+#    y = 1
+#    while y < luft:    # sollange bis y = luft
+#        sys.stdout.write(" ")
+#        y = y + 1
+#   luft = luft - 1
+#    tanne = hoehe * 2 -1
+#    z = 0
+#    while z < tanne:
+#        sys.stdout.write("0")
+#        z = z + 1
+#
+#    sys.stdout.write("\n")
+#    hoehe = hoehe + 1
+    
