@@ -5,6 +5,8 @@ TestFeld = [["1","2","3","4"],["5","6","7","8"],["9","A","B","C"]]
 print ("TesFeld Länge: ", len(TestFeld), " !")
 print (TestFeld)
 
+for x in TestFeld:
+    print
 
 # Feld [x][y]
 Feld = [
@@ -21,7 +23,7 @@ print ( len(Feld[0]))
 xlaenge = len (Feld) - 1
 ylaenge = len (Feld[0]) -1
 
-#Live Edit by SohnyBohny :)
+#Live Edit by SohnyBohny
 
 # Berechnung
 hoehe = 1 
