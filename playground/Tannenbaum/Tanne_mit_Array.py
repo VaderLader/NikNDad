@@ -18,7 +18,7 @@ print ( len(Feld[0]))
 xlaenge = len (Feld) - 1
 ylaenge = len (Feld[0]) -1
 
-#Live Edit by SohnyBohny
+#Live Edit by SohnyBohny :)
 
 # Berechnung
 hoehe = 1 
