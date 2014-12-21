@@ -1,5 +1,5 @@
 import xmasPrint
 
 xmasPrint.xmasp('Test')
-xmasPrint.xmasp('Test2', b
-                ye = 'Tschüss')
+print('\n')
+xmasPrint.xmasp('Test2', bye = 'Tschüss')
