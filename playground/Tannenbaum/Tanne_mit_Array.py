@@ -32,32 +32,32 @@ zielhoehe = 2
 #x = 2
 #while hoehe < zielhoehe:
         
+def Berechnung():
+    x = 2
+    y1 = 2
+    y2 = 2
+    c = 1
+    while x >= 0 :
+        while y1 <= y2:
+            Feld[x][y1] = "0"
+            y1 += 1
+        x -= 1
+        c += c
+        y1 -= c
+        y2 += 1
 
-x = 2
-y1 = 2
-y2 = 2
-c = 1
-while x >= 0 :
-    while y1 <= y2:
-        Feld[x][y1] = "0"
-        y1 += 1
-    x -= 1
-    c += c
-    y1 -= c
-    y2 += 1
 
-
-# Ausgabe
-x = xlaenge -1
-y = 0
-while x >= 0:
+def Ausgabe():
+    x = xlaenge -1
     y = 0
-    while y < ylaenge:
-        #sys.stdout.write("Feld[" + str(x)+ "][" + str(y) + "]=" + str(  (Feld[x][y])  )+ " ")
-        sys.stdout.write(str(Feld[x][y])+ "")
-        y += 1
-    sys.stdout.write("\n")
-    x -= 1
+    while x >= 0:
+        y = 0
+        while y < ylaenge:
+            #sys.stdout.write("Feld[" + str(x)+ "][" + str(y) + "]=" + str(  (Feld[x][y])  )+ " ")
+            sys.stdout.write(str(Feld[x][y])+ "")
+            y += 1
+        sys.stdout.write("\n")
+        x -= 1
 
 
 # while hoehe < zielhoehe:
@@ -74,6 +74,7 @@ while x >= 0:
 #
 #    sys.stdout.write("\n")
 #    hoehe = hoehe + 1
-    
+Berechnung()
+Ausgabe()
 x = input('\nTaste drücken zum beenden')
 
