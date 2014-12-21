@@ -40,4 +40,6 @@ while stammhoehe < zielstammhoehe:
         stammbreitzaeler = stammbreitzaeler + 1
     sys.stdout.write("\n")
     stammhoehe = stammhoehe + 1
-    
+
+
+x = input('\nTaste drücken zum beenden')   
