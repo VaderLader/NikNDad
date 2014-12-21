@@ -30,6 +30,8 @@ hoehe = 1
 zielhoehe = 2
 #x = 2
 #while hoehe < zielhoehe:
+        
+
 x = 2
 y1 = 2
 y2 = 2
@@ -72,3 +74,5 @@ while x >= 0:
 #    sys.stdout.write("\n")
 #    hoehe = hoehe + 1
     
+x = input('\nTaste drücken zum beenden')
+
