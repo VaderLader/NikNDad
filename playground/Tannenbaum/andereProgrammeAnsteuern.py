@@ -20,3 +20,4 @@ print ('\n\n\nFinish')
 print (myFile.readlines()[1])
 print (myFile.readlines()[2])
 '''
+input('\n\n\n---Zum beenden bestätigen---')
