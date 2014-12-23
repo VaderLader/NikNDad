@@ -13,7 +13,8 @@ class TannenBaum:
         pass
 
     
-    # der Baum wurde schon gepflanzt ...
+    
+    # der Baum wurde   schon gepflanzt ...
     def wachsen(self):
         print ('-')
         self.hight += 1
