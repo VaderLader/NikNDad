@@ -15,6 +15,11 @@ popo.print()
 teamA = Team.Team("A-Team")
 teamB = Team.Team("B-Team")
 
+teamA.addPlayer(otto)
+teamA.addPlayer(popo)
+teamA.print
+
+
 
 print("--- Ende ---")
 
