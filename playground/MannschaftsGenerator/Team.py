@@ -15,7 +15,8 @@ class Team:
 
     def print(self):
         print('Team', self.name, 'hat', len(self.players), 'Spieler:')
-        for x in self.players:
-            #print (x.name)
-            x.print()
+        for index, element in enumerate(self.players):
+            print ('{} {}'.format(index, element.name))
+            #x.print()
         
+
