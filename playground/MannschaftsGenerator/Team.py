@@ -2,15 +2,20 @@ import Player
 
 class Team:
     '''This is a Team'''
-    players = []
+    team_counter = 0    # static member
+    
     def __init__(self, i_name = "Team name"):
         self.name = i_name
-                
-    def addPlayer(self, p): # = Player("Player made by the Team class")):
-        players.append(p)
+        self.players = []
+        Team.team_counter += 1
+        
+    def addPlayer(self, p):
+        #ToDo: Ueberpruefen ob der Spieler schon in der Mannschaft
+        self.players.append(p)
 
     def print(self):
-        print('Team', self.name, 'hat', len(players), 'Spieler:')
-        for x in players:
-            print (x)
+        print('Team', self.name, 'hat', len(self.players), 'Spieler:')
+        for x in self.players:
+            #print (x.name)
+            x.print()
         

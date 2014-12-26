@@ -8,7 +8,7 @@ popo = Player.Player("Popo")
 print("Spieler 1:")
 otto.print()
 
-print("Spiler 2:")
+print("Spieler 2:")
 popo.print()
 
 
@@ -17,8 +17,7 @@ teamB = Team.Team("B-Team")
 
 teamA.addPlayer(otto)
 teamA.addPlayer(popo)
-teamA.print
-
+teamA.print()
 
 
 print("--- Ende ---")
