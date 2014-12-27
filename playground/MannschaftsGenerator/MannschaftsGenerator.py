@@ -26,4 +26,3 @@ teamA.print()
 
 print("--- Ende ---")
 
-    
