@@ -1,3 +1,7 @@
+# To start from within PythonShell 3.4.2 type:
+#
+# exec(open("./MannschaftsGenerator.py").read())
+#
 import Team
 import Player
 
