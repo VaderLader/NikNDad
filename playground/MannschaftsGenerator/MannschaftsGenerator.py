@@ -22,7 +22,7 @@ teamB = Team.Team("B-Team")
 teamA.addPlayer(otto)
 teamA.addPlayer(popo)
 teamA.print()
-
+#
 
 print("--- Ende ---")
 
