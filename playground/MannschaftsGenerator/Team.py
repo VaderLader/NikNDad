@@ -8,15 +8,23 @@ class Team:
         self.name = i_name
         self.players = []
         Team.team_counter += 1
+        self.attackpoints = 0
+        self.keeperpoints = 0
+        self.defencepoints = 0
         
     def addPlayer(self, p):
         #ToDo: Ueberpruefen ob der Spieler schon in der Mannschaft
         self.players.append(p)
+        self.attackpoints += p.attackpoints
+        self.keeperpoints += p.keeperpoints
+        self.defencepoints += p.defencepoints
 
     def print(self):
         print('Team', self.name, 'hat', len(self.players), 'Spieler:')
         for index, element in enumerate(self.players):
             print ('{} {}'.format(index, element.name))
             #x.print()
-        
+        print('Die Angriffstärke liegt bei', self.attackpoints)
+        print('Die Abwehrstärke liegt bei', self.defencepoints)
+        print('Die Torwartstärke liegt be liegt bei', self.keeperpoints)
 
