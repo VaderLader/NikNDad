@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<team name="TeamA">
+    <attackpoints>1</attackpoints>
+    <keeperpoints>2</keeperpoints>
+    <defencepoints>3</defencepoints>
+    <players>
+        <player name="otto">
+            <attackpoints>1</attackpoints>
+            <keeperpoints>2</keeperpoints>
+            <defencepoints>3</defencepoints>
+        </player>
+        <player name="lolo">
+            <attackpoints>4</attackpoints>
+            <keeperpoints>5</keeperpoints>
+            <defencepoints>2</defencepoints>
+        </player>
+    </players>
+</team>
