@@ -20,7 +20,9 @@ class Team:
         self.defencepoints += p.defencepoints
 
     def removePlayer(self, p):
-        self.players.pop(p)
+        # "list".index("element") returns the index of "element"
+        # "list".pop("index") removes the element at "index"
+        self.players.pop( self.players.index(p) )
 
     def print(self):
         print('Team', self.name, 'hat', len(self.players), 'Spieler:')
@@ -30,7 +32,5 @@ class Team:
         print('Die Angriffstärke liegt bei', self.attackpoints)
         print('Die Abwehrstärke liegt bei', self.defencepoints)
         print('Die Torwartstärke liegt be liegt bei', self.keeperpoints)
-Player.addPlayer('Hallo')
-Player.addPlayer('Hi')
-Player.addPlayer('Ho')
-Player.removePlayer('Hi')
+
+

@@ -23,6 +23,8 @@ teamA.addPlayer(otto)
 teamA.addPlayer(popo)
 teamA.print()
 #
-
+print ("Jetzt fliegt Otto raus!")
+teamA.removePlayer(otto)
+teamA.print()
 print("--- Ende ---")
 
