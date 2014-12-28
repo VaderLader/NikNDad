@@ -8,6 +8,7 @@ import Player
 print("--- MannschaftsGenerator ---")
 otto = Player.Player("Otto")
 popo = Player.Player("Popo")
+otto2 = Player.Player("Otto")
 
 print("Spieler 1:")
 otto.print()
