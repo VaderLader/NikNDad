@@ -13,18 +13,18 @@ class Team:
         self.defencepoints = 0
         
     def addPlayer(self, p):
-        if p in self.player:
-            #ToDo: Ueberpruefen ob der Spieler schon in der Mannschaft
+        if p in self.players:
+            print('Error:', p.name, 'ist schon in diesem Team!')
+        else:
             self.players.append(p)
             self.attackpoints += p.attackpoints
             self.keeperpoints += p.keeperpoints
-            self.defencepoints += p.defencepoints
-        else:
-            print('Error:', p, 'ist schon in diesem Team aufgenommen')
-
+            self.defencepoints += p.defencepoints 
+            
     def removePlayer(self, p):
         # "list".index("element") returns the index of "element"
         # "list".pop("index") removes the element at "index"
+        # ToDo: Check if p is part of the team before removing
         self.players.pop( self.players.index(p) )
 
     def print(self):
