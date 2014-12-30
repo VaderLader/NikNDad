@@ -4,15 +4,20 @@
     <keeperpoints>2</keeperpoints>
     <defencepoints>3</defencepoints>
     <players>
-        <player name="otto">
+        <player name="Otto">
             <attackpoints>1</attackpoints>
             <keeperpoints>2</keeperpoints>
             <defencepoints>3</defencepoints>
         </player>
-        <player name="lolo">
+        <player name="Lolo">
             <attackpoints>4</attackpoints>
             <keeperpoints>5</keeperpoints>
             <defencepoints>2</defencepoints>
+        </player>
+        <player name="Popo">
+            <attackpoints>2</attackpoints>
+            <keeperpoints>2</keeperpoints>
+            <defencepoints>4</defencepoints>
         </player>
     </players>
 </team>
