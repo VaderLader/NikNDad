@@ -21,12 +21,24 @@ class Team:
         else:
             self.players.append(p)
             self.calcTeampoints()
+    
+    def inputPlayer(self):
+        name = input('Wie heißt der neue Spieler?\n')
+        angriff = int(input('Wie gut ist er im Angriff?\n'))
+        abwehr = int(input('Wie gut ist er in der Abwehr?\n'))
+        tor = int(input('Wie gut ist er im Tor?\n'))
+        p = Player.Player(name, angriff, abwehr, tor)
+        p.print()
+        return p
 
     def removePlayer(self, p):
+        for index, element in enumerate(self.players):
+            if element == p:
+                self.players.pop(index)
         # "list".index("element") returns the index of "element"
         # "list".pop("index") removes the element at "index"
         # ToDo: Check if p is part of the team before removing
-        self.players.pop( self.players.index(p) )
+        #self.players.pop( self.players.index(p) )
 
     def calcTeampoints(self):
         self.attackpoints = 0
@@ -47,5 +59,6 @@ class Team:
         print('Die Angriffstärke liegt bei', self.attackpoints)
         print('Die Abwehrstärke liegt bei', self.defencepoints)
         print('Die Torwartstärke liegt be liegt bei', self.keeperpoints)
+        print(self.players)
 
-
+print('Hi')
