@@ -30,8 +30,9 @@ def menue():
         teamA.addPlayer(p)
         
     elif menueInput == 2:
-            p = input('Welchen Spieler willst du löschen')
-            teamA.removePlayer(p)
+            n = input('Welchen Spieler willst du löschen')
+            teamA.removeName(n)
+            
     elif menueInput == 3:
         teamA.print()
     elif menueInput == 4:
@@ -82,7 +83,7 @@ print ("Jetzt fliegt Otto raus!")
 
 #print("--- Ende ---")
 
-#menue()
+menue()
 
 #print (myjason.MyEncoder().encode(teamA))
 

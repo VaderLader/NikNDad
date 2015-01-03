@@ -31,10 +31,19 @@ class Team:
         p.print()
         return p
 
+
+    def removeName(self, n):
+        for index, element in enumerate(self.players):
+            if element.name == n:
+                self.players.pop(index)
+                self.calcTeampoints()
+                
+                
     def removePlayer(self, p):
         for index, element in enumerate(self.players):
             if element == p:
                 self.players.pop(index)
+                self.calcTeampoints()
         # "list".index("element") returns the index of "element"
         # "list".pop("index") removes the element at "index"
         # ToDo: Check if p is part of the team before removing
