@@ -4,7 +4,7 @@
 #
 import Team
 import Player
-
+import json_object_en_n_decoder as myjason
 
 def menue():
     
@@ -71,7 +71,7 @@ teamA.addPlayer(Popo)
 teamA.print()
 #
 print ("Jetzt fliegt Otto raus!")
-teamA.removePlayer(Otto)
+#teamA.removePlayer(Otto)
 #teamA.removePlayer(otto)
 #teamA.print()
 #print(teamA.calcTeampoints())
@@ -82,4 +82,22 @@ teamA.removePlayer(Otto)
 
 #print("--- Ende ---")
 
-menue()
+#menue()
+
+#print (myjason.MyEncoder().encode(teamA))
+
+
+#encoded_object = myjason.MyEncoder().encode(teamA)
+#print ("-----\nencoded_object:\n")
+#print (encoded_object)
+#print ("----- Endocing finished !!-----------\n")
+
+#print ("----Calling decoder ----")
+#myobj_instance = myjason.MyDecoder().decode(encoded_object)
+#print ("---- decoded object:\n")
+#print (myobj_instance)
+##.print())
+
+
+
+
