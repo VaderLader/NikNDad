@@ -5,20 +5,27 @@
 import Team
 import Player
 import json_object_en_n_decoder as myjason
+import itertools
+
 
 def menue():
     
     print ('--- Menü ---')
     print ('Drücke die 1 um einen Spieler hinzuzufügen')
     print ('Drücke die 2 um einen Spieler zulöschen')
-    print ('Drücke die 3 um dir alle Spieler anzeigenzulassen')
-    menueInput = int(input('... und bestatige mit Enter\n'))
+    print ('Drücke die 3 um dir alle Spieler anzeigenzulassen') 
+    menueInput = intinput('... und bestatige mit Enter\n')
     print (menueInput)
-    
+ 
+    type(menueInput)
     stopp = 0
+    
+        
     while (menueInput != 1) and (menueInput != 2) and (menueInput != 3) and (menueInput != 4):
-        menueInput = int(input('1, 2 oder 3 - ist das so schwer?\n'))
+        menueInput = input('1, 2 oder 3 - ist das so schwer?\n'))
         print (menueInput)
+        type(menueInput)        
+        
         stopp += 1
         if stopp == 4:
             menueInput = 4
@@ -42,8 +49,21 @@ def menue():
         print ('Ich hab die Schnautze voll')
     else:
         menue()
-
-
+        
+def macheManschaften():
+    if len(teamA.playes)%2 != 0:
+        teamA.addPlayer(Player.Player('nullSpieler', 0, 0, 0))
+    
+    spielerliste = range(len(teamA.players))    
+    combos = itertool.combinations(teamA.players, int((len(teamA.players)/2))
+    lTeamA = lint(combos)
+    lTeamB = []
+    # Erzeuge das jeweilspassende Team B
+    for e in lTeamA:
+        dummy = spielerliste
+        for p in e:
+            dummy.pop(dummy.index(p))
+    
 
 #menue()
 
