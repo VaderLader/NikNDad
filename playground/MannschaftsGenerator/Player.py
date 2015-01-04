@@ -24,6 +24,8 @@ class Player:
               "\n| Gesamt Punkte:", self.playerpoints, "\n---------------"
               )
     def calcPlayerpoints(self):
-        self.playerpoints = self.attackpoints * Player.weight_attack + \
+        self.playerpoints = (self.attackpoints * Player.weight_attack + \
                             self.defencepoints * Player.weight_defence + \
-                            self.keeperpoints * Player.weight_keeper
+                            self.keeperpoints * Player.weight_keeper ) \
+                            /(Player.weight_attack + Player.weight_defence \
+                            + Player.weight_keeper)

@@ -38,6 +38,10 @@ class Team:
                 self.players.pop(index)
                 self.calcTeampoints()
                 
+    def removeByIndex(self, index):
+        p = self.players.pop(index)
+        self.calcTeampoints()
+        return p 
                 
     def removePlayer(self, p):
         for index, element in enumerate(self.players):
@@ -57,7 +61,8 @@ class Team:
             self.attackpoints += p.attackpoints
             self.keeperpoints += p.keeperpoints
             self.defencepoints += p.defencepoints
-            self.teampoints = self.attackpoints * Team.weight_attack + self.defencepoints * Team.weight_defence + self.keeperpoints * Team.weight_keeper
+            self.teampoints = (self.attackpoints * Team.weight_attack + self.defencepoints * Team.weight_defence + self.keeperpoints * Team.weight_keeper)/(Team.weight_attack+Team.weight_defence+Team.weight_keeper)
+                            
         return self.teampoints
 
     def print(self):
@@ -68,6 +73,6 @@ class Team:
         print('Die Angriffstärke liegt bei', self.attackpoints)
         print('Die Abwehrstärke liegt bei', self.defencepoints)
         print('Die Torwartstärke liegt be liegt bei', self.keeperpoints)
-        print(self.players)
+        print('Gesamtstärke liegt bei:', self.teampoints)
 
 print('Hi')

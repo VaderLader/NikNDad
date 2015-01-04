@@ -14,7 +14,7 @@ def menue():
     print ('Drücke die 1 um einen Spieler hinzuzufügen')
     print ('Drücke die 2 um einen Spieler zulöschen')
     print ('Drücke die 3 um dir alle Spieler anzeigenzulassen') 
-    menueInput = intinput('... und bestatige mit Enter\n')
+    menueInput = input('... und bestatige mit Enter\n')
     print (menueInput)
  
     type(menueInput)
@@ -22,7 +22,7 @@ def menue():
     
         
     while (menueInput != 1) and (menueInput != 2) and (menueInput != 3) and (menueInput != 4):
-        menueInput = input('1, 2 oder 3 - ist das so schwer?\n'))
+        menueInput = input('1, 2 oder 3 - ist das so schwer?\n')
         print (menueInput)
         type(menueInput)        
         
@@ -51,28 +51,81 @@ def menue():
         menue()
         
 def macheManschaften():
-    if len(teamA.playes)%2 != 0:
+    if len(teamA.players)%2 != 0:
         teamA.addPlayer(Player.Player('nullSpieler', 0, 0, 0))
     
-    spielerliste = range(len(teamA.players))    
-    combos = itertool.combinations(teamA.players, int((len(teamA.players)/2))
-    lTeamA = lint(combos)
+    spielerliste = list(range(0,len(teamA.players))) 
+    print (spielerliste)
+    print("teamA.players=",list(range(0,len(teamA.players))))
+    combos = itertools.combinations(list(range(0,len(teamA.players))), int(len(teamA.players)/2))
+    lTeamA = list(combos)
+    print("lTeamA=",lTeamA)
     lTeamB = []
-    # Erzeuge das jeweilspassende Team B
-    for e in lTeamA:
-        dummy = spielerliste
-        for p in e:
-            dummy.pop(dummy.index(p))
     
-
+    # Erzeuge das jeweils passenden Team B
+    for e in lTeamA:
+        dummy = list(spielerliste)
+        #print("e=",e)
+        for p in e:
+          #  print ("p=",str(p))
+            dummy.pop(dummy.index(p))
+        lTeamB.append(list(dummy))
+    print("lTeamB=",lTeamB)
+    # Berechnung von der Teamstärkendifferenz
+    teampointsDif = []
+    
+    for e in lTeamA:
+        tDif  = 0
+        for p in e:
+            print("tDif=",tDif)
+            tDif += teamA.players[p].playerpoints
+            print("tDif=",tDif)
+        teampointsDif.append(tDif)
+    print("teampointsDif=",teampointsDif)
+    
+    index = 0
+    for e in lTeamB:
+        tDif  = 0
+        for p in e:
+            #print ("p=",p)
+            tDif += teamA.players[p].playerpoints
+        teampointsDif[index] = abs(teampointsDif[index] - tDif)
+        index = index +1
+    print("teampointsDif=",teampointsDif)
+   
+    # Search for the minimum difference
+    indexmin = 0
+    valuemin = teampointsDif[0]
+    index = 0
+    for e in teampointsDif:
+        if e < valuemin:
+            valuemin = e
+            indexmin = index
+        index = index + 1 
+    print("Valuemin=", valuemin, "  indexmin=", indexmin)
+    print("Best Team:", lTeamA[indexmin], " vs. ",lTeamB[indexmin])
+    
+    poplist = list(lTeamB[indexmin])
+    print("poplist=",poplist)
+    poplist.sort(reverse=True)
+    print("poplist=",poplist)
+    
+    for e in  poplist:
+        print("e=",e)
+        teamB.addPlayer(teamA.removeByIndex(e))
+    
+    teamA.print()
+    teamB.print()          
+    
 #menue()
 
 
 #==============================================================================
 print("--- MannschaftsGenerator ---")
-Otto = Player.Player("Otto", 10 ,200, 40)
-Popo = Player.Player("Popo", 40, 0, 10)
-otto2 = Player.Player("Otto")
+Otto = Player.Player("Otto", 40 ,10, 10)
+Popo = Player.Player("Popo", 40, 60, 40)
+Roko = Player.Player("Roko", 30, 20, 20)
+Beka = Player.Player('Beka', 25, 10, 5)
 
 print ("Spieler 1:")
 Otto.print()
@@ -88,7 +141,8 @@ teamB = Team.Team("B-Team")
 
 teamA.addPlayer(Otto)
 teamA.addPlayer(Popo)
-teamA.addPlayer(Popo)
+teamA.addPlayer(Roko)
+teamA.addPlayer(Beka)
 teamA.print()
 #
 print ("Jetzt fliegt Otto raus!")
@@ -99,11 +153,11 @@ print ("Jetzt fliegt Otto raus!")
 #print(teamA.calcTeampoints())
 #print(teamA.calcTeampoints())
 #==============================================================================
+macheManschaften()
 
+print("--- Ende ---")
 
-#print("--- Ende ---")
-
-menue()
+#menue()
 
 #print (myjason.MyEncoder().encode(teamA))
 
