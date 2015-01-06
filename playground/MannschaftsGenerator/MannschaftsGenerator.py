@@ -4,7 +4,8 @@
 #
 import Team
 import Player
-import json_object_en_n_decoder as myjason
+import json
+import json_object_en_n_decoder as myjson #There jason is imported
 import itertools
 
 
@@ -37,8 +38,8 @@ def menue():
         teamA.addPlayer(p)
         
     elif menueInput == 2:
-            n = input('Welchen Spieler willst du löschen')
-            teamA.removeName(n)
+        n = input('Welchen Spieler willst du löschen')
+        teamA.removeName(n)
             
     elif menueInput == 3:
         teamA.print()
@@ -111,7 +112,7 @@ def macheManschaften():
     print("poplist=",poplist)
     
     for e in  poplist:
-        print("e=",e)
+        print("e=", e)
         teamB.addPlayer(teamA.removeByIndex(e))
     
     teamA.print()
@@ -122,18 +123,18 @@ def macheManschaften():
 
 #==============================================================================
 print("--- MannschaftsGenerator ---")
-Otto = Player.Player("Otto", 40 ,10, 10)
-Popo = Player.Player("Popo", 40, 60, 40)
-Roko = Player.Player("Roko", 30, 20, 20)
-Beka = Player.Player('Beka', 25, 10, 5)
+Otto = Player.Player("Otto,Toto", 50, 50, 50)
+Popo = Player.Player("Popo", 20, 20, 20)
+#Roko = Player.Player("Roko", 30, 20, 20)
+#Beka = Player.Player('Beka', 25, 10, 5)
 
 print ("Spieler 1:")
-Otto.print()
+#Otto.print()
 
-print ("Print by using ""Otto.__dict__"":\n", Otto.__dict__)
+#print ("Print by using ""Otto.__dict__"":\n", Otto.__dict__)
 
 print("Spieler 2:")
-Popo.print()
+#Popo.print()
 
 
 teamA = Team.Team("A-Team")
@@ -141,11 +142,11 @@ teamB = Team.Team("B-Team")
 
 teamA.addPlayer(Otto)
 teamA.addPlayer(Popo)
-teamA.addPlayer(Roko)
-teamA.addPlayer(Beka)
-teamA.print()
+#teamA.addPlayer(Roko)
+#teamA.addPlayer(Beka)
+#teamA.print()
 #
-print ("Jetzt fliegt Otto raus!")
+#print ("Jetzt fliegt Otto raus!")
 #teamA.removePlayer(Otto)
 #teamA.removePlayer(otto)
 #teamA.print()
@@ -153,26 +154,40 @@ print ("Jetzt fliegt Otto raus!")
 #print(teamA.calcTeampoints())
 #print(teamA.calcTeampoints())
 #==============================================================================
-macheManschaften()
 
-print("--- Ende ---")
+#macheManschaften()
+
 
 #menue()
 
-#print (myjason.MyEncoder().encode(teamA))
+#print (myjson.MyEncoder().encode(teamA))
 
 
-#encoded_object = myjason.MyEncoder().encode(teamA)
-#print ("-----\nencoded_object:\n")
-#print (encoded_object)
-#print ("----- Endocing finished !!-----------\n")
+#encoded_object = myjson.MyEncoder().encode(teamA)
+encoded_object = myjson.OrderedEncoder().encode(teamA)
 
-#print ("----Calling decoder ----")
-#myobj_instance = myjason.MyDecoder().decode(encoded_object)
-#print ("---- decoded object:\n")
-#print (myobj_instance)
-##.print())
 
+print ("-----\nencoded_object:\n")
+print (encoded_object)
+print ("----- Encoding finished !!-----------\n")
+
+print("---------------------------------------")
+
+print ("----Calling decoder ----")
+#myobj_instance = myjson.MyDecoder().decode(encoded_object)
+myobj_instance = myjson.OrderedDecoder().decode(encoded_object)
+
+print ("---- decoded object:\n")
+print (myobj_instance)
+myobj_instance.print()
+
+
+'''
+with open('filename.txt', 'r') as handle:
+    parsed = json.load(handle)
+'''
+
+print("--- Ende ---")
 
 
 

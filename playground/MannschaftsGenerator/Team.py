@@ -7,13 +7,14 @@ class Team:
     weight_defence = 2
     weight_keeper = 1
 
-    def __init__(self, i_name = "Team name"):
+    def __init__(self, i_name = "Team name", i_attackpoints=0, i_keeperpoints=0, i_defencepoints=0, i_teampoints=0, i_players=[]):
         self.name = i_name
-        self.players = []
+        self.players = i_players
         Team.team_counter += 1
-        self.attackpoints = 0
-        self.keeperpoints = 0
-        self.defencepoints = 0
+        self.attackpoints = i_attackpoints
+        self.keeperpoints = i_keeperpoints
+        self.defencepoints = i_defencepoints
+        self.teampoints = i_teampoints
 
     def addPlayer(self, p):
         if p in self.players:
