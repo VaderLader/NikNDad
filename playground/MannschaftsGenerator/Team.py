@@ -1,20 +1,35 @@
 import Player
 
 class Team:
-    '''This is a Team'''
+    """Class for Team
+        Usage: Team({'name': 'Team name', 
+                            'attackpoints': 0,
+                            'keeperpoints': 0,
+                            'defencepoints': 0,
+                            'players': []
+                            })
+    
+    
+    """
     team_counter = 0    # static member
     weight_attack = 3
     weight_defence = 2
     weight_keeper = 1
 
-    def __init__(self, i_name = "Team name", i_attackpoints=0, i_keeperpoints=0, i_defencepoints=0, i_teampoints=0, i_players=[]):
-        self.name = i_name
-        self.players = i_players
+    def __init__(self, d = {'name': 'Team name', 
+                            'attackpoints': 0,
+                            'keeperpoints': 0,
+                            'defencepoints': 0,
+                            'players': []
+                            }):
+        self.name = d['name']
+        self.attackpoints = d['attackpoints']
+        self.keeperpoints = d['keeperpoints']
+        self.defencepoints = d['defencepoints']
+        self.players = d['players']
         Team.team_counter += 1
-        self.attackpoints = i_attackpoints
-        self.keeperpoints = i_keeperpoints
-        self.defencepoints = i_defencepoints
-        self.teampoints = i_teampoints
+        self.teampoints = self.calcTeampoints()
+        #self.teampoints = d['teampoints']
 
     def addPlayer(self, p):
         if p in self.players:
@@ -28,7 +43,10 @@ class Team:
         angriff = int(input('Wie gut ist er im Angriff?\n'))
         abwehr = int(input('Wie gut ist er in der Abwehr?\n'))
         tor = int(input('Wie gut ist er im Tor?\n'))
-        p = Player.Player(name, angriff, abwehr, tor)
+        p = Player.Player({'name': name,
+                            'attackpoints': angriff,
+                            'defencepoints': abwehr, 
+                            'keeperpoint': tor})
         p.print()
         return p
 
@@ -58,6 +76,7 @@ class Team:
         self.attackpoints = 0
         self.keeperpoints = 0
         self.defencepoints = 0
+        self.teampoints = 0
         for p in self.players:
             self.attackpoints += p.attackpoints
             self.keeperpoints += p.keeperpoints

@@ -119,7 +119,9 @@ class OrderedDecoder(json.JSONDecoder):
 
             print ("--- *args.values():", *args.values())
             
-            inst = class_type(*args.values())
+            inst = class_type(args)
+            
+            #inst = class_type(*args.values())
             #inst = class_('Otto', 'Hola')
                         
         #else:

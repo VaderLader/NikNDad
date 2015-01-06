@@ -4,7 +4,6 @@
 #
 import Team
 import Player
-import json
 import json_object_en_n_decoder as myjson #There jason is imported
 import itertools
 
@@ -123,8 +122,14 @@ def macheManschaften():
 
 #==============================================================================
 print("--- MannschaftsGenerator ---")
-Otto = Player.Player("Otto,Toto", 50, 50, 50)
-Popo = Player.Player("Popo", 20, 20, 20)
+Otto = Player.Player({'name': 'Otto de Motto',
+                      'attackpoints': 10,
+                      'defencepoints': 20, 
+                      'keeperpoints': 30})
+Popo = Player.Player({'name': 'Popo di Mare',
+                      'attackpoints': 30,
+                      'defencepoints': 10, 
+                      'keeperpoints': 20})
 #Roko = Player.Player("Roko", 30, 20, 20)
 #Beka = Player.Player('Beka', 25, 10, 5)
 
@@ -137,8 +142,18 @@ print("Spieler 2:")
 #Popo.print()
 
 
-teamA = Team.Team("A-Team")
-teamB = Team.Team("B-Team")
+teamA = Team.Team({'name': 'A-Team', 
+                            'attackpoints': 0,
+                            'keeperpoints': 0,
+                            'defencepoints': 0,
+                            'players': []
+                            })
+teamB = Team.Team({'name': 'B-Team', 
+                            'attackpoints': 0,
+                            'keeperpoints': 0,
+                            'defencepoints': 0,
+                            'players': []
+                            })
 
 teamA.addPlayer(Otto)
 teamA.addPlayer(Popo)
@@ -169,7 +184,10 @@ encoded_object = myjson.OrderedEncoder().encode(teamA)
 
 print ("-----\nencoded_object:\n")
 print (encoded_object)
-print ("----- Encoding finished !!-----------\n")
+f = open("./ATeam.json","w")
+print("# Chars written to file:", f.write(encoded_object))
+f.flush()
+print ("----- Encoding finished and written to file !!!-----------\n")
 
 print("---------------------------------------")
 
@@ -178,9 +196,13 @@ print ("----Calling decoder ----")
 myobj_instance = myjson.OrderedDecoder().decode(encoded_object)
 
 print ("---- decoded object:\n")
-print (myobj_instance)
-myobj_instance.print()
+#print (myobj_instance)
+#myobj_instance.print()
 
+f = open("./ATeam_3P.json","r")
+TeamANew = myjson.OrderedDecoder().decode(f.read())
+TeamANew.print()
+teamA.print()
 
 '''
 with open('filename.txt', 'r') as handle:

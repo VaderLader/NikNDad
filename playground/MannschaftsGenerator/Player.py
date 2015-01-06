@@ -1,20 +1,24 @@
 class Player:
-    '''Class for Players'''
+    """Class for Players
+    
+       Usage: Player({'name': 'Vorname Name',
+                            'attackpoints': 0,
+                            'defencepoints': 0, 
+                            'keeperpoint': 0})
+    """
     player_counter = 0  # static member
     weight_attack = 3
     weight_defence = 2
     weight_keeper = 1    
     
-    def __init__(self, d):
-        for k,v in d.item():
-            self.__dict__=d
-            
-    def __init__(self, i_name = "Vorname Name", i_attackpoints = 0,
-                 i_defencepoints = 0, i_keeperpoints = 0, i_playerpoints=0):
-        self.name = i_name
-        self.attackpoints = i_attackpoints
-        self.defencepoints = i_defencepoints
-        self.keeperpoints = i_keeperpoints
+    def __init__(self, d={'name': 'Vorname Name',
+                            'attackpoints': 0,
+                            'defencepoints': 0, 
+                            'keeperpoints': 0}):
+        self.name = d['name']
+        self.attackpoints = d['attackpoints']
+        self.defencepoints = d['defencepoints']
+        self.keeperpoints = d['keeperpoints']
         self.calcPlayerpoints()
         Player.player_counter += 1
 
