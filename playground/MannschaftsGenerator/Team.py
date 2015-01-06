@@ -3,9 +3,6 @@ import Player
 class Team:
     """Class for Team
         Usage: Team({'name': 'Team name', 
-                            'attackpoints': 0,
-                            'keeperpoints': 0,
-                            'defencepoints': 0,
                             'players': []
                             })
     
@@ -17,15 +14,9 @@ class Team:
     weight_keeper = 1
 
     def __init__(self, d = {'name': 'Team name', 
-                            'attackpoints': 0,
-                            'keeperpoints': 0,
-                            'defencepoints': 0,
                             'players': []
                             }):
         self.name = d['name']
-        self.attackpoints = d['attackpoints']
-        self.keeperpoints = d['keeperpoints']
-        self.defencepoints = d['defencepoints']
         self.players = d['players']
         Team.team_counter += 1
         self.teampoints = self.calcTeampoints()

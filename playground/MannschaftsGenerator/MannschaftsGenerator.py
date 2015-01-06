@@ -130,8 +130,14 @@ Popo = Player.Player({'name': 'Popo di Mare',
                       'attackpoints': 30,
                       'defencepoints': 10, 
                       'keeperpoints': 20})
-#Roko = Player.Player("Roko", 30, 20, 20)
-#Beka = Player.Player('Beka', 25, 10, 5)
+Roko = Player.Player({'name': 'Roko de Popo',
+                      'attackpoints': 50,
+                      'defencepoints': 20, 
+                      'keeperpoints': 30})
+Beka = Player.Player({'name': 'Beka am Weka',
+                      'attackpoints': 5,
+                      'defencepoints': 20, 
+                      'keeperpoints': 15})
 
 print ("Spieler 1:")
 #Otto.print()
@@ -143,22 +149,16 @@ print("Spieler 2:")
 
 
 teamA = Team.Team({'name': 'A-Team', 
-                            'attackpoints': 0,
-                            'keeperpoints': 0,
-                            'defencepoints': 0,
                             'players': []
                             })
 teamB = Team.Team({'name': 'B-Team', 
-                            'attackpoints': 0,
-                            'keeperpoints': 0,
-                            'defencepoints': 0,
                             'players': []
                             })
 
 teamA.addPlayer(Otto)
 teamA.addPlayer(Popo)
-#teamA.addPlayer(Roko)
-#teamA.addPlayer(Beka)
+teamA.addPlayer(Roko)
+teamA.addPlayer(Beka)
 #teamA.print()
 #
 #print ("Jetzt fliegt Otto raus!")
@@ -170,7 +170,7 @@ teamA.addPlayer(Popo)
 #print(teamA.calcTeampoints())
 #==============================================================================
 
-#macheManschaften()
+macheManschaften()
 
 
 #menue()
@@ -202,6 +202,7 @@ print ("---- decoded object:\n")
 f = open("./ATeam_3P.json","r")
 TeamANew = myjson.OrderedDecoder().decode(f.read())
 TeamANew.print()
+print()
 teamA.print()
 
 '''

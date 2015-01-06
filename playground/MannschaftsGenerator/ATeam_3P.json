@@ -21,6 +21,15 @@
 		"keeperpoints": 25,
 		"defencepoints": 15
 	},
+    {
+		"__class__": "Player",
+		"__module__": "Player",
+		"attackpoints": 3,
+		"playerpoints": 10000,
+		"name": "De Andre",
+		"keeperpoints": 55,
+		"defencepoints": 5
+	},
 	{
 		"__class__": "Player",
 		"__module__": "Player",
