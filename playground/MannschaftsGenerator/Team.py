@@ -77,13 +77,13 @@ class Team:
         return self.teampoints
 
     def print(self):
-        print('Team', self.name, 'hat', len(self.players), 'Spieler:')
+        Mitglieder = ('Team', self.name, 'hat', len(self.players), 'Spieler:\n')
         for index, element in enumerate(self.players):
-            print ('{} {}'.format(index, element.name))
-            #x.print()
-        print('Die Angriffstärke liegt bei', self.attackpoints)
-        print('Die Abwehrstärke liegt bei', self.defencepoints)
-        print('Die Torwartstärke liegt be liegt bei', self.keeperpoints)
-        print('Gesamtstärke liegt bei:', self.teampoints)
+            Mitglieder += ('{} {}'.format(index, element.name),'\n')
+        Mitglieder += ('Die Angriffstärke liegt bei', self.attackpoints,'\n')
+        Mitglieder += ('Die Abwehrstärke liegt bei', self.defencepoints,'\n')
+        Mitglieder += ('Die Torwartstärke liegt be liegt bei', self.keeperpoints,'\n')
+        Mitglieder += ('Gesamtstärke liegt bei:', self.teampoints,'\n')
+        print(Mitglieder)
 
 print('Hi')

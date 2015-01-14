@@ -7,6 +7,13 @@ import Player
 import json_object_en_n_decoder as myjson #There jason is imported
 import itertools
 
+def defMannschaften():
+    teamA = Team.Team({'name': 'A-Team', 
+                            'players': []
+                            })
+    teamB = Team.Team({'name': 'B-Team', 
+                            'players': []
+                            })
 
 def menue():
     
@@ -50,7 +57,7 @@ def menue():
     else:
         menue()
         
-def macheManschaften():
+def berechneMannschaften():
     if len(teamA.players)%2 != 0:
         teamA.addPlayer(Player.Player('nullSpieler', 0, 0, 0))
     
@@ -170,7 +177,7 @@ teamA.addPlayer(Beka)
 #print(teamA.calcTeampoints())
 #==============================================================================
 
-macheManschaften()
+berechneMannschaften()
 
 
 #menue()
