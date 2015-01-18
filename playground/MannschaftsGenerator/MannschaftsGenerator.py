@@ -59,7 +59,10 @@ def menue():
         
 def berechneMannschaften():
     if len(teamA.players)%2 != 0:
-        teamA.addPlayer(Player.Player('nullSpieler', 0, 0, 0))
+        teamA.addPlayer(Player.Player({'name': 'NullPlayer',
+                                       'attackpoints': 0,
+                                       'defencepoints': 0, 
+                                       'keeperpoints': 0}))
     
     spielerliste = list(range(0,len(teamA.players))) 
     print (spielerliste)
