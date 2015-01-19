@@ -20,6 +20,7 @@ class Team:
         self.players = d['players']
         Team.team_counter += 1
         self.teampoints = self.calcTeampoints()
+        self.Mitglieder = "Mitglieder"
         #self.teampoints = d['teampoints']
 
     def addPlayer(self, p):
@@ -84,6 +85,7 @@ class Team:
         Mitglieder += ('Die Abwehrstärke liegt bei', self.defencepoints,'\n')
         Mitglieder += ('Die Torwartstärke liegt be liegt bei', self.keeperpoints,'\n')
         Mitglieder += ('Gesamtstärke liegt bei:', self.teampoints,'\n')
-        print(Mitglieder)
+        #print(Mitglieder)
+        return Mitglieder
 
 print('Hi')

@@ -8,12 +8,9 @@ import json_object_en_n_decoder as myjson #There jason is imported
 import itertools
 
 def defMannschaften():
-    teamA = Team.Team({'name': 'A-Team', 
-                            'players': []
-                            })
-    teamB = Team.Team({'name': 'B-Team', 
-                            'players': []
-                            })
+    teamA = Team.Team({'name': 'A-Team', 'players': []})
+    teamB = Team.Team({'name': 'B-Team', 'players': []})
+
 
 def menue():
     
