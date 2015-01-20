@@ -146,18 +146,24 @@ class TeamGenerator:
         ''' method to load the two teams from disk '''
         print ("----Calling loadTeams(",location, ") ----")
         
+        # teamA
         f = open(str(location + "ATeam.json"),"r")
-        TeamANew = myjson.OrderedDecoder().decode(f.read())
-        TeamANew.print()
-        print()
+        self.teamA = myjson.OrderedDecoder().decode(f.read())
+        #print(self.teamA.print())
         
+        # teamB        
+        f = open(str(location + "BTeam.json"),"r")
+        self.teamB = myjson.OrderedDecoder().decode(f.read())
+        #print(self.teamB.print())
     
     
 # main
 print('---- START ----')
 tg = TeamGenerator() 
 
-tg.sampleTeamSetup()
+#tg.sampleTeamSetup()
+
+tg.loadTeams('./')
 
 print(tg.teamA.print())
 print(tg.teamB.print())

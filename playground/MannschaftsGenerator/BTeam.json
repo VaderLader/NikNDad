@@ -1,0 +1,45 @@
+{
+	"__class__": "Team",
+	"__module__": "Team",
+	"keeperpoints": 50,
+	"name": "B-Team",
+	"players": [{
+		"__class__": "Player",
+		"__module__": "Player",
+		"attackpoints": 10,
+		"playerpoints": 16.666666666666668,
+		"name": "Host vom Porst",
+		"keeperpoints": 20,
+		"defencepoints": 15
+	},
+    {
+		"__class__": "Player",
+		"__module__": "Player",
+		"attackpoints": 35,
+		"playerpoints": 10000,
+		"name": "De Neue",
+		"keeperpoints": 25,
+		"defencepoints": 15
+	},
+    {
+		"__class__": "Player",
+		"__module__": "Player",
+		"attackpoints": 3,
+		"playerpoints": 10000,
+		"name": "De Andre",
+		"keeperpoints": 55,
+		"defencepoints": 5
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"attackpoints": 30,
+		"playerpoints": 21.666666666666668,
+		"name": "Gusti di Wusti",
+		"keeperpoints": 35,
+		"defencepoints": 10
+	}],
+	"teampoints": 38.333333333333336,
+	"attackpoints": 40,
+	"defencepoints": 30
+}
