@@ -122,10 +122,10 @@ class TeamGenerator:
     
     def dumpTeams(self, location='./'):
         ''' method to write the tow teams to disk '''
-        print ("----Calling dumpTeams(",location, ") ----")
+        print ("-------- Calling dumpTeams(",location, ") ----")
         # teamA
         encoded_object = myjson.OrderedEncoder().encode(self.teamA)
-        print ("-----\nencoded_object:\n")
+        print ("-------- encoded_object:\n")
         print (encoded_object)
         f = open(str(location + "ATeam.json"),"w")
         print("# Chars written to file:", f.write(encoded_object))
@@ -133,7 +133,7 @@ class TeamGenerator:
         
         # teamB
         encoded_object = myjson.OrderedEncoder().encode(self.teamB)
-        print ("-----\nencoded_object:\n")
+        print ("-------- encoded_object:\n")
         print (encoded_object)
         f = open(str(location + "BTeam.json"),"w")
         print("# Chars written to file:", f.write(encoded_object))
@@ -144,7 +144,7 @@ class TeamGenerator:
     
     def loadTeams(self, location):    
         ''' method to load the two teams from disk '''
-        print ("----Calling loadTeams(",location, ") ----")
+        print ("-------- Calling loadTeams(",location, ") --------")
         
         # teamA
         f = open(str(location + "ATeam.json"),"r")
@@ -162,10 +162,22 @@ print('---- START ----')
 tg = TeamGenerator() 
 
 #tg.sampleTeamSetup()
-
+print('---- Load both teams as they have been the saved to file ----')
 tg.loadTeams('./')
 
 print(tg.teamA.print())
 print(tg.teamB.print())
+print('---- Shift players from teamB to teamA ----')
+tg.teamA.shiftPlayersFromTeam(tg.teamB)
+print(tg.teamA.print())
+print(tg.teamB.print())
+print('---- berechneMannschaften ')
+tg.berechneMannschaften()
+print(tg.teamA.print())
+print(tg.teamB.print())
+print('---- berechneMannschaften ')
+tg.dumpTeams('./Result/')
+print('---- ')
+
 
 print('---- END ----')

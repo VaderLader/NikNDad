@@ -29,7 +29,7 @@ class Team:
         else:
             self.players.append(p)
             self.calcTeampoints()
-    
+
     def inputPlayer(self):
         name = input('Wie heißt der neue Spieler?\n')
         angriff = int(input('Wie gut ist er im Angriff?\n'))
@@ -63,7 +63,11 @@ class Team:
         # "list".pop("index") removes the element at "index"
         # ToDo: Check if p is part of the team before removing
         #self.players.pop( self.players.index(p) )
-
+        
+    def removeAllPlayers(self):
+        self.players = []            
+        self.calcTeampoints()
+            
     def calcTeampoints(self):
         self.attackpoints = 0
         self.keeperpoints = 0
@@ -88,4 +92,12 @@ class Team:
         #print(Mitglieder)
         return Mitglieder
 
+    def shiftPlayersFromTeam(self, otherTeam):
+        ''' Method to shift all players from otherTeam. The otherTeam has no players 
+            afterwards '''          
+        self.players = self.players + otherTeam.players    
+        self.calcTeampoints()
+        otherTeam.removeAllPlayers() 
+        
+        
 print('Hi')
