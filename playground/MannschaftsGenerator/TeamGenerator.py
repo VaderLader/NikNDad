@@ -30,13 +30,16 @@ class TeamGenerator:
         spielerliste = list(range(0,len(self.teamA.players))) 
         print (spielerliste)
         print("self.teamA.players=",list(range(0,len(self.teamA.players))))
+        
+        # lTeamA keeps the List of all possible TeamAs, wich can be setup
+        # with different player combinations        
         combos = itertools.combinations(list(range(0,len(self.teamA.players))),
                                         int(len(self.teamA.players)/2))
-        lTeamA = list(combos) #
+        lTeamA = list(combos)  
         print("lTeamA=",lTeamA)
-        lTeamB = []
         
         # Erzeuge das jeweils passenden Team B
+        lTeamB = []
         for e in lTeamA:
             dummy = list(spielerliste)
             #print("e=",e)
@@ -45,17 +48,16 @@ class TeamGenerator:
                 dummy.pop(dummy.index(p))
             lTeamB.append(list(dummy))
         print("lTeamB=",lTeamB)
+
         # Berechnung von der Teamstärkendifferenz
         teampointsDif = []
         
         for e in lTeamA:
             tDif  = 0
             for p in e:
-                print("tDif=",tDif)
                 tDif += self.teamA.players[p].playerpoints
-                print("tDif=",tDif)
-            teampointsDif.append(tDif)
-        print("teampointsDif=",teampointsDif)
+                teampointsDif.append(tDif)
+        #print("teampointsDif=",teampointsDif)
         
         index = 0
         for e in lTeamB:
@@ -65,7 +67,7 @@ class TeamGenerator:
                 tDif += self.teamA.players[p].playerpoints
             teampointsDif[index] = abs(teampointsDif[index] - tDif)
             index = index +1
-        print("teampointsDif=",teampointsDif)
+        #print("teampointsDif=",teampointsDif)
        
         # Search for the minimum difference
         indexmin = 0
@@ -78,14 +80,15 @@ class TeamGenerator:
             index = index + 1 
         print("Valuemin=", valuemin, "  indexmin=", indexmin)
         print("Best Team:", lTeamA[indexmin], " vs. ",lTeamB[indexmin])
-        
+
+        # Shift Players from teamA to teamB
+        #     
         poplist = list(lTeamB[indexmin])
-        print("poplist=",poplist)
+        #print("poplist=",poplist)
         poplist.sort(reverse=True)
-        print("poplist=",poplist)
+        #print("poplist=",poplist)
         
         for e in  poplist:
-            print("e=", e)
             self.teamB.addPlayer(self.teamA.removeByIndex(e))
         
         self.teamA.print()
@@ -125,18 +128,15 @@ class TeamGenerator:
         print ("-------- Calling dumpTeams(",location, ") ----")
         # teamA
         encoded_object = myjson.OrderedEncoder().encode(self.teamA)
-        print ("-------- encoded_object:\n")
-        print (encoded_object)
-        f = open(str(location + "ATeam.json"),"w")
-        print("# Chars written to file:", f.write(encoded_object))
-        f.flush()
+        s = str(location + "ATeam.json")        
+        f = open(s,"w")
+        print("File '", s,"' written with ", f.write(encoded_object)," Chars")
         
         # teamB
         encoded_object = myjson.OrderedEncoder().encode(self.teamB)
-        print ("-------- encoded_object:\n")
-        print (encoded_object)
-        f = open(str(location + "BTeam.json"),"w")
-        print("# Chars written to file:", f.write(encoded_object))
+        s = str(location + "BTeam.json")        
+        f = open(s,"w")
+        print("File '", s,"' written with ", f.write(encoded_object)," Chars")
         f.flush()
                 
         
@@ -147,12 +147,14 @@ class TeamGenerator:
         print ("-------- Calling loadTeams(",location, ") --------")
         
         # teamA
-        f = open(str(location + "ATeam.json"),"r")
+        s = str(location + "ATeam.json")         
+        f = open(s,"r")
         self.teamA = myjson.OrderedDecoder().decode(f.read())
         #print(self.teamA.print())
         
         # teamB        
-        f = open(str(location + "BTeam.json"),"r")
+        s = str(location + "BTeam.json")         
+        f = open(s,"r")
         self.teamB = myjson.OrderedDecoder().decode(f.read())
         #print(self.teamB.print())
     
