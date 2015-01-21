@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import MannschaftsGenerator
+#import MannschaftsGenerator
+import TeamGenerator
 #import Team
 import Player
 import json_object_en_n_decoder as myjson #There jason is imported
@@ -22,15 +23,7 @@ def add():
     print('add() in Oberfläche')
     maxErreicht.show()
     maxErreicht.okBtn.clicked.connect(maxErreicht.close) 
-#==============================================================================
-#     print ('add')
-#     btn = QPushButton('Text')
-#     btn.setGeometry(20, 50, 60, 60)
-#==============================================================================
-   # geoY += 10
-#==============================================================================
-#      quit = QtGui.QPushButton('Close', self)
-#  quit.setGeometry(10, 10, 60, 35)
+
 #==============================================================================   
     
 def weiterRechnen():
@@ -92,6 +85,9 @@ def weiterRechnen():
 
 
 # Main program
+# main
+print('---- START ----')
+tg = TeamGenerator() 
 
 app = QApplication(sys.argv)
 s1 = loadUi('Oberfläche.ui')
@@ -99,21 +95,35 @@ s2 = loadUi('Oberfläche2.ui')
 maxErreicht = loadUi('maxAnzahlErreicht.ui')
 showTeams = loadUi('showTeams.ui')
 
+# Show first UI Screen
 
-    
+print('---- Load both teams as they have been the saved to file ----')
+tg.loadTeams('./')
 
-geoY = 50
+print(tg.teamA.print())
+print(tg.teamB.print())
+print('---- Shift players from teamB to teamA ----')
+tg.teamA.shiftPlayersFromTeam(tg.teamB)
+print(tg.teamA.print())
+print(tg.teamB.print())
+print('---- berechneMannschaften ')
+tg.berechneMannschaften()
+print(tg.teamA.print())
+print(tg.teamB.print())
+print('---- berechneMannschaften ')
+tg.dumpTeams('./Result/')
+print('---- ')
 
 
-
+print('---- END ----')
 
 ###
-print('Reading TeamA from file')
-f = open("./ATeam_3P.json","r")
-teamA = myjson.OrderedDecoder().decode(f.read())
-print('teamA loaded from file:')
-teamA.print()
-print()
+#print('Reading TeamA from file')
+#f = open("./ATeam_3P.json","r")
+#teamA = myjson.OrderedDecoder().decode(f.read())
+#print('teamA loaded from file:')
+#teamA.print()
+#print()
 ###
 
 
