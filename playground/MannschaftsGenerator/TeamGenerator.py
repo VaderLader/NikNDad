@@ -19,6 +19,9 @@ class TeamGenerator:
         self.teamB = Team.Team({'name': 'B-Team', 
                                 'players': []
                                 })
+        self.fullTeam = Team.Team({'name': 'Full-Team', 
+                                'players': []
+                                })
         
 #==============================================================================            
     def berechneMannschaften(self):
@@ -126,25 +129,14 @@ class TeamGenerator:
 #==============================================================================
     
     def dumpTeams(self, location='./'):
-        ''' method to write the tow teams to disk '''
+        ''' method to write the two teams to disk '''
         print ("-------- Calling dumpTeams(",location, ") ----")
         # teamA
         self.dumpTeam('teamA', location, 'ATeam.jason')
-        
-        #encoded_object = myjson.OrderedEncoder().encode(self.teamA)
-        #s = str(location + "ATeam.json")        
-        #f = open(s,"w")
-        #print("File '", s,"' written with ", f.write(encoded_object)," Chars")
-        
+      
         # teamB
         self.dumpTeam('teamB', location, 'BTeam.jason')
-                
-        #encoded_object = myjson.OrderedEncoder().encode(self.teamB)
-        #s = str(location + "BTeam.json")        
-        #f = open(s,"w")
-        #print("File '", s,"' written with ", f.write(encoded_object)," Chars")
-        #f.flush()
-    
+        
         print ("----- Encoding finished and written to file !!!-----------\n")
         
     def dumpTeam(self, teamName, location, filename):
@@ -182,7 +174,7 @@ tg = TeamGenerator()
 
 #tg.sampleTeamSetup()
 print('---- Load both teams as they have been the saved to file ----')
-tg.loadTeams('./')
+tg.loadTeam('Full-Team','./Input', 'FullTeam.jason')
 
 print(tg.teamA.print())
 print(tg.teamB.print())
