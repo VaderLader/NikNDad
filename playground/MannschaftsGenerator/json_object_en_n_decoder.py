@@ -33,7 +33,7 @@ class OrderedDecoder(json.JSONDecoder):
         """ Argument is an dictionary with all memberattributes necessary to
         construct the object
         """        
-        print("___ OrderedDecoder.dict_to_object(dd) ___")
+        #print("___ OrderedDecoder.dict_to_object(dd) ___")
         #print(dd) 
         d = OrderedDict(dd)
         class_name = d.popitem(last=False)[1]        

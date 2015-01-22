@@ -129,38 +129,53 @@ class TeamGenerator:
         ''' method to write the tow teams to disk '''
         print ("-------- Calling dumpTeams(",location, ") ----")
         # teamA
-        encoded_object = myjson.OrderedEncoder().encode(self.teamA)
-        s = str(location + "ATeam.json")        
-        f = open(s,"w")
-        print("File '", s,"' written with ", f.write(encoded_object)," Chars")
+        self.dumpTeam('teamA', location, 'ATeam.jason')
+        
+        #encoded_object = myjson.OrderedEncoder().encode(self.teamA)
+        #s = str(location + "ATeam.json")        
+        #f = open(s,"w")
+        #print("File '", s,"' written with ", f.write(encoded_object)," Chars")
         
         # teamB
-        encoded_object = myjson.OrderedEncoder().encode(self.teamB)
-        s = str(location + "BTeam.json")        
+        self.dumpTeam('teamB', location, 'BTeam.jason')
+                
+        #encoded_object = myjson.OrderedEncoder().encode(self.teamB)
+        #s = str(location + "BTeam.json")        
+        #f = open(s,"w")
+        #print("File '", s,"' written with ", f.write(encoded_object)," Chars")
+        #f.flush()
+    
+        print ("----- Encoding finished and written to file !!!-----------\n")
+        
+    def dumpTeam(self, teamName, location, filename):
+        ''' dumpTeam(<Name of the Team Variable>, <filesystem path>,
+                     <jason filename>) '''        
+        encoded_object = myjson.OrderedEncoder().encode(self.__dict__[teamName])
+        s = str(location + filename)        
         f = open(s,"w")
         print("File '", s,"' written with ", f.write(encoded_object)," Chars")
         f.flush()
-                
         
-        print ("----- Encoding finished and written to file !!!-----------\n")
-    
+    def loadTeam(self, teamName, location, filename):
+        ''' loadTeam(<Name of the Team Variable>, <filesystem path>,
+                     <jason filename>)'''
+        s = str(location + filename)         
+        f = open(s,"r")
+        self.__dict__[teamName] = myjson.OrderedDecoder().decode(f.read())
+        print(self.__dict__[teamName].print())
+        
     def loadTeams(self, location):    
         ''' method to load the two teams from disk '''
         print ("-------- Calling loadTeams(",location, ") --------")
         
         # teamA
-        s = str(location + "ATeam.json")         
-        f = open(s,"r")
-        self.teamA = myjson.OrderedDecoder().decode(f.read())
+        self.loadTeam('teamA', location, "ATeam.json")
         #print(self.teamA.print())
         
         # teamB        
-        s = str(location + "BTeam.json")         
-        f = open(s,"r")
-        self.teamB = myjson.OrderedDecoder().decode(f.read())
+        self.loadTeam('teamB', location, "BTeam.json")        
         #print(self.teamB.print())
-    
-    
+     
 # main
 print('---- START ----')
 tg = TeamGenerator() 
