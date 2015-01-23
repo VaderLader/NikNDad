@@ -26,6 +26,7 @@ class TeamGenerator:
 #==============================================================================            
     def berechneMannschaften(self):
         ''' Method to calculate and select two teams which are most equal '''
+        
         if len(self.teamA.players)%2 != 0:
             self.teamA.addPlayer(Player.Player({'name': 'NullPlayer',
                                            'attackpoints': 0,
@@ -33,15 +34,16 @@ class TeamGenerator:
                                            'keeperpoints': 0}))
         
         spielerliste = list(range(0,len(self.teamA.players))) 
-        print (spielerliste)
-        print("self.teamA.players=",list(range(0,len(self.teamA.players))))
+        #print (spielerliste)
+        #print("self.teamA.players=",list(range(0,len(self.teamA.players))))
         
         # lTeamA keeps the List of all possible TeamAs, wich can be setup
         # with different player combinations        
         combos = itertools.combinations(list(range(0,len(self.teamA.players))),
                                         int(len(self.teamA.players)/2))
         lTeamA = list(combos)  
-        print("lTeamA=",lTeamA)
+        #print("len(lTeamA)=", len(lTeamA)) 
+        #print("lTeamA=",lTeamA)
         
         # Erzeuge das jeweils passenden Team B
         lTeamB = []
@@ -52,10 +54,11 @@ class TeamGenerator:
               #  print ("p=",str(p))
                 dummy.pop(dummy.index(p))
             lTeamB.append(list(dummy))
-        print("lTeamB=",lTeamB)
+        #print("lTeamB=",lTeamB)
 
         # Berechnung von der Teamstärkendifferenz
         teampointsDif = []
+                
         
         for e in lTeamA:
             tDif  = 0
@@ -154,7 +157,12 @@ class TeamGenerator:
         s = str(location + filename)         
         f = open(s,"r")
         self.__dict__[teamName] = myjson.OrderedDecoder().decode(f.read())
-        print(self.__dict__[teamName].print())
+        print('self.__dict__[teamName]= ',self.__dict__[teamName].print())
+        
+        print('-------- loadTeam: self.__dict__[',teamName,'].print()\n',
+              self.__dict__[teamName].print())
+        print('-------- loadTeam: self.fullTeam.print()',self.fullTeam.print(),'\n')
+              
         
     def loadTeams(self, location):    
         ''' method to load the two teams from disk '''
@@ -171,22 +179,25 @@ class TeamGenerator:
 # main
 print('---- START ----')
 tg = TeamGenerator() 
+x = 45
 
 #tg.sampleTeamSetup()
 print('---- Load both teams as they have been the saved to file ----')
-tg.loadTeam('Full-Team','./Input', 'FullTeam.jason')
-
-print(tg.teamA.print())
-print(tg.teamB.print())
-print('---- Shift players from teamB to teamA ----')
-tg.teamA.shiftPlayersFromTeam(tg.teamB)
-print(tg.teamA.print())
-print(tg.teamB.print())
+tg.loadTeam('fullTeam','./Input/', 'FullTeam.json')
+print('---+++', tg.fullTeam.print())
+tg.dumpTeam('fullTeam','./Input/', 'FullTeam_out.json')
+#print('---+++', tg.fullTeam.print())
+#print(tg.teamA.print())
+#print(tg.teamB.print())
+print('\n---- Shift players from fullTeam to teamA ----')
+tg.teamA.shiftNPlayersFromTeam(tg.fullTeam,22)
+print('---+++', tg.teamA.print())
+print('---+++', tg.teamB.print())
 print('---- berechneMannschaften ')
 tg.berechneMannschaften()
 print(tg.teamA.print())
 print(tg.teamB.print())
-print('---- berechneMannschaften ')
+print('---- dumpTeams ')
 tg.dumpTeams('./Result/')
 print('---- ')
 

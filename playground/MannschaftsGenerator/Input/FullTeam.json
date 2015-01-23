@@ -1,64 +1,217 @@
 {
 	"__class__": "Team",
 	"__module__": "Team",
+	"keeperpoints": 650,
+	"name": "fullTeam",
+	"teampoints": 725.3333333333334,
 	"players": [{
 		"__class__": "Player",
 		"__module__": "Player",
-		"keeperpoints": 30,
-		"playerpoints": 16.666666666666668,
-		"attackpoints": 10,
-		"name": "Otto de Motto",
-		"defencepoints": 20
-	},
-    {
-		"__class__": "Player",
-		"__module__": "Player",
-		"attackpoints": 10,
-		"playerpoints": 16.666666666666668,
-		"name": "Host vom Porst",
-		"keeperpoints": 20,
-		"defencepoints": 15
-	},
-    {
-		"__class__": "Player",
-		"__module__": "Player",
-		"attackpoints": 35,
-		"playerpoints": 10000,
-		"name": "De Neue",
-		"keeperpoints": 25,
-		"defencepoints": 15
-	},
-    {
-		"__class__": "Player",
-		"__module__": "Player",
-		"attackpoints": 3,
-		"playerpoints": 10000,
-		"name": "De Andre",
-		"keeperpoints": 55,
-		"defencepoints": 5
+		"keeperpoints": 45,
+		"name": "Peter",
+		"playerpoints": 54.166666666666664,
+		"defencepoints": 50,
+		"attackpoints": 60
 	},
 	{
 		"__class__": "Player",
 		"__module__": "Player",
-		"attackpoints": 30,
-		"playerpoints": 21.666666666666668,
-		"name": "Gusti di Wusti",
+		"keeperpoints": 0,
+		"name": "Lukas",
+		"playerpoints": 22.833333333333332,
+		"defencepoints": 1,
+		"attackpoints": 45
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 50,
+		"name": "Papa",
+		"playerpoints": 46.0,
+		"defencepoints": 50,
+		"attackpoints": 42
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
 		"keeperpoints": 35,
-		"defencepoints": 10
-	}
+		"name": "Niklas",
+		"playerpoints": 22.0,
+		"defencepoints": 26,
+		"attackpoints": 15
+	},
 	{
 		"__class__": "Player",
 		"__module__": "Player",
-		"keeperpoints": 20,
-		"playerpoints": 21.666666666666668,
-		"attackpoints": 30,
-		"name": "Popo di Mare",
-		"defencepoints": 10
+		"keeperpoints": 45,
+		"name": "Matteo",
+		"playerpoints": 28.833333333333332,
+		"defencepoints": 22,
+		"attackpoints": 28
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 0,
+		"name": "Christian",
+		"playerpoints": 26.0,
+		"defencepoints": 18,
+		"attackpoints": 40
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 25,
+		"name": "Florian",
+		"playerpoints": 30.833333333333332,
+		"defencepoints": 32,
+		"attackpoints": 32
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 30,
+		"name": "Benni",
+		"playerpoints": 30.0,
+		"defencepoints": 45,
+		"attackpoints": 20
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 25,
+		"name": "Fabian",
+		"playerpoints": 28.5,
+		"defencepoints": 28,
+		"attackpoints": 30
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 25,
+		"name": "Louis",
+		"playerpoints": 28.833333333333332,
+		"defencepoints": 32,
+		"attackpoints": 28
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 30,
+		"name": "Moritz",
+		"playerpoints": 29.333333333333332,
+		"defencepoints": 28,
+		"attackpoints": 30
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 25,
+		"name": "Vera",
+		"playerpoints": 21.5,
+		"defencepoints": 22,
+		"attackpoints": 20
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 15,
+		"name": "Ron",
+		"playerpoints": 17.333333333333332,
+		"defencepoints": 22,
+		"attackpoints": 15
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 30,
+		"name": "Paul",
+		"playerpoints": 34.333333333333336,
+		"defencepoints": 28,
+		"attackpoints": 40
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 10,
+		"name": "Leo",
+		"playerpoints": 10.666666666666666,
+		"defencepoints": 12,
+		"attackpoints": 10
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 25,
+		"name": "Emil",
+		"playerpoints": 35.166666666666664,
+		"defencepoints": 30,
+		"attackpoints": 42
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 30,
+		"name": "Michel",
+		"playerpoints": 34.166666666666664,
+		"defencepoints": 35,
+		"attackpoints": 35
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 45,
+		"name": "Jan",
+		"playerpoints": 48.333333333333336,
+		"defencepoints": 40,
+		"attackpoints": 55
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 30,
+		"name": "Roko",
+		"playerpoints": 28.333333333333332,
+		"defencepoints": 25,
+		"attackpoints": 30
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 15,
+		"name": "Tom",
+		"playerpoints": 31.666666666666668,
+		"defencepoints": 35,
+		"attackpoints": 35
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 15,
+		"name": "Jonas",
+		"playerpoints": 20.833333333333332,
+		"defencepoints": 25,
+		"attackpoints": 20
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 50,
+		"name": "Pavel",
+		"playerpoints": 48.333333333333336,
+		"defencepoints": 45,
+		"attackpoints": 50
+	},
+	{
+		"__class__": "Player",
+		"__module__": "Player",
+		"keeperpoints": 50,
+		"name": "Felix",
+		"playerpoints": 47.333333333333336,
+		"defencepoints": 45,
+		"attackpoints": 48
 	}],
 	"Mitglieder": "Mitglieder",
-	"keeperpoints": 50,
-	"teampoints": 38.333333333333336,
-	"attackpoints": 40,
-	"name": "Full-Team",
-	"defencepoints": 30
+	"defencepoints": 696,
+	"attackpoints": 770
 }

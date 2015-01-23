@@ -55,6 +55,7 @@ class Team:
         return p 
                 
     def removePlayer(self, p):
+        ''' rte '''
         for index, element in enumerate(self.players):
             if element == p:
                 self.players.pop(index)
@@ -94,10 +95,35 @@ class Team:
 
     def shiftPlayersFromTeam(self, otherTeam):
         ''' Method to shift all players from otherTeam. The otherTeam has no players 
-            afterwards '''          
+            afterwards '''   
+        print('In shiftPlayersFromTeam','id(otherTeam)=', id(otherTeam), 'otherTeam.name=', otherTeam.name, ' len=', len(otherTeam.players))
+        print('len(self.players)',len(self.players))
         self.players = self.players + otherTeam.players    
+        print('len(self.players)',len(self.players))
         self.calcTeampoints()
         otherTeam.removeAllPlayers() 
+    
+    def shiftNPlayersFromTeam(self, otherTeam, n):
+        ''' Method to shift the first n players from otherTeam. The otherTeam has no players 
+            afterwards '''   
+        print('In shiftPlayersFromTeam','id(otherTeam)=', id(otherTeam),
+              'otherTeam.name=', otherTeam.name, ' len=',
+              len(otherTeam.players))
+        print('len(self.players)',len(self.players))
+        
+        #for index, p in enumerate(otherTeam.players):
+            
+        #    if index < n :
+        for index in range(0, n):
+            self.addPlayer(otherTeam.players[index])
+            print(index,n, len(self.players))
+        #for index in range(0, n):
+        #    otherTeam.removePlayer(otherTeam.players[index])
+                  
+        print("+++",index,n)
+        print("vvvv")
+        self.calcTeampoints()
         
         
 print('Hi')
+
