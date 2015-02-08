@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="btn_loadTeam">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>320</y>
-     <width>75</width>
-     <height>23</height>
+     <x>20</x>
+     <y>310</y>
+     <width>751</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
