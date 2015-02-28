@@ -1,6 +1,4 @@
-from PyQt4 import QtCore
-from PyQt4 import uic
-from PyQt4 import QtGui
+from PyQt4 import QtCore, uic, QtGui
 import sys
 
 if __name__ == '__main__':
@@ -9,8 +7,7 @@ if __name__ == '__main__':
     app.setStyle("cleanlooks")
     
     #DATA
-    data = QtCore.QStringList()
-    data << "one" << "two" << "three" << "four" << "five"
+    data = ["one", "two", "three", "four", "five"]
 
     listView = QtGui.QListView()    
     listView.show()
