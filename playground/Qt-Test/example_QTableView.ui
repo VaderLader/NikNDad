@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="btn_loadTeam">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>320</y>
-     <width>75</width>
-     <height>23</height>
+     <x>20</x>
+     <y>310</y>
+     <width>751</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
@@ -38,5 +38,38 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btn_loadTeam</sender>
+   <signal>clicked()</signal>
+   <receiver>tableView</receiver>
+   <slot>showFullScreen()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>377</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>407</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_loadTeam</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>523</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>580</x>
+     <y>375</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
