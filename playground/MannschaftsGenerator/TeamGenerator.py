@@ -10,7 +10,6 @@ import itertools
 
 class TeamGenerator:
     ''' TeamGenerator class for Calculating best team distributions '''   
-
     def __init__(self):
         ''' Constructor: TeamGenerator() '''
         self.teamA = Team.Team({'name': 'A-Team', 
@@ -177,29 +176,33 @@ class TeamGenerator:
         #print(self.teamB.print())
      
 # main
-print('---- START ----')
-tg = TeamGenerator() 
-x = 45
-
-#tg.sampleTeamSetup()
-print('---- Load both teams as they have been the saved to file ----')
-tg.loadTeam('fullTeam','./Input/', 'FullTeam.json')
-print('---+++', tg.fullTeam.print())
-tg.dumpTeam('fullTeam','./Input/', 'FullTeam_out.json')
-#print('---+++', tg.fullTeam.print())
-#print(tg.teamA.print())
-#print(tg.teamB.print())
-print('\n---- Shift players from fullTeam to teamA ----')
-tg.teamA.shiftNPlayersFromTeam(tg.fullTeam,22)
-print('---+++', tg.teamA.print())
-print('---+++', tg.teamB.print())
-print('---- berechneMannschaften ')
-tg.berechneMannschaften()
-print(tg.teamA.print())
-print(tg.teamB.print())
-print('---- dumpTeams ')
-tg.dumpTeams('./Result/')
-print('---- ')
-
-
-print('---- END ----')
+if __name__ == '__main__':
+    
+    
+    print('---- START ----')
+    tg = TeamGenerator() 
+    x = 45
+    
+    #tg.sampleTeamSetup()
+    print('---- Load both teams as they have been the saved to file ----')
+    tg.loadTeam('fullTeam','./Input/', 'FullTeam.json')
+    print('---+++', tg.fullTeam.print())
+    tg.dumpTeam('fullTeam','./Input/', 'FullTeam_out.json')
+    #print('---+++', tg.fullTeam.print())
+    #print(tg.teamA.print())
+    #print(tg.teamB.print())
+    print('\n---- Shift players from fullTeam to teamA ----')
+    tg.teamA.shiftNPlayersFromTeam(tg.fullTeam,22)
+    print('---+++', tg.teamA.print())
+    print('---+++', tg.teamB.print())
+    print('---- berechneMannschaften ')
+    tg.berechneMannschaften()
+    print(tg.teamA.print())
+    print(tg.teamB.print())
+    print('---- dumpTeams ')
+    tg.dumpTeams('./Result/')
+    print('---- ')
+    
+    
+    print('---- END ----')
+    
