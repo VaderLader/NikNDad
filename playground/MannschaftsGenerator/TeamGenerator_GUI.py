@@ -10,35 +10,51 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.uic import *
 
+import TeamGenerator
 
+class TeamGeneratorModel(QtCore.QAbstractListModel):
 
-app = QApplication(sys.argv)
-#s1 = loadUi('./.GUI/GUI_Number_1.ui')
+    def ___init__(self, team = [], parent = None):
+        QtCore.QAbstract
 
-#s1.show
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-sys.exit(app.exec_())
+if __name__ == '__main__':
+    
+    print('----- START -----')
+    
+    app = QApplication(sys.argv)
+    s1 = loadUi('./.GUI/GUI_Number_1.ui')
+    
+    s1.show()
+    
+    
+    tg = TeamGenerator.TeamGenerator()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    print('----- END -----')
+    
+    sys.exit(app.exec_())
+    
+    print('----- STOP -----')
