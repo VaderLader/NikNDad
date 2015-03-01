@@ -14,7 +14,7 @@ import TeamGenerator
 
 class TeamGeneratorModel(QtCore.QAbstractListModel):
 
-    def ___init__(self, team = [], parent = None):
+    def __init__(self, team = [], parent = None):
         QtCore.QAbstractListModel.__init__(self, parent)
         self.__team = team
         
@@ -23,15 +23,21 @@ class TeamGeneratorModel(QtCore.QAbstractListModel):
         if role == QtCore.Qt.DisplayRole:
             
             if orientation == QtCore.Qt.Horizontal:
-                return QtCore.QString("Spieler Name")
-            else:
-                return QtCore.QString("Spieler %1").arg(section + 1)   
+                return "Spieler Name"
+            else:                
+                return "Spieler " + str(section + 1)  
     
     def data(self, index, role):
-        
-        
-        if role == QtCore.Qt.EditRole:
-            return self.__colors[index.row()].name()
+        print('data(self, index, role):')
+        if role == QtCore.Qt.DisplayRole:
+            print('True')
+            return self.__team[index.row()].name()
+        else:
+            print('False')
+            
+            
+    def rowCount(self, parent):
+        return len(self.__team)
 
     
 
@@ -48,7 +54,7 @@ if __name__ == '__main__':
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
     tg.loadTeam('fullTeam','./Input/', 'FullTeam.json')
-    tgm = TeamGeneratorModel(["1","2"]) #tg.fullTeam)
+    tgm = TeamGeneratorModel(['1', '2', '3'])
     
     s1.tableView_A.setModel(tgm)
     
