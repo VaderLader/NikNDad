@@ -14,9 +14,9 @@ import TeamGenerator
 
 class TeamGeneratorModel(QtCore.QAbstractTableModel):
 
-    def __init__(self, player = [[]], parent = None):
+    def __init__(self, ptable = [[]], parent = None):
         QtCore.QAbstractTableModel.__init__(self, parent)
-        self.__player = player
+        self.__ptable = ptable
         
     def headerData(self, section, orientation, role):
         
@@ -25,7 +25,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
             if orientation == QtCore.Qt.Horizontal:
                 return "Spieler Name"
             else:                
-                return "Spieler " + str(section + 1)  
+                return "Spieler " + str(section)  
     
     def data(self, index, role):
         row = index.row()
@@ -33,16 +33,21 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         
         if role == QtCore.Qt.DisplayRole:
             if column == 0:
-                return str( self.__player[column][row].name)
+                return str(self.__ptable[0][row].name)
             elif column == 1:
-                return str( self.__player[column][row].attackpoints)
-            
+                return str(self.__ptable[0][row].attackpoints)                
+            elif column == 2:
+                return str(self.__ptable[0][row].defencepoints) 
+            elif column == 3:
+                return str(self.__ptable[0][row].keeperpoints) 
+            elif column == 4:
+                return str(self.__ptable[0][row].playerpoints)
             
     def rowCount(self, parent):
-        return len(self.__player[0])
+        return len(self.__ptable[0])
         
     def columnCount(self, parent):
-        return len(self.__player)
+        return len(self.__ptable)
     
     def flags(self,index): 
         return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
@@ -54,11 +59,12 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
             column = index.column()
             
             if column == 0:
-                return str( self.__player[column][row].name)
+                return "C0"                
+                #return str( self.__ptable[column][row].name)
             elif column == 1:
-                return str( self.__player[column][row].attackpoints)
-
-            self.__player[row].name=value
+                #return str( self.__ptable[column][row].attackpoints)
+                return "C1"
+            self.__ptable[row].name=value
             return False
             
         
@@ -67,7 +73,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         self.beginInsertRows(parent, position, position + rows - 1)  
         
         for i in range(rows):
-            self.__player.insert(position, TeamGenerator.Player.Player({'name': 'Neuer Spieler',
+            self.__ptable.insert(position, TeamGenerator.Player.Player({'name': 'Neuer Spieler',
                                                           'attackpoints': 0,
                                                           'defencepoints': 0, 
                                                           'keeperpoints': 0}))        
@@ -79,8 +85,8 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         self.beginRemoveRows(parent, position, position + rows - 1)
         
         for i in range(rows):
-            value = self.__player[position]
-            self.__player.remove(value)
+            value = self.__ptable[position]
+            self.__ptable.remove(value)
              
         self.endRemoveRows()
         return True
@@ -100,12 +106,23 @@ if __name__ == '__main__':
     s1 = loadUi('./.GUI/GUI_Number_1.ui')
     
     s1.show()
-   
+    
     
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
     tg.loadTeam('fullTeam','./Input/', 'FullTeam.json')
-    tgm = TeamGeneratorModel([tg.fullTeam.players,tg.fullTeam.players])#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
+    
+    
+    print("########### TEST START ############")
+    print(tg.fullTeam.players)    
+    print("++++++++++++++++++")
+    
+    dummy = range(0, len(tg.fullTeam.players))
+   
+    print("dummy=",dummy)   
+    print("########### TEST START ############")    
+     
+    tgm = TeamGeneratorModel([tg.fullTeam.players,dummy,dummy, dummy, dummy])#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     
     s1.tableView_A.setModel(tgm)
     
