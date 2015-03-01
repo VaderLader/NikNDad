@@ -28,12 +28,12 @@ class TeamGeneratorModel(QtCore.QAbstractListModel):
                 return "Spieler " + str(section + 1)  
     
     def data(self, index, role):
-        print('data(self, index, role):')
+#        print('data(self, index, role):')
         if role == QtCore.Qt.DisplayRole:
-            print('True')
+#            print('True')
             return str( self.__player[index.row()].name)
-        else:
-            print('False')
+#        else:
+#            print('False')
             
             
     def rowCount(self, parent):
@@ -42,6 +42,39 @@ class TeamGeneratorModel(QtCore.QAbstractListModel):
     def flags(self,index): 
         return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
         
+    def setData(self, index, value, role = QtCore.Qt.EditRole):
+        if role == QtCore.Qt.EditRole:
+            
+            row = index.row()
+            self.__player[row].name=value
+            return False
+            
+        
+    def insertRows(self, position, rows, parent = QtCore.QModelIndex()):
+        # Syntax: self.beginInsertRows(index,first,last)
+        self.beginInsertRows(parent, position, position + rows - 1)  
+        
+        for i in range(rows):
+            self.__player.insert(position, TeamGenerator.Player.Player({'name': 'Neuer Spieler',
+                                                          'attackpoints': 0,
+                                                          'defencepoints': 0, 
+                                                          'keeperpoints': 0}))        
+        self.endInsertRows()
+        
+#        return True
+        
+    def removeRows(self, position, rows, parent = QtCore.QModelIndex()):
+        self.beginRemoveRows(parent, position, position + rows - 1)
+        
+        for i in range(rows):
+            value = self.__player[position]
+            self.__player.remove(value)
+             
+        self.endRemoveRows()
+        return True
+
+def insertClicked():
+    tgm.insertRows(0 ,1)        
     
 
 if __name__ == '__main__':
@@ -61,7 +94,8 @@ if __name__ == '__main__':
     
     s1.tableView_A.setModel(tgm)
     
-    
+    s1.pushButton_2.clicked.connect(insertClicked)
+
     
     
     
