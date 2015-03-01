@@ -12,10 +12,10 @@ from PyQt4.uic import *
 
 import TeamGenerator
 
-class TeamGeneratorModel(QtCore.QAbstractListModel):
+class TeamGeneratorModel(QtCore.QAbstractTableModel):
 
-    def __init__(self, player = [], parent = None):
-        QtCore.QAbstractListModel.__init__(self, parent)
+    def __init__(self, player = [[]], parent = None):
+        QtCore.QAbstractTableModel.__init__(self, parent)
         self.__player = player
         
     def headerData(self, section, orientation, role):
@@ -38,6 +38,9 @@ class TeamGeneratorModel(QtCore.QAbstractListModel):
             
     def rowCount(self, parent):
         return len(self.__player)
+        
+    def columCount(self, parent):
+        return len(self.__player[0])
     
     def flags(self,index): 
         return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
@@ -72,6 +75,9 @@ class TeamGeneratorModel(QtCore.QAbstractListModel):
              
         self.endRemoveRows()
         return True
+        
+        
+
 
 def insertClicked():
     tgm.insertRows(0 ,1)        
@@ -90,7 +96,7 @@ if __name__ == '__main__':
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
     tg.loadTeam('fullTeam','./Input/', 'FullTeam.json')
-    tgm = TeamGeneratorModel(tg.fullTeam.players) #     ['1', '2', '3'])
+    tgm = TeamGeneratorModel(tg.fullTeam.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     
     s1.tableView_A.setModel(tgm)
     
