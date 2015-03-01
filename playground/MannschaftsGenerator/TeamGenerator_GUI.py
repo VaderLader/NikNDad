@@ -28,19 +28,21 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 return "Spieler " + str(section + 1)  
     
     def data(self, index, role):
-#        print('data(self, index, role):')
+        row = index.row()
+        column = index.column()
+        
         if role == QtCore.Qt.DisplayRole:
-#            print('True')
-            return str( self.__player[index.row()].name)
-#        else:
-#            print('False')
+            if column == 0:
+                return str( self.__player[column][row].name)
+            elif column == 1:
+                return str( self.__player[column][row].attackpoints)
             
             
     def rowCount(self, parent):
-        return len(self.__player)
-        
-    def columCount(self, parent):
         return len(self.__player[0])
+        
+    def columnCount(self, parent):
+        return len(self.__player)
     
     def flags(self,index): 
         return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
@@ -49,6 +51,13 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         if role == QtCore.Qt.EditRole:
             
             row = index.row()
+            column = index.column()
+            
+            if column == 0:
+                return str( self.__player[column][row].name)
+            elif column == 1:
+                return str( self.__player[column][row].attackpoints)
+
             self.__player[row].name=value
             return False
             
@@ -96,7 +105,7 @@ if __name__ == '__main__':
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
     tg.loadTeam('fullTeam','./Input/', 'FullTeam.json')
-    tgm = TeamGeneratorModel(tg.fullTeam.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
+    tgm = TeamGeneratorModel([tg.fullTeam.players,tg.fullTeam.players])#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     
     s1.tableView_A.setModel(tgm)
     
