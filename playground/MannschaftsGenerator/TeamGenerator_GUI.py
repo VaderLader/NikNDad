@@ -42,6 +42,9 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 return str(self.__ptable[0][row].keeperpoints) 
             elif column == 4:
                 return str(self.__ptable[0][row].playerpoints)
+                
+        if role == QtCore.Qt.EditRole:
+            return self.__ptable[0][row].name()
             
     def rowCount(self, parent):
         return len(self.__ptable[0])
@@ -53,20 +56,25 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
         
     def setData(self, index, value, role = QtCore.Qt.EditRole):
+       
+        
         if role == QtCore.Qt.EditRole:
             
             row = index.row()
             column = index.column()
             
             if column == 0:
-                return "C0"                
-                #return str( self.__ptable[column][row].name)
+                self.__ptable[0][row].name = str(value)
             elif column == 1:
-                #return str( self.__ptable[column][row].attackpoints)
-                return "C1"
-            self.__ptable[row].name=value
-            return False
+                self.__ptable[0][row].attackpoints = int(value) 
+            elif column == 2:
+                self.__ptable[0][row].defencepoints = int(value)
+            elif column == 3:
+                self.__ptable[0][row].keeperpoints = int(value) 
             
+            self.__ptable[0][row].calcPlayerpoints()
+            return True
+        return False
         
     def insertRows(self, position, rows, parent = QtCore.QModelIndex()):
         # Syntax: self.beginInsertRows(index,first,last)
