@@ -15,7 +15,15 @@ import TeamGenerator
 class TeamGeneratorModel(QtCore.QAbstractTableModel):
 
     def __init__(self, ptable = [[]], parent = None):
+#==============================================================================
+#         print (ptable)
+#         dummy = range(0, len(ptable))
+#         print ([ptable,dummy,dummy,dummy,dummy])
+#         print (ptable)
+#         ptable = [ptable,dummy,dummy,dummy,dummy]
+#==============================================================================
         QtCore.QAbstractTableModel.__init__(self, parent)
+        dummy = range(0, len(ptable))
         self.__ptable = ptable
         
     def headerData(self, section, orientation, role):
@@ -87,6 +95,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                                                           'keeperpoints': 0}))        
         self.endInsertRows()
         
+        
 #        return True
         
     def removeRows(self, position, rows, parent = QtCore.QModelIndex()):
@@ -99,12 +108,28 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         self.endRemoveRows()
         return True
         
+#==============================================================================
+#     def sort(self, Ncol, order):
+#         """Sort table by given column number.
+#         """
+#         self.emit(SIGNAL("layoutAboutToBeChanged()"))
+#         self.arraydata = sorted(self.arraydata, key=operator.itemgetter(Ncol))        
+#         if order == Qt.DescendingOrder:
+#             self.arraydata.reverse()
+#         self.emit(SIGNAL("layoutChanged()"))
+#==============================================================================
+        
         
 
 
 def insertClicked():
-    tgm.insertRows(0 ,1)        
+    tgm.insertRows(3,1)        
+
+def sort2():
+    tgm.sort(2,2)
     
+def tableClick():
+    print ('§§§§§§§§§§§§§§§§§§§TABLE CLICKED §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§')
 
 if __name__ == '__main__':
     
@@ -130,12 +155,13 @@ if __name__ == '__main__':
     print("dummy=",dummy)   
     print("########### TEST START ############")    
      
-    tgm = TeamGeneratorModel([tg.fullTeam.players,dummy,dummy, dummy, dummy])#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
+    tgm = TeamGeneratorModel([tg.fullTeam.players,tg.fullTeam.players,tg.fullTeam.players,tg.fullTeam.players,tg.fullTeam.players])#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     
     s1.tableView_A.setModel(tgm)
     
     s1.pushButton_2.clicked.connect(insertClicked)
-
+    s1.pushButton_1.clicked.connect(sort2)
+#    s1.tableView_A.header.clicked.connect(tableClick)
     
     
     
