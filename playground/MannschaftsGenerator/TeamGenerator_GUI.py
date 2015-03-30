@@ -31,7 +31,17 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         if role == QtCore.Qt.DisplayRole:
             
             if orientation == QtCore.Qt.Horizontal:
-                return "Spieler Name"
+                if section == 0:                
+                    return "Spieler Name"
+                elif section == 1:
+                    return 'Angriff'
+                elif section == 2:
+                    return 'Abwehr'
+                elif section == 3:
+                    return 'Tor'
+                elif section == 4:
+                    return 'Gesammt'
+                    
             else:                
                 return "Spieler " + str(section)  
     
@@ -125,8 +135,18 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
 def insertClicked():
     tgm.insertRows(3,1)        
 
-def sort2():
-    tgm.sort(2,2)
+#==============================================================================
+# def clicked0():
+#     print ('0 clicked')
+# def clicked1():
+#     print ('1 clicked')
+# def clicked2():
+#     print ('2 clicked')
+# def clicked3():
+#     print ('3 clicked')
+# def clicked4():
+#     print ('4 clicked')
+#==============================================================================
     
 def tableClick():
     print ('§§§§§§§§§§§§§§§§§§§TABLE CLICKED §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§')
@@ -160,9 +180,24 @@ if __name__ == '__main__':
     s1.tableView_A.setModel(tgm)
     
     s1.pushButton_2.clicked.connect(insertClicked)
-    s1.pushButton_1.clicked.connect(sort2)
-#    s1.tableView_A.header.clicked.connect(tableClick)
-    
+#    s1.pushButton_1.clicked.connect(sort2)
+#==============================================================================
+#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
+#                                   QtCore.SIGNAL('sectionClicked (0)'),
+#                                   clicked0)
+#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
+#                                   QtCore.SIGNAL('sectionClicked (1)'),
+#                                   clicked1)
+#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
+#                                   QtCore.SIGNAL('sectionClicked (2)'),
+#                                   clicked2)
+#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
+#                                   QtCore.SIGNAL('sectionClicked (3)'),
+#                                   clicked3)
+#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
+#                                   QtCore.SIGNAL('sectionClicked (4)'),
+#                                   clicked4)    
+#==============================================================================
     
     
     
