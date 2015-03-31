@@ -154,7 +154,7 @@ if __name__ == '__main__':
     
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
-    tg.loadTeam('fullTeam','./Input/', 'FullTeam.json')
+    tg.loadTeam('teamA','./Input/', 'SmallTeam.json')
     
     
     print("########### TEST START ############")
@@ -162,18 +162,23 @@ if __name__ == '__main__':
     #print("++++++++++++++++++")
     
   
-    tgm = TeamGeneratorModel(tg.fullTeam.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
-
+    tgmA= TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
+    tgmB = TeamGeneratorModel(tg.teamB.players)
     
-    s1.tableView_A.setModel(tgm)
+    s1.tableView_A.setModel(tgmA)
+    s1.tableView_B.setModel(tgmB)
     
     s1.pushButton_2.clicked.connect(insertClicked)
-      
+    s1.pushButton_1.clicked.connect(tg.berechneMannschaften)  
 
     
-    proxy = PlayerFilterProxyModel()
-    proxy.setSourceModel(tgm)
-    s1.tableView_A.setModel(proxy)
+    proxyA = PlayerFilterProxyModel()
+    proxyA.setSourceModel(tgmA)
+    s1.tableView_A.setModel(proxyA)  
+    
+    proxyB = PlayerFilterProxyModel()
+    proxyB.setSourceModel(tgmA)
+    s1.tableView_B.setModel(proxyB)
      
     
     
