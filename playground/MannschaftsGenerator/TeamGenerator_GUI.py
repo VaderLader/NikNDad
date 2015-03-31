@@ -61,7 +61,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 #  "%.2f" % rundet auf zwei Nachkommetstellen und macht einen string 
                 
         if role == QtCore.Qt.EditRole:
-            return self.__ptable[row].name()
+            return self.__ptable[row].name
             
     def rowCount(self, parent):
         return len(self.__ptable)
@@ -140,7 +140,7 @@ def tableClick():
 
 def headerClick():
     print ('Header Click')
-
+    
 
 if __name__ == '__main__':
     
@@ -148,7 +148,7 @@ if __name__ == '__main__':
     
     app = QApplication(sys.argv)
     s1 = loadUi('./.GUI/GUI_Number_1.ui')
-    
+        
     s1.show()
     
     
