@@ -57,7 +57,8 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
             elif column == 3:
                 return str(self.__ptable[row].keeperpoints) 
             elif column == 4:
-                return str(self.__ptable[row].playerpoints)
+                return "%.2f" % self.__ptable[row].playerpoints
+                #  "%.2f" % rundet auf zwei Nachkommetstellen und macht einen string 
                 
         if role == QtCore.Qt.EditRole:
             return self.__ptable[row].name()
