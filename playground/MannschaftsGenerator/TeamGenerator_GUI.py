@@ -14,17 +14,15 @@ import TeamGenerator
 
 class TeamGeneratorModel(QtCore.QAbstractTableModel):
 
-    def __init__(self, ptable = [[]], parent = None):
-#==============================================================================
-#         print (ptable)
-#         dummy = range(0, len(ptable))
-#         print ([ptable,dummy,dummy,dummy,dummy])
-#         print (ptable)
-#         ptable = [ptable,dummy,dummy,dummy,dummy]
-#==============================================================================
+    def __init__(self, ptable = [], parent = None):
         QtCore.QAbstractTableModel.__init__(self, parent)
-        dummy = range(0, len(ptable))
         self.__ptable = ptable
+        
+
+        
+        
+    def sortColumn(section):
+        pass    
         
     def headerData(self, section, orientation, role):
         
@@ -51,62 +49,59 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         
         if role == QtCore.Qt.DisplayRole:
             if column == 0:
-                return str(self.__ptable[0][row].name)
+                return str(self.__ptable[row].name)
             elif column == 1:
-                return str(self.__ptable[0][row].attackpoints)                
+                return str(self.__ptable[row].attackpoints)                
             elif column == 2:
-                return str(self.__ptable[0][row].defencepoints) 
+                return str(self.__ptable[row].defencepoints) 
             elif column == 3:
-                return str(self.__ptable[0][row].keeperpoints) 
+                return str(self.__ptable[row].keeperpoints) 
             elif column == 4:
-                return str(self.__ptable[0][row].playerpoints)
+                return str(self.__ptable[row].playerpoints)
                 
         if role == QtCore.Qt.EditRole:
-            return self.__ptable[0][row].name()
+            return self.__ptable[row].name()
             
     def rowCount(self, parent):
-        return len(self.__ptable[0])
+        return len(self.__ptable)
         
     def columnCount(self, parent):
-        return len(self.__ptable)
+        return 5
     
     def flags(self,index): 
         return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
         
     def setData(self, index, value, role = QtCore.Qt.EditRole):
-       
-        
+       # setData is always called if data has to be displayed      
         if role == QtCore.Qt.EditRole:
             
             row = index.row()
             column = index.column()
             
             if column == 0:
-                self.__ptable[0][row].name = str(value)
+                self.__ptable[row].name = str(value)
             elif column == 1:
-                self.__ptable[0][row].attackpoints = int(value) 
+                self.__ptable[row].attackpoints = int(value) 
             elif column == 2:
-                self.__ptable[0][row].defencepoints = int(value)
+                self.__ptable[row].defencepoints = int(value)
             elif column == 3:
-                self.__ptable[0][row].keeperpoints = int(value) 
+                self.__ptable[row].keeperpoints = int(value) 
             
-            self.__ptable[0][row].calcPlayerpoints()
+            self.__ptable[row].calcPlayerpoints()
             return True
         return False
         
     def insertRows(self, position, rows, parent = QtCore.QModelIndex()):
         # Syntax: self.beginInsertRows(index,first,last)
         self.beginInsertRows(parent, position, position + rows - 1)  
-        
-        for i in range(rows):
-            self.__ptable.insert(position, TeamGenerator.Player.Player({'name': 'Neuer Spieler',
-                                                          'attackpoints': 0,
-                                                          'defencepoints': 0, 
-                                                          'keeperpoints': 0}))        
+        newPlayer = TeamGenerator.Player.Player({'name': '<Neuer Spieler>',
+                                          'attackpoints': 0,
+                                          'defencepoints': 0, 
+                                          'keeperpoints': 0})        
+        self.__ptable.insert(position,newPlayer)
+
         self.endInsertRows()
-        
-        
-#        return True
+        return True
         
     def removeRows(self, position, rows, parent = QtCore.QModelIndex()):
         self.beginRemoveRows(parent, position, position + rows - 1)
@@ -117,39 +112,34 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
              
         self.endRemoveRows()
         return True
-        
+
+    
 #==============================================================================
-#     def sort(self, Ncol, order):
-#         """Sort table by given column number.
-#         """
-#         self.emit(SIGNAL("layoutAboutToBeChanged()"))
-#         self.arraydata = sorted(self.arraydata, key=operator.itemgetter(Ncol))        
-#         if order == Qt.DescendingOrder:
-#             self.arraydata.reverse()
-#         self.emit(SIGNAL("layoutChanged()"))
+    def sort(self, Ncol, order):
+         """Sort table by given column number.
+         """
+         #self.emit(SIGNAL("layoutAboutToBeChanged()"))
+         self.__ptable = sorted(self.__ptable, key=operator.itemgetter(Ncol))        
+         if order == Qt.DescendingOrder:
+             self.arraydata.reverse()
+         self.emit(SIGNAL("layoutChanged()"))
 #==============================================================================
-        
-        
+ 
+class PlayerFilterProxyModel(QSortFilterProxyModel):
+    pass
+       
 
 
 def insertClicked():
-    tgm.insertRows(3,1)        
+    tgm.insertRows(0,1)        
 
-#==============================================================================
-# def clicked0():
-#     print ('0 clicked')
-# def clicked1():
-#     print ('1 clicked')
-# def clicked2():
-#     print ('2 clicked')
-# def clicked3():
-#     print ('3 clicked')
-# def clicked4():
-#     print ('4 clicked')
-#==============================================================================
     
 def tableClick():
     print ('§§§§§§§§§§§§§§§§§§§TABLE CLICKED §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§')
+
+def headerClick():
+    print ('Header Click')
+
 
 if __name__ == '__main__':
     
@@ -167,55 +157,23 @@ if __name__ == '__main__':
     
     
     print("########### TEST START ############")
-    print(tg.fullTeam.players)    
-    print("++++++++++++++++++")
+    #print(str(p.name) for p in tg.fullTeam.players)    
+    #print("++++++++++++++++++")
     
-    dummy = range(0, len(tg.fullTeam.players))
-   
-    print("dummy=",dummy)   
-    print("########### TEST START ############")    
-     
-    tgm = TeamGeneratorModel([tg.fullTeam.players,tg.fullTeam.players,tg.fullTeam.players,tg.fullTeam.players,tg.fullTeam.players])#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
+  
+    tgm = TeamGeneratorModel(tg.fullTeam.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
+
     
     s1.tableView_A.setModel(tgm)
     
     s1.pushButton_2.clicked.connect(insertClicked)
-#    s1.pushButton_1.clicked.connect(sort2)
-#==============================================================================
-#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
-#                                   QtCore.SIGNAL('sectionClicked (0)'),
-#                                   clicked0)
-#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
-#                                   QtCore.SIGNAL('sectionClicked (1)'),
-#                                   clicked1)
-#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
-#                                   QtCore.SIGNAL('sectionClicked (2)'),
-#                                   clicked2)
-#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
-#                                   QtCore.SIGNAL('sectionClicked (3)'),
-#                                   clicked3)
-#     s1.tableView_A.header.connect(s1.tableView_A.header.horizontalHeader(),
-#                                   QtCore.SIGNAL('sectionClicked (4)'),
-#                                   clicked4)    
-#==============================================================================
+      
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    proxy = PlayerFilterProxyModel()
+    proxy.setSourceModel(tgm)
+    s1.tableView_A.setModel(proxy)
+     
     
     
     print('----- END -----')
