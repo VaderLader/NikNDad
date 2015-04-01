@@ -73,7 +73,9 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
         
     def setData(self, index, value, role = QtCore.Qt.EditRole):
-       # setData is always called if data has to be displayed      
+       # setData is always called if data has to be displayed 
+        s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+        s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
         if role == QtCore.Qt.EditRole:
             
             row = index.row()
@@ -160,6 +162,9 @@ def callBerechneManschaften():
 
     
 def refreshGUI():
+    s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+    s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+    
     tgmA = TeamGeneratorModel(tg.teamA.players)
     tgmB = TeamGeneratorModel(tg.teamB.players)
     s1.tableView_A.setModel(tgmA)
@@ -205,6 +210,8 @@ if __name__ == '__main__':
     tgmA = TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     tgmB = TeamGeneratorModel(tg.teamB.players)
     
+    s1.gesammt_A.setText(str(tg.teamA.calcTeampoints()))
+    s1.gesammt_B.setText(str(tg.teamB.calcTeampoints()))
     
        
     s1.tableView_A.setModel(tgmA)
