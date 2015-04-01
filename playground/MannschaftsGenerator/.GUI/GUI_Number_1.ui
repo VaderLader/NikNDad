@@ -42,6 +42,15 @@
       <height>661</height>
      </rect>
     </property>
+    <property name="alternatingRowColors">
+     <bool>true</bool>
+    </property>
+    <property name="gridStyle">
+     <enum>Qt::DotLine</enum>
+    </property>
+    <property name="sortingEnabled">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="pushButton_1">
     <property name="geometry">
@@ -53,7 +62,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Do nothing</string>
+     <string>Calculate</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">

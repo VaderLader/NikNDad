@@ -58,7 +58,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 return int(self.__ptable[row].keeperpoints) 
             elif column == 4:
                 return float("%.2f" % self.__ptable[row].playerpoints)
-                #  "%.2f" % rundet auf zwei Nachkommetstellen und macht einen string 
+
                 
         if role == QtCore.Qt.EditRole:
             return self.__ptable[row].name
@@ -132,17 +132,53 @@ class PlayerFilterProxyModel(QSortFilterProxyModel):
 
 
 def insertClicked():
-    tgm.insertRows(0,1)        
+    
+    tgmA.insertRows(0,1)        
+    #TODO:
+    #Abhängig vom Focus entweder TeamA Tabelle oder TeamB Tabelle erweitern    
+    #tgmB.insertRows(0,1)        
+    refreshGUI()    
 
     
 def tableClick():
     print ('§§§§§§§§§§§§§§§§§§§TABLE CLICKED §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§')
 
+
 def headerClick():
     print ('Header Click')
     
+ 
+def callBerechneManschaften():
+    print("### callBerechneManschaften() ###")
+    tg.berechneMannschaften()    
+    print("########### TEAM A: ############")
+    tg.teamA.print()
+    print("########### TEAM B: ############")
+    tg.teamB.print()
+    refreshGUI()    
+
+
+    
+def refreshGUI():
+    tgmA = TeamGeneratorModel(tg.teamA.players)
+    tgmB = TeamGeneratorModel(tg.teamB.players)
+    s1.tableView_A.setModel(tgmA)
+    s1.tableView_B.setModel(tgmB)
+
+    proxyA = PlayerFilterProxyModel(tgmA)
+    proxyA.setSourceModel(tgmA)
+    s1.tableView_A.setModel(proxyA)  
+    
+    proxyB = PlayerFilterProxyModel(tgmB)
+    proxyB.setSourceModel(tgmB) 
+    s1.tableView_B.setModel(proxyB)
+    
+
 
 if __name__ == '__main__':
+  
+ 
+   
     
     print('----- START -----')
     
@@ -155,29 +191,36 @@ if __name__ == '__main__':
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
     tg.loadTeam('teamA','./Input/', 'SmallTeam.json')
-    
+
+    print("########### TEAM A: ############")
+    tg.teamA.print()
+    print("########### TEAM B: ############")
+    tg.teamB.print()
     
     print("########### TEST START ############")
     #print(str(p.name) for p in tg.fullTeam.players)    
     #print("++++++++++++++++++")
     
   
-    tgmA= TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
+    tgmA = TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     tgmB = TeamGeneratorModel(tg.teamB.players)
     
+    
+       
     s1.tableView_A.setModel(tgmA)
     s1.tableView_B.setModel(tgmB)
     
     s1.pushButton_2.clicked.connect(insertClicked)
-    s1.pushButton_1.clicked.connect(tg.berechneMannschaften)  
+    s1.pushButton_1.clicked.connect(callBerechneManschaften)  
 
+   
     
-    proxyA = PlayerFilterProxyModel()
+    proxyA = PlayerFilterProxyModel(tgmA)
     proxyA.setSourceModel(tgmA)
     s1.tableView_A.setModel(proxyA)  
     
-    proxyB = PlayerFilterProxyModel()
-    proxyB.setSourceModel(tgmA)
+    proxyB = PlayerFilterProxyModel(tgmB)
+    proxyB.setSourceModel(tgmB) 
     s1.tableView_B.setModel(proxyB)
      
     

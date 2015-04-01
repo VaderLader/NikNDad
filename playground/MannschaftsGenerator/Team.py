@@ -90,7 +90,7 @@ class Team:
         Mitglieder += ('Die Abwehrstärke liegt bei', self.defencepoints,'\n')
         Mitglieder += ('Die Torwartstärke liegt be liegt bei', self.keeperpoints,'\n')
         Mitglieder += ('Gesamtstärke liegt bei:', self.teampoints,'\n')
-        #print(Mitglieder)
+        print(Mitglieder)
         return Mitglieder
 
     def shiftPlayersFromTeam(self, otherTeam):

@@ -25,7 +25,7 @@ class TeamGenerator:
 #==============================================================================            
     def berechneMannschaften(self):
         ''' Method to calculate and select two teams which are most equal '''
-        
+       #print ("berechneMannschaften")
         if len(self.teamA.players)%2 != 0:
             self.teamA.addPlayer(Player.Player({'name': 'NullPlayer',
                                            'attackpoints': 0,
@@ -98,9 +98,10 @@ class TeamGenerator:
         for e in  poplist:
             self.teamB.addPlayer(self.teamA.removeByIndex(e))
         
+        print("HALLO")
         self.teamA.print()
         self.teamB.print()          
-    
+        print("HHH")
 #==============================================================================
     
     def sampleTeamSetup(self):
