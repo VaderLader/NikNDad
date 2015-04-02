@@ -74,8 +74,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         
     def setData(self, index, value, role = QtCore.Qt.EditRole):
        # setData is always called if data has to be displayed 
-        s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-        s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+
         if role == QtCore.Qt.EditRole:
             
             row = index.row()
@@ -91,7 +90,11 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 self.__ptable[row].keeperpoints = int(value) 
             
             self.__ptable[row].calcPlayerpoints()
+            s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+            s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
             return True
+        s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+        s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
         return False
         
     def insertRows(self, position, rows, parent = QtCore.QModelIndex()):
@@ -209,6 +212,8 @@ if __name__ == '__main__':
   
     tgmA = TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     tgmB = TeamGeneratorModel(tg.teamB.players)
+    
+#    print(tgmA.columnViewportPosition)
     
     s1.gesammt_A.setText(str(tg.teamA.calcTeampoints()))
     s1.gesammt_B.setText(str(tg.teamB.calcTeampoints()))
