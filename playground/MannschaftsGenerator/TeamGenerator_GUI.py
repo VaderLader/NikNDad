@@ -209,32 +209,27 @@ if __name__ == '__main__':
     #print(str(p.name) for p in tg.fullTeam.players)    
     #print("++++++++++++++++++")
     
-  
+    
+    # Data[tg.teamA.players] ---> DataModel[tgmA] 
     tgmA = TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     tgmB = TeamGeneratorModel(tg.teamB.players)
+        
+    # DataModel[tgmA]  ---> ProxyModel[proxyA]
+    proxyA = PlayerFilterProxyModel(tgmA)
+    proxyA.setSourceModel(tgmA)
+    proxyB = PlayerFilterProxyModel(tgmB)
+    proxyB.setSourceModel(tgmB) 
+  
+    # ProxyModel[proxyA]--->ViewModel[tableView_A]
+    s1.tableView_A.setModel(proxyA)  
+    s1.tableView_B.setModel(proxyB)
     
-#    print(tgmA.columnViewportPosition)
-    
-    s1.gesammt_A.setText(str(tg.teamA.calcTeampoints()))
-    s1.gesammt_B.setText(str(tg.teamB.calcTeampoints()))
-    
-       
-    s1.tableView_A.setModel(tgmA)
-    s1.tableView_B.setModel(tgmB)
     
     s1.pushButton_2.clicked.connect(insertClicked)
     s1.pushButton_1.clicked.connect(callBerechneManschaften)  
 
-   
-    
-    proxyA = PlayerFilterProxyModel(tgmA)
-    proxyA.setSourceModel(tgmA)
-    s1.tableView_A.setModel(proxyA)  
-    
-    proxyB = PlayerFilterProxyModel(tgmB)
-    proxyB.setSourceModel(tgmB) 
-    s1.tableView_B.setModel(proxyB)
-     
+    s1.gesammt_A.setText(str(tg.teamA.calcTeampoints()))
+    s1.gesammt_B.setText(str(tg.teamB.calcTeampoints()))
     
     
     print('----- END -----')
