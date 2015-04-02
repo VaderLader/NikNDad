@@ -163,6 +163,9 @@ def callBerechneManschaften():
     refreshGUI()    
 
 
+#def refreshGUI():
+#    tgmA.dataChanged.emit()        
+#    tgmB.dataChanged.emit()
     
 def refreshGUI():
     s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
@@ -180,8 +183,14 @@ def refreshGUI():
     proxyB = PlayerFilterProxyModel(tgmB)
     proxyB.setSourceModel(tgmB) 
     s1.tableView_B.setModel(proxyB)
-    
 
+def getCurrentPlayer(self):
+    print("getCurrentPlayer")
+    indexes = selModelA.selectedIndexes()
+        
+    for index in indexes:
+        text = u"(%i,%i)" % (index.row(), index.column())
+        print(text)
 
 if __name__ == '__main__':
   
@@ -209,11 +218,11 @@ if __name__ == '__main__':
     #print(str(p.name) for p in tg.fullTeam.players)    
     #print("++++++++++++++++++")
     
-    
+    ##########################################################################
     # Data[tg.teamA.players] ---> DataModel[tgmA] 
     tgmA = TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     tgmB = TeamGeneratorModel(tg.teamB.players)
-        
+    
     # DataModel[tgmA]  ---> ProxyModel[proxyA]
     proxyA = PlayerFilterProxyModel(tgmA)
     proxyA.setSourceModel(tgmA)
@@ -223,15 +232,27 @@ if __name__ == '__main__':
     # ProxyModel[proxyA]--->ViewModel[tableView_A]
     s1.tableView_A.setModel(proxyA)  
     s1.tableView_B.setModel(proxyB)
-    
-    
+    ##########################################################################
+ 
+    selModelA = s1.tableView_A.selectionModel()
+
+
+    # QtCore.QObject.connect(self.uiTree.selectionModel(),
+    #           QtCore.SIGNAL("currentChanged(QModelIndex, QModelIndex)"),
+    #                                       self._propEditor.setSelection)
+
+
+
+
+
+   
     s1.pushButton_2.clicked.connect(insertClicked)
     s1.pushButton_1.clicked.connect(callBerechneManschaften)  
 
     s1.gesammt_A.setText(str(tg.teamA.calcTeampoints()))
     s1.gesammt_B.setText(str(tg.teamB.calcTeampoints()))
     
-    
+    s1.pushButton.clicked.connect(getCurrentPlayer)
     print('----- END -----')
     
     sys.exit(app.exec_())
