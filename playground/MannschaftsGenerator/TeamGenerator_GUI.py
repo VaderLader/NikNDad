@@ -138,7 +138,11 @@ class PlayerFilterProxyModel(QSortFilterProxyModel):
 
 def insertClicked():
     
-    tgmA.insertRows(0,1)        
+    currentTable = getCurrentPlayer()[1]
+    if currentTable == 'A':    
+        tgmA.insertRows(0,1)
+    elif currentTable == 'B':
+        tgmB.insertRows(0,1)        
     #TODO:
     #Abhängig vom Focus entweder TeamA Tabelle oder TeamB Tabelle erweitern    
     #tgmB.insertRows(0,1)        
@@ -183,15 +187,76 @@ def refreshGUI():
     proxyB = PlayerFilterProxyModel(tgmB)
     proxyB.setSourceModel(tgmB) 
     s1.tableView_B.setModel(proxyB)
+   
 
-def getCurrentPlayer(self):
-    print("getCurrentPlayer")
+def getCurrentPlayer():
+    print("getCurrentPlayer")    
+    
+    selModelA = s1.tableView_A.selectionModel()
+    selModelB = s1.tableView_B.selectionModel()
+    
     indexes = selModelA.selectedIndexes()
+    if (indexes != [] ):
+        indexes = selModelA.selectedIndexes()
+        return [indexes, 'A']
+#        for index in indexes:
+#            text = u"(%i,%i)" % (index.row(), index.column())
+#            print(text)
+#            return [index, "A"]
+    else:
+        indexes = selModelB.selectedIndexes()
+        if (indexes != [] ):
+            indexes = selModelB.selectedIndexes()
+            return [indexes, 'B']
+                   
+    return [[], 'x']
+    
+def switch():
+    indexes = getCurrentPlayer()
+#    x_sauber = list(set(x))
+    selectetPlayers = []
+    
+    for index in(indexes[0]):
+        selectetPlayers.append(int(index.row()))
+    
+    selectetPlayers = list(set(selectetPlayers))
+    selectetPlayers.sort(reverse = True)
         
-    for index in indexes:
-        text = u"(%i,%i)" % (index.row(), index.column())
-        print(text)
-
+    if indexes[1] == 'A':
+        for i in selectetPlayers:
+            tg.teamB.addPlayer(tg.teamA.removeByIndex(i))
+        
+    elif indexes[1] == 'B':
+        for i in selectetPlayers:
+            tg.teamA.addPlayer(tg.teamB.removeByIndex(i))
+    else:
+        pass
+    
+    refreshGUI()
+    
+def removeFromTable():
+    indexes = getCurrentPlayer()
+    selectetPlayers = []
+    
+    for index in(indexes[0]):
+        selectetPlayers.append(int(index.row()))
+    
+    selectetPlayers = list(set(selectetPlayers))
+    selectetPlayers.sort(reverse = True)
+        
+    if indexes[1] == 'A':
+        for i in selectetPlayers:
+            tgmA.removeRows(selectetPlayers)
+        
+    elif indexes[1] == 'B':
+        for i in selectetPlayers:
+            tgmB.removeRows(selectetPlayers)
+    else:
+        pass
+    
+    refreshGUI()
+            
+    
 if __name__ == '__main__':
   
  
@@ -234,7 +299,7 @@ if __name__ == '__main__':
     s1.tableView_B.setModel(proxyB)
     ##########################################################################
  
-    selModelA = s1.tableView_A.selectionModel()
+
 
 
     # QtCore.QObject.connect(self.uiTree.selectionModel(),
@@ -245,15 +310,18 @@ if __name__ == '__main__':
 
 
 
-   
+    s1.pushButton_3.clicked.connect(removeFromTable)
     s1.pushButton_2.clicked.connect(insertClicked)
     s1.pushButton_1.clicked.connect(callBerechneManschaften)  
 
     s1.gesammt_A.setText(str(tg.teamA.calcTeampoints()))
     s1.gesammt_B.setText(str(tg.teamB.calcTeampoints()))
     
-    s1.pushButton.clicked.connect(getCurrentPlayer)
+    s1.pushButton.clicked.connect(switch)
     print('----- END -----')
+    
+    selModelA = s1.tableView_A.selectionModel()
+    selModelB = s1.tableView_B.selectionModel()
     
     sys.exit(app.exec_())
     
