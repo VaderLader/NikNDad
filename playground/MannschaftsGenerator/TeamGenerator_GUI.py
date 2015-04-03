@@ -47,6 +47,9 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         row = index.row()
         column = index.column()
         
+#        if self.__ptable[row].available == 0:
+#            index.row().setTextColor(QtCore.Qt.red)
+        
         if role == QtCore.Qt.DisplayRole:
             if column == 0:
                 return str(self.__ptable[row].name)
@@ -75,10 +78,16 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
     def setData(self, index, value, role = QtCore.Qt.EditRole):
        # setData is always called if data has to be displayed 
 
+        
+
         if role == QtCore.Qt.EditRole:
             
             row = index.row()
             column = index.column()
+            
+#            print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
+#            if self.__ptable[row].available == 0:
+#                index.row().setTextColor(QtCore.Qt.red)            
             
             if column == 0:
                 self.__ptable[row].name = str(value)
@@ -103,7 +112,8 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         newPlayer = TeamGenerator.Player.Player({'name': '<Neuer Spieler>',
                                           'attackpoints': 0,
                                           'defencepoints': 0, 
-                                          'keeperpoints': 0})        
+                                          'keeperpoints': 0,
+                                          'available': 0})        
         self.__ptable.insert(position,newPlayer)
 
         self.endInsertRows()
@@ -246,15 +256,37 @@ def removeFromTable():
         
     if indexes[1] == 'A':
         for i in selectetPlayers:
-            tgmA.removeRows(selectetPlayers)
+            tg.teamA.removeByIndex(i)
         
     elif indexes[1] == 'B':
         for i in selectetPlayers:
-            tgmB.removeRows(selectetPlayers)
+            tg.teamB.removeByIndex(i)
     else:
         pass
     
     refreshGUI()
+    
+def weiter():
+    s1.show()
+    werSp.close()
+#    callBerechneManschaften()
+    
+def spieltMit():
+    print ('spieltMit')
+    selModelF = werSp.listView.selectionModel()
+    indexes = selModelF.selectedIndexes()
+    
+    selectetPlayers = []
+    
+    for index in(indexes):
+        selectetPlayers.append(int(index.row()))
+    
+    selectetPlayers = list(set(selectetPlayers))
+    selectetPlayers.sort(reverse = True)
+    for i in selectetPlayers:
+        tg.teamA.addPlayer(tg.fullTeam.removeByIndex(i))
+    
+    
             
     
 if __name__ == '__main__':
@@ -266,13 +298,15 @@ if __name__ == '__main__':
     
     app = QApplication(sys.argv)
     s1 = loadUi('./.GUI/GUI_Number_1.ui')
+    werSp = loadUi('./.GUI/werSpielt.ui')
         
-    s1.show()
-    
+    werSp.show()
+    werSp.weiter_Btn.clicked.connect(weiter)
     
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
-    tg.loadTeam('teamA','./Input/', 'SmallTeam.json')
+#    tg.loadTeam('teamA','./Input/', 'SmallTeam.json')
+    tg.loadTeam('fullTeam','./Input/', 'SmallTeam.json')
 
     print("########### TEAM A: ############")
     tg.teamA.print()
@@ -285,6 +319,10 @@ if __name__ == '__main__':
     
     ##########################################################################
     # Data[tg.teamA.players] ---> DataModel[tgmA] 
+    tgmF = TeamGeneratorModel(tg.fullTeam.players)
+#    tgmF.insertRows(0,5)  
+#    print('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
+    
     tgmA = TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     tgmB = TeamGeneratorModel(tg.teamB.players)
     
@@ -293,10 +331,13 @@ if __name__ == '__main__':
     proxyA.setSourceModel(tgmA)
     proxyB = PlayerFilterProxyModel(tgmB)
     proxyB.setSourceModel(tgmB) 
+    proxyF = PlayerFilterProxyModel(tgmF)
+    proxyF.setSourceModel(tgmF)
   
     # ProxyModel[proxyA]--->ViewModel[tableView_A]
     s1.tableView_A.setModel(proxyA)  
     s1.tableView_B.setModel(proxyB)
+    werSp.listView.setModel(proxyF)
     ##########################################################################
  
 
@@ -322,6 +363,8 @@ if __name__ == '__main__':
     
     selModelA = s1.tableView_A.selectionModel()
     selModelB = s1.tableView_B.selectionModel()
+    
+    werSp.spielt_Btn.clicked.connect(spieltMit)
     
     sys.exit(app.exec_())
     
