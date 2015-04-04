@@ -99,6 +99,25 @@ class TeamGenerator:
         for e in  poplist:
             self.teamB.addPlayer(self.teamA.removeByIndex(e))
         
+
+        for index in self.teamA.players:
+            if index.name == 'NullPlayer':
+                if index.attackpoints == 0:
+                    if index.defencepoints == 0:
+                        if index.keeperpoints == 0:
+                            
+                            self.teamA.removePlayer(index)
+                            print ('pop')
+                
+        for index in self.teamB.players:
+            if index.name == 'NullPlayer':
+                if index.attackpoints == 0:
+                    if index.defencepoints == 0:
+                        if index.keeperpoints == 0:
+                            self.teamB.removePlayer(index)
+                            print ('pop')
+                
+                
         self.teamA.print()
         self.teamB.print()          
         print("End of berechneMannschaften()")

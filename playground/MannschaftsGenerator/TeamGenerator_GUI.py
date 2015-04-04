@@ -100,7 +100,13 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
             
             self.__ptable[row].calcPlayerpoints()
             s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+            s1.angriff_A.setText(str(tg.teamA.attackpoints))
+            s1.abwehr_A.setText(str(tg.teamA.defencepoints))
+            s1.tor_A.setText(str(tg.teamA.keeperpoints))
             s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+            s1.angriff_B.setText(str(tg.teamB.attackpoints))
+            s1.abwehr_B.setText(str(tg.teamB.defencepoints))
+            s1.tor_B.setText(str(tg.teamB.keeperpoints))
             return True
         s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
         s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
@@ -181,23 +187,43 @@ def callBerechneManschaften():
 #    tgmA.dataChanged.emit()        
 #    tgmB.dataChanged.emit()
     
-def refreshGUI():
-    s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-    s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+def refreshGUI(seite = 2):
+    if seite == 2:
+        s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+        s1.angriff_A.setText(str(tg.teamA.attackpoints))
+        s1.abwehr_A.setText(str(tg.teamA.defencepoints))
+        s1.tor_A.setText(str(tg.teamA.keeperpoints))
+        s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+        s1.angriff_B.setText(str(tg.teamB.attackpoints))
+        s1.abwehr_B.setText(str(tg.teamB.defencepoints))
+        s1.tor_B.setText(str(tg.teamB.keeperpoints))
+        
+        tgmA = TeamGeneratorModel(tg.teamA.players)
+        tgmB = TeamGeneratorModel(tg.teamB.players)
+        s1.tableView_A.setModel(tgmA)
+        s1.tableView_B.setModel(tgmB)
+            
     
-    tgmA = TeamGeneratorModel(tg.teamA.players)
-    tgmB = TeamGeneratorModel(tg.teamB.players)
-    s1.tableView_A.setModel(tgmA)
-    s1.tableView_B.setModel(tgmB)
-
-    proxyA = PlayerFilterProxyModel(tgmA)
-    proxyA.setSourceModel(tgmA)
-    s1.tableView_A.setModel(proxyA)  
+        proxyA = PlayerFilterProxyModel(tgmA)
+        proxyA.setSourceModel(tgmA)
+        s1.tableView_A.setModel(proxyA)  
+        
+        proxyB = PlayerFilterProxyModel(tgmB)
+        proxyB.setSourceModel(tgmB) 
+        s1.tableView_B.setModel(proxyB)
     
-    proxyB = PlayerFilterProxyModel(tgmB)
-    proxyB.setSourceModel(tgmB) 
-    s1.tableView_B.setModel(proxyB)
-   
+    elif seite == 1:
+        tgmA = TeamGeneratorModel(tg.teamA.players)
+        tgmF = TeamGeneratorModel(tg.fullTeam.players)
+        
+        proxyA = PlayerFilterProxyModel(tgmA)
+        proxyA.setSourceModel(tgmA)
+        proxyF = PlayerFilterProxyModel(tgmF)
+        proxyF.setSourceModel(tgmF)
+        
+        werSp.allView.setModel(proxyF)
+        werSp.aView.setModel(proxyA)
+        
 
 def getCurrentPlayer():
     print("getCurrentPlayer")    
@@ -267,24 +293,74 @@ def removeFromTable():
     refreshGUI()
     
 def weiter():
-    s1.show()
     werSp.close()
-#    callBerechneManschaften()
+    warte.show()
+    callBerechneManschaften()
+    s1.show()
+    warte.close()
     
 def spieltMit():
     print ('spieltMit')
-    selModelF = werSp.listView.selectionModel()
-    indexes = selModelF.selectedIndexes()
+    selModelF = werSp.allView.selectionModel()
+    selModelA = werSp.aView.selectionModel()
     
-    selectetPlayers = []
+    indexes = selModelA.selectedIndexes()
+    if (indexes != [] ):
+        indexes = selModelA.selectedIndexes()
+        for index in reversed(indexes):
+            tg.fullTeam.addPlayer(tg.teamA.removeByIndex(index.row()))
+
+    else:
+        indexes = selModelF.selectedIndexes()
+        if (indexes != [] ):
+            indexes = selModelF.selectedIndexes()
+            for index in reversed(indexes):
+                tg.teamA.addPlayer(tg.fullTeam.removeByIndex(index.row()))
+    refreshGUI(1)
+            
+def oeffnen():
+    print ('öffnen clicked')
+    winOpen.show()
+    winOpen.Btn.clicked.connect(oeffnen2)
+
+def oeffnen2():  
+    tg.loadTeam('fullTeam','./Input/', winOpen.eingabe.displayText())
+    refreshGUI(1)
     
-    for index in(indexes):
-        selectetPlayers.append(int(index.row()))
+def speichern():
+    print('speichern')
+    winSave.show()
+    winSave.Btn.clicked.connect(speichern2)
     
-    selectetPlayers = list(set(selectetPlayers))
-    selectetPlayers.sort(reverse = True)
-    for i in selectetPlayers:
-        tg.teamA.addPlayer(tg.fullTeam.removeByIndex(i))
+def speichern2():
+    tg.dumpTeam('fullTeam','./Input/', winSave.eingabe.displayText())
+    refreshGUI(1)
+    
+def werSpAdd():
+    tgmF.insertRows(0,1)
+    refreshGUI(1)
+    
+def werSpRemove():
+    selModelF = werSp.allView.selectionModel()
+    selModelA = werSp.aView.selectionModel()
+    
+    indexes = selModelA.selectedIndexes()
+    if (indexes != [] ):
+        indexes = selModelA.selectedIndexes()
+        for index in reversed(indexes):
+            tg.teamA.removeByIndex(index.row())
+
+    else:
+        indexes = selModelF.selectedIndexes()
+        if (indexes != [] ):
+            indexes = selModelF.selectedIndexes()
+            for index in reversed(indexes):
+                tg.fullTeam.removeByIndex(index.row())
+    refreshGUI(1)
+    
+def wilWeiter():
+    werSp.show()
+    willcome.close()
     
     
             
@@ -299,14 +375,21 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     s1 = loadUi('./.GUI/GUI_Number_1.ui')
     werSp = loadUi('./.GUI/werSpielt.ui')
+    warte = loadUi('./.GUI/warte.ui')
+    winOpen = loadUi('./.GUI/oeffnen.ui')
+    winSave = loadUi('./.GUI/speichern.ui')
+    willcome = loadUi('./.GUI/Oberfläche.ui')
         
-    werSp.show()
+    willcome.show()
+    willcome.startWeiterBtn.clicked.connect(wilWeiter)
     werSp.weiter_Btn.clicked.connect(weiter)
+    werSp.actionOeffnen.triggered.connect(oeffnen)
+    werSp.actionSpeichern.triggered.connect(speichern)
     
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
 #    tg.loadTeam('teamA','./Input/', 'SmallTeam.json')
-    tg.loadTeam('fullTeam','./Input/', 'SmallTeam.json')
+
 
     print("########### TEAM A: ############")
     tg.teamA.print()
@@ -337,7 +420,8 @@ if __name__ == '__main__':
     # ProxyModel[proxyA]--->ViewModel[tableView_A]
     s1.tableView_A.setModel(proxyA)  
     s1.tableView_B.setModel(proxyB)
-    werSp.listView.setModel(proxyF)
+    werSp.allView.setModel(proxyF)
+    werSp.aView.setModel(proxyA)
     ##########################################################################
  
 
@@ -353,10 +437,20 @@ if __name__ == '__main__':
 
     s1.pushButton_3.clicked.connect(removeFromTable)
     s1.pushButton_2.clicked.connect(insertClicked)
-    s1.pushButton_1.clicked.connect(callBerechneManschaften)  
+    s1.pushButton_1.clicked.connect(callBerechneManschaften)
+    werSp.add_Btn.clicked.connect(werSpAdd)
+    werSp.remove_Btn.clicked.connect(werSpRemove)
+    
 
-    s1.gesammt_A.setText(str(tg.teamA.calcTeampoints()))
-    s1.gesammt_B.setText(str(tg.teamB.calcTeampoints()))
+    s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+    s1.angriff_A.setText(str(tg.teamA.attackpoints))
+    s1.abwehr_A.setText(str(tg.teamA.defencepoints))
+    s1.tor_A.setText(str(tg.teamA.keeperpoints))
+    s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+    s1.angriff_B.setText(str(tg.teamB.attackpoints))
+    s1.abwehr_B.setText(str(tg.teamB.defencepoints))
+    s1.tor_B.setText(str(tg.teamB.keeperpoints))
+    
     
     s1.pushButton.clicked.connect(switch)
     print('----- END -----')
@@ -364,7 +458,7 @@ if __name__ == '__main__':
     selModelA = s1.tableView_A.selectionModel()
     selModelB = s1.tableView_B.selectionModel()
     
-    werSp.spielt_Btn.clicked.connect(spieltMit)
+    werSp.jaNein_Btn.clicked.connect(spieltMit)
     
     sys.exit(app.exec_())
     

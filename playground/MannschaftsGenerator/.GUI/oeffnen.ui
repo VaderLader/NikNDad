@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>125</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Öffnen</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Fussball.jpg</normaloff>Fussball.jpg</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item alignment="Qt::AlignTop">
+    <widget class="QLabel" name="label">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>27</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Datei wird aus ./Import geöffnet</string>
+     </property>
+    </widget>
+   </item>
+   <item alignment="Qt::AlignVCenter">
+    <widget class="QLineEdit" name="eingabe">
+     <property name="text">
+      <string>Welche Datei soll geöffnet werden?</string>
+     </property>
+    </widget>
+   </item>
+   <item alignment="Qt::AlignBottom">
+    <widget class="QPushButton" name="Btn">
+     <property name="text">
+      <string>Öffnen</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>Btn</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>103</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>385</x>
+     <y>-13</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

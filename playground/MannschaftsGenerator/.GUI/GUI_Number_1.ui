@@ -103,7 +103,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="torA">
+       <widget class="QLabel" name="tor_A">
         <property name="text">
          <string>xx</string>
         </property>
