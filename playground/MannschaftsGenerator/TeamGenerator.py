@@ -25,7 +25,7 @@ class TeamGenerator:
 #==============================================================================            
     def berechneMannschaften(self):
         ''' Method to calculate and select two teams which are most equal '''
-       #print ("berechneMannschaften")
+        print ("In berechneMannschaften()")
         if len(self.teamA.players)%2 != 0:
             self.teamA.addPlayer(Player.Player({'name': 'NullPlayer',
                                            'attackpoints': 0,
@@ -33,16 +33,15 @@ class TeamGenerator:
                                            'keeperpoints': 0}))
         
         spielerliste = list(range(0,len(self.teamA.players))) 
-        #print (spielerliste)
-        #print("self.teamA.players=",list(range(0,len(self.teamA.players))))
+        #print("self.teamA.players=",spielerliste)
         
         # lTeamA keeps the List of all possible TeamAs, wich can be setup
         # with different player combinations        
         combos = itertools.combinations(list(range(0,len(self.teamA.players))),
                                         int(len(self.teamA.players)/2))
         lTeamA = list(combos)  
-        #print("len(lTeamA)=", len(lTeamA)) 
-        #print("lTeamA=",lTeamA)
+        print("Anzahl der verschiedenen Teams = ", len(lTeamA)) 
+        #print("Verschiedene Teams lTeamA =",lTeamA)
         
         # Erzeuge das jeweils passenden Team B
         lTeamB = []
@@ -53,17 +52,17 @@ class TeamGenerator:
               #  print ("p=",str(p))
                 dummy.pop(dummy.index(p))
             lTeamB.append(list(dummy))
-        #print("lTeamB=",lTeamB)
+        #print("lTeamB =",lTeamB)
 
         # Berechnung von der Teamstärkendifferenz
         teampointsDif = []
-                
+             
         
         for e in lTeamA:
             tDif  = 0
             for p in e:
                 tDif += self.teamA.players[p].playerpoints
-                teampointsDif.append(tDif)
+            teampointsDif.append(tDif)
         #print("teampointsDif=",teampointsDif)
         
         index = 0
@@ -74,7 +73,9 @@ class TeamGenerator:
                 tDif += self.teamA.players[p].playerpoints
             teampointsDif[index] = abs(teampointsDif[index] - tDif)
             index = index +1
+        print("len(teampointsDif)=",len(teampointsDif))
         #print("teampointsDif=",teampointsDif)
+        
        
         # Search for the minimum difference
         indexmin = 0
@@ -98,10 +99,9 @@ class TeamGenerator:
         for e in  poplist:
             self.teamB.addPlayer(self.teamA.removeByIndex(e))
         
-        print("HALLO")
         self.teamA.print()
         self.teamB.print()          
-        print("HHH")
+        print("End of berechneMannschaften()")
 #==============================================================================
     
     def sampleTeamSetup(self):
@@ -135,10 +135,10 @@ class TeamGenerator:
         ''' method to write the two teams to disk '''
         print ("-------- Calling dumpTeams(",location, ") ----")
         # teamA
-        self.dumpTeam('teamA', location, 'ATeam.jason')
+        self.dumpTeam('teamA', location, 'ATeam.json')
       
         # teamB
-        self.dumpTeam('teamB', location, 'BTeam.jason')
+        self.dumpTeam('teamB', location, 'BTeam.json')
         
         print ("----- Encoding finished and written to file !!!-----------\n")
         
@@ -185,19 +185,24 @@ if __name__ == '__main__':
     x = 45
     
     #tg.sampleTeamSetup()
-    print('---- Load both teams as they have been the saved to file ----')
-    tg.loadTeam('fullTeam','./Input/', 'FullTeam.json')
+    print('---- Load all Players into "fullTeam" as they have been the saved to file ----')
+    tg.loadTeam('fullTeam','./Input/', 'VerySmallTeam.json')
     print('---+++', tg.fullTeam.print())
-    tg.dumpTeam('fullTeam','./Input/', 'FullTeam_out.json')
+    tg.dumpTeam('fullTeam','./Input/', 'VerySmallTeam_out.json')
     #print('---+++', tg.fullTeam.print())
     #print(tg.teamA.print())
     #print(tg.teamB.print())
     print('\n---- Shift players from fullTeam to teamA ----')
-    tg.teamA.shiftNPlayersFromTeam(tg.fullTeam,22)
-    print('---+++', tg.teamA.print())
-    print('---+++', tg.teamB.print())
+    print('len(tg.fullTeam.players)', len(tg.fullTeam.players))
+    tg.teamA.shiftNPlayersFromTeam(tg.fullTeam,len(tg.fullTeam.players))
+    print('\n------\n')    
+    print('---teamA---\n', tg.teamA.print())
+    print('\n------\n')    
+    print('---teamB---\n', tg.teamB.print())
+    print('\n------\n')
     print('---- berechneMannschaften ')
     tg.berechneMannschaften()
+    print('\n---- Result after berechneMannschaften:\n')
     print(tg.teamA.print())
     print(tg.teamB.print())
     print('---- dumpTeams ')

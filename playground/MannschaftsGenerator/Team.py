@@ -19,7 +19,12 @@ class Team:
         self.name = d['name']
         self.players = d['players']
         Team.team_counter += 1
+        self.attackpoints = 0
+        self.keeperpoints = 0
+        self.defencepoints = 0
+        # Calculate all points of the team        
         self.teampoints = self.calcTeampoints()
+                
         self.Mitglieder = "Mitglieder"
         #self.teampoints = d['teampoints']
 
@@ -70,6 +75,7 @@ class Team:
         self.calcTeampoints()
             
     def calcTeampoints(self):
+        # Calculate all points from scratch
         self.attackpoints = 0
         self.keeperpoints = 0
         self.defencepoints = 0
@@ -78,7 +84,11 @@ class Team:
             self.attackpoints += p.attackpoints
             self.keeperpoints += p.keeperpoints
             self.defencepoints += p.defencepoints
-            self.teampoints = (self.attackpoints * Team.weight_attack + self.defencepoints * Team.weight_defence + self.keeperpoints * Team.weight_keeper)/(Team.weight_attack+Team.weight_defence+Team.weight_keeper)
+        
+        self.teampoints = (self.attackpoints * Team.weight_attack + \
+                    self.defencepoints * Team.weight_defence + \
+                    self.keeperpoints * Team.weight_keeper)/ \
+                    (Team.weight_attack+Team.weight_defence+Team.weight_keeper)
                             
         return self.teampoints
 
@@ -90,7 +100,7 @@ class Team:
         Mitglieder += ('Die Abwehrstärke liegt bei', self.defencepoints,'\n')
         Mitglieder += ('Die Torwartstärke liegt be liegt bei', self.keeperpoints,'\n')
         Mitglieder += ('Gesamtstärke liegt bei:', self.teampoints,'\n')
-        print(Mitglieder)
+        #print(Mitglieder)
         return Mitglieder
 
     def shiftPlayersFromTeam(self, otherTeam):
@@ -106,7 +116,7 @@ class Team:
     def shiftNPlayersFromTeam(self, otherTeam, n):
         ''' Method to shift the first n players from otherTeam. The otherTeam has no players 
             afterwards '''   
-        print('In shiftPlayersFromTeam','id(otherTeam)=', id(otherTeam),
+        print('In shiftNPlayersFromTeam','id(otherTeam)=', id(otherTeam),
               'otherTeam.name=', otherTeam.name, ' len=',
               len(otherTeam.players))
         print('len(self.players)',len(self.players))
@@ -123,7 +133,6 @@ class Team:
         print("+++",index,n)
         print("vvvv")
         self.calcTeampoints()
+        otherTeam.calcTeampoints()
+        print('End of shiftNPlayersFromTeam')
         
-        
-print('Hi')
-
