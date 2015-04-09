@@ -9,7 +9,9 @@ import itertools
 
 
 class TeamGenerator:
-    ''' TeamGenerator class for Calculating best team distributions '''   
+    ''' TeamGenerator class for Calculating best team distributions 
+        COOOL!    
+    '''   
     def __init__(self):
         ''' Constructor: TeamGenerator() '''
         self.teamA = Team.Team({'name': 'A-Team', 

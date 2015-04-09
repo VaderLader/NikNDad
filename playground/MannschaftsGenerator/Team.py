@@ -36,6 +36,12 @@ class Team:
             self.calcTeampoints()
 
     def inputPlayer(self):
+        """
+        Nicht benutzt
+        :returns: The newly input player.
+        :rtype: Player.
+        """
+        
         name = input('Wie heißt der neue Spieler?\n')
         angriff = int(input('Wie gut ist er im Angriff?\n'))
         abwehr = int(input('Wie gut ist er in der Abwehr?\n'))
@@ -48,13 +54,28 @@ class Team:
         return p
 
 
-    def removeName(self, n):
+    def removeName(self, name):
+        """Removes a Player by it's Name
+
+        :param name: Name
+        :type name: str 
+        :returns: None
+        
+        """
+    
         for index, element in enumerate(self.players):
-            if element.name == n:
+            if element.name == name:
                 self.players.pop(index)
                 self.calcTeampoints()
                 
     def removeByIndex(self, index):
+        """Removes a Player by it's index 
+
+        :param index: index is the position in the Team's players list.
+        :type index: int. 
+        :returns: The removed Player is returned.
+        :rtype: Player.
+        """        
         p = self.players.pop(index)
         self.calcTeampoints()
         return p 
@@ -75,7 +96,7 @@ class Team:
         self.calcTeampoints()
             
     def calcTeampoints(self):
-        # Calculate all points from scratch
+        #: Calculate all points from scratch
         self.attackpoints = 0
         self.keeperpoints = 0
         self.defencepoints = 0

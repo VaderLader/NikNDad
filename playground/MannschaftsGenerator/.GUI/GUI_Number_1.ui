@@ -125,7 +125,7 @@
       <item>
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>Gesammt</string>
+         <string>Gesamt</string>
         </property>
        </widget>
       </item>
@@ -253,7 +253,7 @@
       <item>
        <widget class="QLabel" name="label_16">
         <property name="text">
-         <string>Gesammt</string>
+         <string>Gesamt</string>
         </property>
        </widget>
       </item>

@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Player &mdash; Mannschafts Generator 0.9.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Mannschafts Generator 0.9.1 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../index.html" class="fa fa-home"> Mannschafts Generator</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Player.html">Player module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Player.html#player-class">Player Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Team.html">Team module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator.html">TeamGenerator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator_GUI.html">TeamGenerator_GUI module</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Mannschafts Generator</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>Player</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for Player</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="Player"><a class="viewcode-back" href="../Player.html#Player.Player">[docs]</a><span class="k">class</span> <span class="nc">Player</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class for Players</span>
+<span class="sd">    </span>
+<span class="sd">       Usage: Player({&#39;name&#39;: &#39;Vorname Name&#39;,</span>
+<span class="sd">                      &#39;attackpoints&#39;: 0,</span>
+<span class="sd">                      &#39;defencepoints&#39;: 0, </span>
+<span class="sd">                      &#39;keeperpoint&#39;: 0})</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">player_counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c">#: static member</span>
+    <span class="n">weight_attack</span> <span class="o">=</span> <span class="mi">3</span> <span class="c">#: Gewichtung</span>
+    <span class="n">weight_defence</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">weight_keeper</span> <span class="o">=</span> <span class="mi">1</span>    
+    
+    <span class="c">#: Mal sehen wo dieser Kommentar steht</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Vorname Name&#39;</span><span class="p">,</span>
+                            <span class="s">&#39;attackpoints&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                            <span class="s">&#39;defencepoints&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+                            <span class="s">&#39;keeperpoints&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}):</span>
+                            
+    
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attackpoints</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;attackpoints&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defencepoints</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;defencepoints&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keeperpoints</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s">&#39;keeperpoints&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calcPlayerpoints</span><span class="p">()</span>
+        <span class="n">Player</span><span class="o">.</span><span class="n">player_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+<div class="viewcode-block" id="Player.print"><a class="viewcode-back" href="../Player.html#Player.Player.print">[docs]</a>    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;--&quot;</span><span class="p">,</span>  <span class="s">&quot;Spieler:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&quot;--&quot;</span><span class="p">,</span>
+              <span class="s">&quot;</span><span class="se">\n</span><span class="s">| Angriff:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attackpoints</span><span class="p">,</span>
+              <span class="s">&quot;</span><span class="se">\n</span><span class="s">| Verteidigung:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">defencepoints</span><span class="p">,</span>
+              <span class="s">&quot;</span><span class="se">\n</span><span class="s">| Torwart:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">keeperpoints</span><span class="p">,</span>
+              <span class="s">&quot;</span><span class="se">\n</span><span class="s">| Gesamt Punkte:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">playerpoints</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">---------------&quot;</span>
+              <span class="p">)</span>
+              </div>
+<div class="viewcode-block" id="Player.calcPlayerpoints"><a class="viewcode-back" href="../Player.html#Player.Player.calcPlayerpoints">[docs]</a>    <span class="k">def</span> <span class="nf">calcPlayerpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Die playerpoints werden als gewichtete Summe der Angriffs-, Abwehr-,</span>
+<span class="sd">        und Torwart-Punkte berechnet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">playerpoints</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attackpoints</span> <span class="o">*</span> <span class="n">Player</span><span class="o">.</span><span class="n">weight_attack</span> <span class="o">+</span> \
+                            <span class="bp">self</span><span class="o">.</span><span class="n">defencepoints</span> <span class="o">*</span> <span class="n">Player</span><span class="o">.</span><span class="n">weight_defence</span> <span class="o">+</span> \
+                            <span class="bp">self</span><span class="o">.</span><span class="n">keeperpoints</span> <span class="o">*</span> <span class="n">Player</span><span class="o">.</span><span class="n">weight_keeper</span> <span class="p">)</span> \
+                            <span class="o">/</span><span class="p">(</span><span class="n">Player</span><span class="o">.</span><span class="n">weight_attack</span> <span class="o">+</span> <span class="n">Player</span><span class="o">.</span><span class="n">weight_defence</span> \
+                            <span class="o">+</span> <span class="n">Player</span><span class="o">.</span><span class="n">weight_keeper</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, SohnyBohny.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.9.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

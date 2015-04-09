@@ -1,0 +1,648 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TeamGenerator_GUI &mdash; Mannschafts Generator 0.9.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Mannschafts Generator 0.9.1 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../index.html" class="fa fa-home"> Mannschafts Generator</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Player.html">Player module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Player.html#player-class">Player Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Team.html">Team module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator.html">TeamGenerator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator_GUI.html">TeamGenerator_GUI module</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Mannschafts Generator</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>TeamGenerator_GUI</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for TeamGenerator_GUI</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Sat Feb 28 16:43:55 2015</span>
+
+<span class="sd">@author: pi</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">as</span> <span class="nn">QtCore</span>
+<span class="kn">from</span> <span class="nn">PyQt4.QtGui</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyQt4.uic</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">TeamGenerator</span>
+
+<div class="viewcode-block" id="TeamGeneratorModel"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel">[docs]</a><span class="k">class</span> <span class="nc">TeamGeneratorModel</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractTableModel</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptable</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">parent</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractTableModel</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span> <span class="o">=</span> <span class="n">ptable</span>
+        
+
+        
+        
+<div class="viewcode-block" id="TeamGeneratorModel.sortColumn"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.sortColumn">[docs]</a>    <span class="k">def</span> <span class="nf">sortColumn</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
+        <span class="k">pass</span>    
+        </div>
+<div class="viewcode-block" id="TeamGeneratorModel.headerData"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.headerData">[docs]</a>    <span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">:</span>
+            
+            <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">section</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>                
+                    <span class="k">return</span> <span class="s">&quot;Spieler Name&quot;</span>
+                <span class="k">elif</span> <span class="n">section</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s">&#39;Angriff&#39;</span>
+                <span class="k">elif</span> <span class="n">section</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s">&#39;Abwehr&#39;</span>
+                <span class="k">elif</span> <span class="n">section</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s">&#39;Tor&#39;</span>
+                <span class="k">elif</span> <span class="n">section</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="s">&#39;Gesammt&#39;</span>
+                    
+            <span class="k">else</span><span class="p">:</span>                
+                <span class="k">return</span> <span class="s">&quot;Spieler &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>  
+    </div>
+<div class="viewcode-block" id="TeamGeneratorModel.data"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span>
+        
+<span class="c">#        if self.__ptable[row].available == 0:</span>
+<span class="c">#            index.row().setTextColor(QtCore.Qt.red)</span>
+        
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">attackpoints</span><span class="p">)</span>                
+            <span class="k">elif</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">defencepoints</span><span class="p">)</span> 
+            <span class="k">elif</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">keeperpoints</span><span class="p">)</span> 
+            <span class="k">elif</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">playerpoints</span><span class="p">)</span>
+
+                
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">EditRole</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+            </div>
+<div class="viewcode-block" id="TeamGeneratorModel.rowCount"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.rowCount">[docs]</a>    <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="TeamGeneratorModel.columnCount"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.columnCount">[docs]</a>    <span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">5</span>
+    </div>
+<div class="viewcode-block" id="TeamGeneratorModel.flags"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.flags">[docs]</a>    <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">index</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsEditable</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsEnabled</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsSelectable</span>
+        </div>
+<div class="viewcode-block" id="TeamGeneratorModel.setData"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.setData">[docs]</a>    <span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">EditRole</span><span class="p">):</span>
+       <span class="c"># setData is always called if data has to be displayed </span>
+
+
+
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">EditRole</span><span class="p">:</span>
+            
+            <span class="n">row</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()</span>
+            <span class="n">column</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span>
+            
+<span class="c">#            print(&#39;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%&#39;)</span>
+<span class="c">#            if self.__ptable[row].available == 0:</span>
+<span class="c">#                index.row().setTextColor(QtCore.Qt.red)            </span>
+            
+            <span class="k">if</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">attackpoints</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> 
+            <span class="k">elif</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">defencepoints</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">column</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">keeperpoints</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> 
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">calcPlayerpoints</span><span class="p">()</span>
+            <span class="n">s1</span><span class="o">.</span><span class="n">gesammt_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">())</span>
+            <span class="n">s1</span><span class="o">.</span><span class="n">angriff_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">attackpoints</span><span class="p">))</span>
+            <span class="n">s1</span><span class="o">.</span><span class="n">abwehr_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">defencepoints</span><span class="p">))</span>
+            <span class="n">s1</span><span class="o">.</span><span class="n">tor_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">keeperpoints</span><span class="p">))</span>
+            <span class="n">s1</span><span class="o">.</span><span class="n">gesammt_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">())</span>
+            <span class="n">s1</span><span class="o">.</span><span class="n">angriff_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">attackpoints</span><span class="p">))</span>
+            <span class="n">s1</span><span class="o">.</span><span class="n">abwehr_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">defencepoints</span><span class="p">))</span>
+            <span class="n">s1</span><span class="o">.</span><span class="n">tor_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">keeperpoints</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">gesammt_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">())</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">gesammt_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">False</span>
+        </div>
+<div class="viewcode-block" id="TeamGeneratorModel.insertRows"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.insertRows">[docs]</a>    <span class="k">def</span> <span class="nf">insertRows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">()):</span>
+        <span class="c"># Syntax: self.beginInsertRows(index,first,last)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beginInsertRows</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">position</span> <span class="o">+</span> <span class="n">rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  
+        <span class="n">newPlayer</span> <span class="o">=</span> <span class="n">TeamGenerator</span><span class="o">.</span><span class="n">Player</span><span class="o">.</span><span class="n">Player</span><span class="p">({</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;&lt;Neuer Spieler&gt;&#39;</span><span class="p">,</span>
+                                          <span class="s">&#39;attackpoints&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                          <span class="s">&#39;defencepoints&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+                                          <span class="s">&#39;keeperpoints&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                          <span class="s">&#39;available&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">position</span><span class="p">,</span><span class="n">newPlayer</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">endInsertRows</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">True</span>
+        </div>
+<div class="viewcode-block" id="TeamGeneratorModel.removeRows"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.removeRows">[docs]</a>    <span class="k">def</span> <span class="nf">removeRows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">()):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beginRemoveRows</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">position</span> <span class="o">+</span> <span class="n">rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">position</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+             
+        <span class="bp">self</span><span class="o">.</span><span class="n">endRemoveRows</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    
+<span class="c">#==============================================================================</span></div>
+<div class="viewcode-block" id="TeamGeneratorModel.sort"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.sort">[docs]</a>    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Ncol</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+         <span class="sd">&quot;&quot;&quot;Sort table by given column number.</span>
+<span class="sd">         &quot;&quot;&quot;</span>
+         <span class="c">#self.emit(SIGNAL(&quot;layoutAboutToBeChanged()&quot;))</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="n">Ncol</span><span class="p">))</span>        
+         <span class="k">if</span> <span class="n">order</span> <span class="o">==</span> <span class="n">Qt</span><span class="o">.</span><span class="n">DescendingOrder</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">arraydata</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">SIGNAL</span><span class="p">(</span><span class="s">&quot;layoutChanged()&quot;</span><span class="p">))</span>
+<span class="c">#==============================================================================</span>
+ </div></div>
+<div class="viewcode-block" id="PlayerFilterProxyModel"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.PlayerFilterProxyModel">[docs]</a><span class="k">class</span> <span class="nc">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">QSortFilterProxyModel</span><span class="p">):</span>
+    <span class="k">pass</span>
+       
+
+</div>
+<div class="viewcode-block" id="insertClicked"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.insertClicked">[docs]</a><span class="k">def</span> <span class="nf">insertClicked</span><span class="p">():</span>
+    
+    <span class="n">currentTable</span> <span class="o">=</span> <span class="n">getCurrentPlayer</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">currentTable</span> <span class="o">==</span> <span class="s">&#39;A&#39;</span><span class="p">:</span>    
+        <span class="n">tgmA</span><span class="o">.</span><span class="n">insertRows</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">currentTable</span> <span class="o">==</span> <span class="s">&#39;B&#39;</span><span class="p">:</span>
+        <span class="n">tgmB</span><span class="o">.</span><span class="n">insertRows</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>        
+    <span class="c">#TODO:</span>
+    <span class="c">#Abhängig vom Focus entweder TeamA Tabelle oder TeamB Tabelle erweitern    </span>
+    <span class="c">#tgmB.insertRows(0,1)        </span>
+    <span class="n">refreshGUI</span><span class="p">()</span>    
+
+    </div>
+<div class="viewcode-block" id="tableClick"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.tableClick">[docs]</a><span class="k">def</span> <span class="nf">tableClick</span><span class="p">():</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s">&#39;§§§§§§§§§§§§§§§§§§§TABLE CLICKED §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§&#39;</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="headerClick"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.headerClick">[docs]</a><span class="k">def</span> <span class="nf">headerClick</span><span class="p">():</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s">&#39;Header Click&#39;</span><span class="p">)</span>
+    
+ </div>
+<div class="viewcode-block" id="callBerechneManschaften"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.callBerechneManschaften">[docs]</a><span class="k">def</span> <span class="nf">callBerechneManschaften</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;### callBerechneManschaften() ###&quot;</span><span class="p">)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">berechneMannschaften</span><span class="p">()</span>    
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;########### TEAM A: ############&quot;</span><span class="p">)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;########### TEAM B: ############&quot;</span><span class="p">)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>
+    <span class="n">refreshGUI</span><span class="p">()</span>    
+
+
+<span class="c">#def refreshGUI():</span>
+<span class="c">#    tgmA.dataChanged.emit()        </span>
+<span class="c">#    tgmB.dataChanged.emit()</span>
+    </div>
+<div class="viewcode-block" id="refreshGUI"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.refreshGUI">[docs]</a><span class="k">def</span> <span class="nf">refreshGUI</span><span class="p">(</span><span class="n">seite</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">seite</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">gesammt_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">())</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">angriff_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">attackpoints</span><span class="p">))</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">abwehr_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">defencepoints</span><span class="p">))</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">tor_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">keeperpoints</span><span class="p">))</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">gesammt_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">())</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">angriff_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">attackpoints</span><span class="p">))</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">abwehr_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">defencepoints</span><span class="p">))</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">tor_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">keeperpoints</span><span class="p">))</span>
+        
+        <span class="n">tgmA</span> <span class="o">=</span> <span class="n">TeamGeneratorModel</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
+        <span class="n">tgmB</span> <span class="o">=</span> <span class="n">TeamGeneratorModel</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">tableView_B</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">tgmB</span><span class="p">)</span>
+            
+    
+        <span class="n">proxyA</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+        <span class="n">proxyA</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+        <span class="n">s1</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyA</span><span class="p">)</span>  
+        
+        <span class="n">proxyB</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmB</span><span class="p">)</span>
+        <span class="n">proxyB</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmB</span><span class="p">)</span> 
+        <span class="n">s1</span><span class="o">.</span><span class="n">tableView_B</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyB</span><span class="p">)</span>
+    
+    <span class="k">elif</span> <span class="n">seite</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">tgmA</span> <span class="o">=</span> <span class="n">TeamGeneratorModel</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
+        <span class="n">tgmF</span> <span class="o">=</span> <span class="n">TeamGeneratorModel</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
+        
+        <span class="n">proxyA</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+        <span class="n">proxyA</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+        <span class="n">proxyF</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmF</span><span class="p">)</span>
+        <span class="n">proxyF</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmF</span><span class="p">)</span>
+        
+        <span class="n">werSp</span><span class="o">.</span><span class="n">allView</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyF</span><span class="p">)</span>
+        <span class="n">werSp</span><span class="o">.</span><span class="n">aView</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyA</span><span class="p">)</span>
+        
+</div>
+<div class="viewcode-block" id="getCurrentPlayer"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.getCurrentPlayer">[docs]</a><span class="k">def</span> <span class="nf">getCurrentPlayer</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;getCurrentPlayer&quot;</span><span class="p">)</span>    
+    
+    <span class="n">selModelA</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+    <span class="n">selModelB</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">tableView_B</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+    
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelA</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">indexes</span> <span class="o">!=</span> <span class="p">[]</span> <span class="p">):</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelA</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">indexes</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">]</span>
+<span class="c">#        for index in indexes:</span>
+<span class="c">#            text = u&quot;(%i,%i)&quot; % (index.row(), index.column())</span>
+<span class="c">#            print(text)</span>
+<span class="c">#            return [index, &quot;A&quot;]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelB</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">indexes</span> <span class="o">!=</span> <span class="p">[]</span> <span class="p">):</span>
+            <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelB</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">indexes</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">]</span>
+                   
+    <span class="k">return</span> <span class="p">[[],</span> <span class="s">&#39;x&#39;</span><span class="p">]</span>
+    </div>
+<div class="viewcode-block" id="switch"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.switch">[docs]</a><span class="k">def</span> <span class="nf">switch</span><span class="p">():</span>
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">getCurrentPlayer</span><span class="p">()</span>
+<span class="c">#    x_sauber = list(set(x))</span>
+    <span class="n">selectetPlayers</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span><span class="p">(</span><span class="n">indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">selectetPlayers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()))</span>
+    
+    <span class="n">selectetPlayers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">selectetPlayers</span><span class="p">))</span>
+    <span class="n">selectetPlayers</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;A&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">selectetPlayers</span><span class="p">:</span>
+            <span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">removeByIndex</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        
+    <span class="k">elif</span> <span class="n">indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;B&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">selectetPlayers</span><span class="p">:</span>
+            <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">removeByIndex</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+    <span class="n">refreshGUI</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="removeFromTable"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.removeFromTable">[docs]</a><span class="k">def</span> <span class="nf">removeFromTable</span><span class="p">():</span>
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">getCurrentPlayer</span><span class="p">()</span>
+    <span class="n">selectetPlayers</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span><span class="p">(</span><span class="n">indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">selectetPlayers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()))</span>
+    
+    <span class="n">selectetPlayers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">selectetPlayers</span><span class="p">))</span>
+    <span class="n">selectetPlayers</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;A&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">selectetPlayers</span><span class="p">:</span>
+            <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">removeByIndex</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        
+    <span class="k">elif</span> <span class="n">indexes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;B&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">selectetPlayers</span><span class="p">:</span>
+            <span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">removeByIndex</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+    <span class="n">refreshGUI</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="weiter"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.weiter">[docs]</a><span class="k">def</span> <span class="nf">weiter</span><span class="p">():</span>
+    <span class="n">werSp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">warte</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">callBerechneManschaften</span><span class="p">()</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">warte</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    </div>
+<div class="viewcode-block" id="spieltMit"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.spieltMit">[docs]</a><span class="k">def</span> <span class="nf">spieltMit</span><span class="p">():</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s">&#39;spieltMit&#39;</span><span class="p">)</span>
+    <span class="n">selModelF</span> <span class="o">=</span> <span class="n">werSp</span><span class="o">.</span><span class="n">allView</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+    <span class="n">selModelA</span> <span class="o">=</span> <span class="n">werSp</span><span class="o">.</span><span class="n">aView</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+    
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelA</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">indexes</span> <span class="o">!=</span> <span class="p">[]</span> <span class="p">):</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelA</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">indexes</span><span class="p">):</span>
+            <span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">removeByIndex</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelF</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">indexes</span> <span class="o">!=</span> <span class="p">[]</span> <span class="p">):</span>
+            <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelF</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">indexes</span><span class="p">):</span>
+                <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="o">.</span><span class="n">removeByIndex</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()))</span>
+    <span class="n">refreshGUI</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            </div>
+<div class="viewcode-block" id="oeffnen"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.oeffnen">[docs]</a><span class="k">def</span> <span class="nf">oeffnen</span><span class="p">():</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s">&#39;öffnen clicked&#39;</span><span class="p">)</span>
+    <span class="c">#werSP</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="n">QWidget</span><span class="p">(),</span> <span class="s">&#39;Lade ein Team&#39;</span><span class="p">,</span><span class="s">&#39;./Input/&#39;</span><span class="p">,</span><span class="s">&#39;*.json&#39;</span><span class="p">)</span>
+   <span class="c"># file=open(filename)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">loadTeam</span><span class="p">(</span><span class="s">&#39;fullTeam&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">filename</span><span class="p">)</span>    
+    <span class="n">refreshGUI</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        
+    <span class="c">#data = file.read()</span>
+    <span class="c">#werSp.textEdit.setText(data)</span>
+        
+    
+    <span class="c">#winOpen.show()</span>
+    
+    <span class="c">#winOpen.Btn.clicked.connect(oeffnen2)</span>
+
+<span class="c">#def oeffnen2():  </span>
+ <span class="c">#tg.loadTeam(&#39;fullTeam&#39;,&#39;./Input/&#39;, winOpen.eingabe.displayText())</span>
+ <span class="c">#refreshGUI(1)</span>
+    </div>
+<div class="viewcode-block" id="speichern"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.speichern">[docs]</a><span class="k">def</span> <span class="nf">speichern</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;speichern&#39;</span><span class="p">)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">QFileDialog</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="n">QWidget</span><span class="p">(),</span> <span class="s">&#39;Speichere ein Team&#39;</span><span class="p">,</span><span class="s">&#39;./Input/&#39;</span><span class="p">,</span><span class="s">&#39;*.json&#39;</span><span class="p">)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">dumpTeam</span><span class="p">(</span><span class="s">&#39;fullTeam&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="n">refreshGUI</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+  <span class="c"># winSave.show()</span>
+    <span class="c">#winSave.Btn.clicked.connect(speichern2)</span>
+    
+<span class="c">#def speichern2():</span>
+<span class="c">#    tg.dumpTeam(&#39;fullTeam&#39;,&#39;./Input/&#39;, winSave.eingabe.displayText())</span>
+<span class="c">#    refreshGUI(1)</span>
+    </div>
+<div class="viewcode-block" id="werSpAdd"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.werSpAdd">[docs]</a><span class="k">def</span> <span class="nf">werSpAdd</span><span class="p">():</span>
+    <span class="n">tgmF</span><span class="o">.</span><span class="n">insertRows</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">refreshGUI</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="werSpRemove"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.werSpRemove">[docs]</a><span class="k">def</span> <span class="nf">werSpRemove</span><span class="p">():</span>
+    <span class="n">selModelF</span> <span class="o">=</span> <span class="n">werSp</span><span class="o">.</span><span class="n">allView</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+    <span class="n">selModelA</span> <span class="o">=</span> <span class="n">werSp</span><span class="o">.</span><span class="n">aView</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+    
+    <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelA</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">indexes</span> <span class="o">!=</span> <span class="p">[]</span> <span class="p">):</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelA</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">indexes</span><span class="p">):</span>
+            <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">removeByIndex</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelF</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">indexes</span> <span class="o">!=</span> <span class="p">[]</span> <span class="p">):</span>
+            <span class="n">indexes</span> <span class="o">=</span> <span class="n">selModelF</span><span class="o">.</span><span class="n">selectedIndexes</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">indexes</span><span class="p">):</span>
+                <span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="o">.</span><span class="n">removeByIndex</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
+    <span class="n">refreshGUI</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    </div>
+<div class="viewcode-block" id="willWeiter"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.willWeiter">[docs]</a><span class="k">def</span> <span class="nf">willWeiter</span><span class="p">():</span>
+    <span class="n">werSp</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">welcome</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    
+            
+    </div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+  
+ 
+   
+    
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;----- START -----&#39;</span><span class="p">)</span>
+    
+    <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/GUI_Number_1.ui&#39;</span><span class="p">)</span>
+    <span class="n">werSp</span> <span class="o">=</span>     <span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/werSpielt.ui&#39;</span><span class="p">)</span>
+    <span class="n">warte</span> <span class="o">=</span>     <span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/warte.ui&#39;</span><span class="p">)</span>
+    <span class="n">winOpen</span> <span class="o">=</span>   <span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/oeffnen.ui&#39;</span><span class="p">)</span>
+    <span class="n">winSave</span> <span class="o">=</span>   <span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/speichern.ui&#39;</span><span class="p">)</span>
+    <span class="n">welcome</span> <span class="o">=</span>  <span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/Oberfläche.ui&#39;</span><span class="p">)</span>
+        
+    <span class="n">welcome</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">welcome</span><span class="o">.</span><span class="n">startWeiterBtn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">willWeiter</span><span class="p">)</span>
+    <span class="n">werSp</span><span class="o">.</span><span class="n">weiter_Btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">weiter</span><span class="p">)</span>
+    <span class="n">werSp</span><span class="o">.</span><span class="n">actionOeffnen</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">oeffnen</span><span class="p">)</span>
+    <span class="n">werSp</span><span class="o">.</span><span class="n">actionSpeichern</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">speichern</span><span class="p">)</span>
+    
+    <span class="n">tg</span> <span class="o">=</span> <span class="n">TeamGenerator</span><span class="o">.</span><span class="n">TeamGenerator</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---- Load both teams as they have been the saved to file ----&#39;</span><span class="p">)</span>
+<span class="c">#    tg.loadTeam(&#39;teamA&#39;,&#39;./Input/&#39;, &#39;SmallTeam.json&#39;)</span>
+
+
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;########### TEAM A: ############&quot;</span><span class="p">)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;########### TEAM B: ############&quot;</span><span class="p">)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;########### TEST START ############&quot;</span><span class="p">)</span>
+    <span class="c">#print(str(p.name) for p in tg.fullTeam.players)    </span>
+    <span class="c">#print(&quot;++++++++++++++++++&quot;)</span>
+    
+    <span class="c">##########################################################################</span>
+    <span class="c"># Data[tg.teamA.players] ---&gt; DataModel[tgmA] </span>
+    <span class="n">tgmF</span> <span class="o">=</span> <span class="n">TeamGeneratorModel</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
+<span class="c">#    tgmF.insertRows(0,5)  </span>
+<span class="c">#    print(&#39;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&#39;)</span>
+    
+    <span class="n">tgmA</span> <span class="o">=</span> <span class="n">TeamGeneratorModel</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)</span><span class="c">#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;])</span>
+    <span class="n">tgmB</span> <span class="o">=</span> <span class="n">TeamGeneratorModel</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
+    
+    <span class="c"># DataModel[tgmA]  ---&gt; ProxyModel[proxyA]</span>
+    <span class="n">proxyA</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+    <span class="n">proxyA</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+    <span class="n">proxyB</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmB</span><span class="p">)</span>
+    <span class="n">proxyB</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmB</span><span class="p">)</span> 
+    <span class="n">proxyF</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmF</span><span class="p">)</span>
+    <span class="n">proxyF</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmF</span><span class="p">)</span>
+  
+    <span class="c"># ProxyModel[proxyA]---&gt;ViewModel[tableView_A]</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyA</span><span class="p">)</span>  
+    <span class="n">s1</span><span class="o">.</span><span class="n">tableView_B</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyB</span><span class="p">)</span>
+    <span class="n">werSp</span><span class="o">.</span><span class="n">allView</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyF</span><span class="p">)</span>
+    <span class="n">werSp</span><span class="o">.</span><span class="n">aView</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyA</span><span class="p">)</span>
+    <span class="c">##########################################################################</span>
+ 
+
+
+
+    <span class="c"># QtCore.QObject.connect(self.uiTree.selectionModel(),</span>
+    <span class="c">#           QtCore.SIGNAL(&quot;currentChanged(QModelIndex, QModelIndex)&quot;),</span>
+    <span class="c">#                                       self._propEditor.setSelection)</span>
+
+
+
+
+
+    <span class="n">s1</span><span class="o">.</span><span class="n">pushButton_3</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">removeFromTable</span><span class="p">)</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">pushButton_2</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">insertClicked</span><span class="p">)</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">pushButton_1</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">callBerechneManschaften</span><span class="p">)</span>
+    <span class="n">werSp</span><span class="o">.</span><span class="n">add_Btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">werSpAdd</span><span class="p">)</span>
+    <span class="n">werSp</span><span class="o">.</span><span class="n">remove_Btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">werSpRemove</span><span class="p">)</span>
+    
+
+    <span class="n">s1</span><span class="o">.</span><span class="n">gesammt_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">())</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">angriff_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">attackpoints</span><span class="p">))</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">abwehr_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">defencepoints</span><span class="p">))</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">tor_A</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">keeperpoints</span><span class="p">))</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">gesammt_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">())</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">angriff_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">attackpoints</span><span class="p">))</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">abwehr_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">defencepoints</span><span class="p">))</span>
+    <span class="n">s1</span><span class="o">.</span><span class="n">tor_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">keeperpoints</span><span class="p">))</span>
+    
+    
+    <span class="n">s1</span><span class="o">.</span><span class="n">pushButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">switch</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;----- END -----&#39;</span><span class="p">)</span>
+    
+    <span class="n">selModelA</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+    <span class="n">selModelB</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">tableView_B</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+    
+    <span class="n">werSp</span><span class="o">.</span><span class="n">jaNein_Btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">spieltMit</span><span class="p">)</span>
+    
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;----- STOP -----&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, SohnyBohny.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.9.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

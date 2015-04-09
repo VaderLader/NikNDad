@@ -78,7 +78,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
     def setData(self, index, value, role = QtCore.Qt.EditRole):
        # setData is always called if data has to be displayed 
 
-        
+
 
         if role == QtCore.Qt.EditRole:
             
@@ -320,21 +320,36 @@ def spieltMit():
             
 def oeffnen():
     print ('öffnen clicked')
-    winOpen.show()
-    winOpen.Btn.clicked.connect(oeffnen2)
-
-def oeffnen2():  
-    tg.loadTeam('fullTeam','./Input/', winOpen.eingabe.displayText())
+    #werSP
+    filename = QFileDialog.getOpenFileName(QWidget(), 'Lade ein Team','./Input/','*.json')
+   # file=open(filename)
+    tg.loadTeam('fullTeam','',filename)    
     refreshGUI(1)
+        
+    #data = file.read()
+    #werSp.textEdit.setText(data)
+        
+    
+    #winOpen.show()
+    
+    #winOpen.Btn.clicked.connect(oeffnen2)
+
+#def oeffnen2():  
+ #tg.loadTeam('fullTeam','./Input/', winOpen.eingabe.displayText())
+ #refreshGUI(1)
     
 def speichern():
     print('speichern')
-    winSave.show()
-    winSave.Btn.clicked.connect(speichern2)
-    
-def speichern2():
-    tg.dumpTeam('fullTeam','./Input/', winSave.eingabe.displayText())
+    filename = QFileDialog.getSaveFileName(QWidget(), 'Speichere ein Team','./Input/','*.json')
+    tg.dumpTeam('fullTeam','', filename)
     refreshGUI(1)
+    
+  # winSave.show()
+    #winSave.Btn.clicked.connect(speichern2)
+    
+#def speichern2():
+#    tg.dumpTeam('fullTeam','./Input/', winSave.eingabe.displayText())
+#    refreshGUI(1)
     
 def werSpAdd():
     tgmF.insertRows(0,1)
@@ -358,9 +373,9 @@ def werSpRemove():
                 tg.fullTeam.removeByIndex(index.row())
     refreshGUI(1)
     
-def wilWeiter():
+def willWeiter():
     werSp.show()
-    willcome.close()
+    welcome.close()
     
     
             
@@ -374,14 +389,14 @@ if __name__ == '__main__':
     
     app = QApplication(sys.argv)
     s1 = loadUi('./.GUI/GUI_Number_1.ui')
-    werSp = loadUi('./.GUI/werSpielt.ui')
-    warte = loadUi('./.GUI/warte.ui')
-    winOpen = loadUi('./.GUI/oeffnen.ui')
-    winSave = loadUi('./.GUI/speichern.ui')
-    willcome = loadUi('./.GUI/Oberfläche.ui')
+    werSp =     loadUi('./.GUI/werSpielt.ui')
+    warte =     loadUi('./.GUI/warte.ui')
+    winOpen =   loadUi('./.GUI/oeffnen.ui')
+    winSave =   loadUi('./.GUI/speichern.ui')
+    welcome =  loadUi('./.GUI/Oberfläche.ui')
         
-    willcome.show()
-    willcome.startWeiterBtn.clicked.connect(wilWeiter)
+    welcome.show()
+    welcome.startWeiterBtn.clicked.connect(willWeiter)
     werSp.weiter_Btn.clicked.connect(weiter)
     werSp.actionOeffnen.triggered.connect(oeffnen)
     werSp.actionSpeichern.triggered.connect(speichern)

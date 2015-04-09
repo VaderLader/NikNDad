@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TeamGenerator_GUI module &mdash; Mannschafts Generator 0.9.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Mannschafts Generator 0.9.1 documentation" href="index.html"/>
+        <link rel="up" title="." href="modules.html"/>
+        <link rel="prev" title="TeamGenerator module" href="TeamGenerator.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> Mannschafts Generator</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">.</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Player.html">Player module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Player.html#player-class">Player Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Team.html">Team module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">TeamGenerator_GUI module</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Mannschafts Generator</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="modules.html">.</a> &raquo;</li>
+      
+    <li>TeamGenerator_GUI module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/TeamGenerator_GUI.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="module-TeamGenerator_GUI">
+<span id="teamgenerator-gui-module"></span><h1>TeamGenerator_GUI module<a class="headerlink" href="#module-TeamGenerator_GUI" title="Permalink to this headline">¶</a></h1>
+<p>Created on Sat Feb 28 16:43:55 2015</p>
+<p>&#64;author: pi</p>
+<dl class="class">
+<dt id="TeamGenerator_GUI.PlayerFilterProxyModel">
+<em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">PlayerFilterProxyModel</code><a class="reference internal" href="_modules/TeamGenerator_GUI.html#PlayerFilterProxyModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.PlayerFilterProxyModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QSortFilterProxyModel</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel">
+<em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">TeamGeneratorModel</code><span class="sig-paren">(</span><em>ptable=[]</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt4.QtCore.QAbstractTableModel</span></code></p>
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.columnCount">
+<code class="descname">columnCount</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.columnCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.columnCount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.data">
+<code class="descname">data</code><span class="sig-paren">(</span><em>index</em>, <em>role</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.flags">
+<code class="descname">flags</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.flags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.flags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.headerData">
+<code class="descname">headerData</code><span class="sig-paren">(</span><em>section</em>, <em>orientation</em>, <em>role</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.headerData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.headerData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.insertRows">
+<code class="descname">insertRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x0000000005EA2CF8&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.insertRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.insertRows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.removeRows">
+<code class="descname">removeRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x0000000005EA2D68&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.removeRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.removeRows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.rowCount">
+<code class="descname">rowCount</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.rowCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.rowCount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.setData">
+<code class="descname">setData</code><span class="sig-paren">(</span><em>index</em>, <em>value</em>, <em>role=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.setData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.setData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.sort">
+<code class="descname">sort</code><span class="sig-paren">(</span><em>Ncol</em>, <em>order</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort table by given column number.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.sortColumn">
+<code class="descname">sortColumn</code><span class="sig-paren">(</span><em>section</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.sortColumn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.sortColumn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.callBerechneManschaften">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">callBerechneManschaften</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#callBerechneManschaften"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.callBerechneManschaften" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.getCurrentPlayer">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">getCurrentPlayer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#getCurrentPlayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.getCurrentPlayer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.headerClick">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">headerClick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#headerClick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.headerClick" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.insertClicked">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">insertClicked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#insertClicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.insertClicked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.oeffnen">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">oeffnen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#oeffnen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.oeffnen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.refreshGUI">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">refreshGUI</code><span class="sig-paren">(</span><em>seite=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#refreshGUI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.refreshGUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.removeFromTable">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">removeFromTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#removeFromTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.removeFromTable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.speichern">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">speichern</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#speichern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.speichern" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.spieltMit">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">spieltMit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#spieltMit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.spieltMit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.switch">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">switch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#switch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.switch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.tableClick">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">tableClick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#tableClick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.tableClick" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.weiter">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">weiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#weiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.weiter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.werSpAdd">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">werSpAdd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#werSpAdd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.werSpAdd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.werSpRemove">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">werSpRemove</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#werSpRemove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.werSpRemove" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TeamGenerator_GUI.willWeiter">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">willWeiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#willWeiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.willWeiter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="TeamGenerator.html" class="btn btn-neutral" title="TeamGenerator module"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, SohnyBohny.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.9.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
