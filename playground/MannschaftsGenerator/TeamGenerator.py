@@ -4,7 +4,7 @@
 #
 import Team
 import Player
-import json_object_en_n_decoder as myjson #There jason is imported
+import json_object_en_n_decoder as myjson
 import itertools
 
 
@@ -24,7 +24,17 @@ class TeamGenerator:
                                 'players': []
                                 })
         
-#==============================================================================            
+#==============================================================================   
+    def binomial(self, n, k):
+        ''' Calculate (n k) = n!/((n-k)!*k!) =
+            = ( n*(n-1)*...*(n-k+1) )/(1*2*3...*n)
+        '''
+        res=1
+        for i in range(1,k+1):
+            res = (res*(n-i+1))/i
+        return res
+            
+         
     def berechneMannschaften(self):
         ''' Method to calculate and select two teams which are most equal '''
         print ("In berechneMannschaften()")
@@ -39,10 +49,13 @@ class TeamGenerator:
         
         # lTeamA keeps the List of all possible TeamAs, wich can be setup
         # with different player combinations        
-        combos = itertools.combinations(list(range(0,len(self.teamA.players))),
-                                        int(len(self.teamA.players)/2))
+        n = len(self.teamA.players)
+        k = int(len(self.teamA.players)/2)
+        combos = itertools.combinations(list(range(0,len(self.teamA.players))),k)
+                                        
         lTeamA = list(combos)  
-        print("Anzahl der verschiedenen Teams = ", len(lTeamA)) 
+        print("Anzahl der verschiedenen Teams = ", len(lTeamA))
+        print("binomial(",n,",",k,")=", self.binomial(n,k) )
         #print("Verschiedene Teams lTeamA =",lTeamA)
         
         # Erzeuge das jeweils passenden Team B

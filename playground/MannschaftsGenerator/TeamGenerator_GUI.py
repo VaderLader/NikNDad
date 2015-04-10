@@ -7,25 +7,23 @@ Created on Sat Feb 28 16:43:55 2015
 
 import sys
 import PyQt4.QtCore as QtCore
-from PyQt4.QtGui import *
-from PyQt4.uic import *
+import PyQt4.QtGui as QtGui
+#from PyQt4.QtGui import *
+#from PyQt4.uic import *
+import PyQt4.uic as uic 
 
 import TeamGenerator
 
+#==============================================================================
 class TeamGeneratorModel(QtCore.QAbstractTableModel):
 
     def __init__(self, ptable = [], parent = None):
         QtCore.QAbstractTableModel.__init__(self, parent)
         self.__ptable = ptable
         
-
-        
-        
-    def sortColumn(section):
-        pass    
-        
+      
     def headerData(self, section, orientation, role):
-        
+        ''' Set fixed column header'''
         if role == QtCore.Qt.DisplayRole:
             
             if orientation == QtCore.Qt.Horizontal:
@@ -38,18 +36,24 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 elif section == 3:
                     return 'Tor'
                 elif section == 4:
-                    return 'Gesammt'
-                    
+                    return 'Gesamt'        
             else:                
                 return "Spieler " + str(section)  
     
     def data(self, index, role):
+        ''' Return data from __ptable
+        
+        :param index: index
+        :type index: QModelIndex
+        :param role: role
+        :type role: QtCore.Qt.DisplayRole
+        :returns: Table Cell Value
+        :rtype: str/int/float
+        
+        '''
         row = index.row()
         column = index.column()
-        
-#        if self.__ptable[row].available == 0:
-#            index.row().setTextColor(QtCore.Qt.red)
-        
+                
         if role == QtCore.Qt.DisplayRole:
             if column == 0:
                 return str(self.__ptable[row].name)
@@ -61,33 +65,37 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 return int(self.__ptable[row].keeperpoints) 
             elif column == 4:
                 return float("%.2f" % self.__ptable[row].playerpoints)
-
                 
         if role == QtCore.Qt.EditRole:
             return self.__ptable[row].name
             
     def rowCount(self, parent):
+        ''' Number of rows in the table '''
         return len(self.__ptable)
         
     def columnCount(self, parent):
+        ''' Fixed number of columns = 5 '''
         return 5
     
-    def flags(self,index): 
+    def flags(self,index):
+        ''' Controls if item is enabled; editable and selectable
+        '''
         return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
         
     def setData(self, index, value, role = QtCore.Qt.EditRole):
-       # setData is always called if data has to be displayed 
-
-
-
+        ''' This method is always called if data has to be displayed in the GUI
+        
+        :param index: index
+        :type index:
+        :param value: value of the cell
+        :type vale:
+        :returns: True/False
+        :rtype: bool
+        '''
         if role == QtCore.Qt.EditRole:
             
             row = index.row()
             column = index.column()
-            
-#            print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
-#            if self.__ptable[row].available == 0:
-#                index.row().setTextColor(QtCore.Qt.red)            
             
             if column == 0:
                 self.__ptable[row].name = str(value)
@@ -99,20 +107,24 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 self.__ptable[row].keeperpoints = int(value) 
             
             self.__ptable[row].calcPlayerpoints()
-            s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-            s1.angriff_A.setText(str(tg.teamA.attackpoints))
-            s1.abwehr_A.setText(str(tg.teamA.defencepoints))
-            s1.tor_A.setText(str(tg.teamA.keeperpoints))
-            s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
-            s1.angriff_B.setText(str(tg.teamB.attackpoints))
-            s1.abwehr_B.setText(str(tg.teamB.defencepoints))
-            s1.tor_B.setText(str(tg.teamB.keeperpoints))
+            calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+            calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
+            calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
+            calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))
+            calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+            calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
+            calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
+            calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
             return True
-        s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-        s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+        
+        calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+        calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
         return False
         
     def insertRows(self, position, rows, parent = QtCore.QModelIndex()):
+        ''' Insert rows at position
+            
+        '''        
         # Syntax: self.beginInsertRows(index,first,last)
         self.beginInsertRows(parent, position, position + rows - 1)  
         newPlayer = TeamGenerator.Player.Player({'name': '<Neuer Spieler>',
@@ -126,6 +138,16 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         return True
         
     def removeRows(self, position, rows, parent = QtCore.QModelIndex()):
+        """Removes rows from the table 
+
+        :param position: Number of the first row, which is removed
+        :type positionn: int 
+        :param rows: Number of rows to be removed
+        :type rows: int 
+        :returns: True
+        :rtype: bool
+        """
+       
         self.beginRemoveRows(parent, position, position + rows - 1)
         
         for i in range(rows):
@@ -136,7 +158,6 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         return True
 
     
-#==============================================================================
     def sort(self, Ncol, order):
          """Sort table by given column number.
          """
@@ -145,34 +166,30 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
          if order == Qt.DescendingOrder:
              self.arraydata.reverse()
          self.emit(SIGNAL("layoutChanged()"))
+
 #==============================================================================
- 
-class PlayerFilterProxyModel(QSortFilterProxyModel):
+
+#==============================================================================
+class PlayerFilterProxyModel(QtGui.QSortFilterProxyModel):
+    ''' Just inherited from the base class as it is
+    '''
     pass
-       
+#==============================================================================       
 
 
+
+#==============================================================================
 def insertClicked():
+    '''Dependent on the focus one row on Table A or Table B is inserted'''
     
     currentTable = getCurrentPlayer()[1]
     if currentTable == 'A':    
         tgmA.insertRows(0,1)
     elif currentTable == 'B':
-        tgmB.insertRows(0,1)        
-    #TODO:
-    #Abhängig vom Focus entweder TeamA Tabelle oder TeamB Tabelle erweitern    
-    #tgmB.insertRows(0,1)        
+        tgmB.insertRows(0,1)             
     refreshGUI()    
 
     
-def tableClick():
-    print ('§§§§§§§§§§§§§§§§§§§TABLE CLICKED §§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§')
-
-
-def headerClick():
-    print ('Header Click')
-    
- 
 def callBerechneManschaften():
     print("### callBerechneManschaften() ###")
     tg.berechneMannschaften()    
@@ -182,37 +199,34 @@ def callBerechneManschaften():
     tg.teamB.print()
     refreshGUI()    
 
-
-#def refreshGUI():
-#    tgmA.dataChanged.emit()        
-#    tgmB.dataChanged.emit()
     
-def refreshGUI(seite = 2):
-    if seite == 2:
-        s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-        s1.angriff_A.setText(str(tg.teamA.attackpoints))
-        s1.abwehr_A.setText(str(tg.teamA.defencepoints))
-        s1.tor_A.setText(str(tg.teamA.keeperpoints))
-        s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
-        s1.angriff_B.setText(str(tg.teamB.attackpoints))
-        s1.abwehr_B.setText(str(tg.teamB.defencepoints))
-        s1.tor_B.setText(str(tg.teamB.keeperpoints))
+def refreshGUI(window = 2):
+    ''' method to refresh all displayed data '''
+    if window == 2:
+        calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+        calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
+        calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
+        calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))
+        calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+        calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
+        calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
+        calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
         
         tgmA = TeamGeneratorModel(tg.teamA.players)
         tgmB = TeamGeneratorModel(tg.teamB.players)
-        s1.tableView_A.setModel(tgmA)
-        s1.tableView_B.setModel(tgmB)
+        calculatedTeamWindow.tableView_A.setModel(tgmA)
+        calculatedTeamWindow.tableView_B.setModel(tgmB)
             
     
         proxyA = PlayerFilterProxyModel(tgmA)
         proxyA.setSourceModel(tgmA)
-        s1.tableView_A.setModel(proxyA)  
+        calculatedTeamWindow.tableView_A.setModel(proxyA)  
         
         proxyB = PlayerFilterProxyModel(tgmB)
         proxyB.setSourceModel(tgmB) 
-        s1.tableView_B.setModel(proxyB)
+        calculatedTeamWindow.tableView_B.setModel(proxyB)
     
-    elif seite == 1:
+    elif window == 1:
         tgmA = TeamGeneratorModel(tg.teamA.players)
         tgmF = TeamGeneratorModel(tg.fullTeam.players)
         
@@ -221,15 +235,15 @@ def refreshGUI(seite = 2):
         proxyF = PlayerFilterProxyModel(tgmF)
         proxyF.setSourceModel(tgmF)
         
-        werSp.allView.setModel(proxyF)
-        werSp.aView.setModel(proxyA)
+        playerSelectWindow.allView.setModel(proxyF)
+        playerSelectWindow.aView.setModel(proxyA)
         
 
 def getCurrentPlayer():
     print("getCurrentPlayer")    
     
-    selModelA = s1.tableView_A.selectionModel()
-    selModelB = s1.tableView_B.selectionModel()
+    selModelA = calculatedTeamWindow.tableView_A.selectionModel()
+    selModelB = calculatedTeamWindow.tableView_B.selectionModel()
     
     indexes = selModelA.selectedIndexes()
     if (indexes != [] ):
@@ -293,16 +307,16 @@ def removeFromTable():
     refreshGUI()
     
 def weiter():
-    werSp.close()
-    warte.show()
+    playerSelectWindow.close()
+    waitingCalculation.show()
     callBerechneManschaften()
-    s1.show()
-    warte.close()
+    calculatedTeamWindow.show()
+    waitingCalculation.close()
     
 def spieltMit():
     print ('spieltMit')
-    selModelF = werSp.allView.selectionModel()
-    selModelA = werSp.aView.selectionModel()
+    selModelF = playerSelectWindow.allView.selectionModel()
+    selModelA = playerSelectWindow.aView.selectionModel()
     
     indexes = selModelA.selectedIndexes()
     if (indexes != [] ):
@@ -320,14 +334,14 @@ def spieltMit():
             
 def oeffnen():
     print ('öffnen clicked')
-    #werSP
-    filename = QFileDialog.getOpenFileName(QWidget(), 'Lade ein Team','./Input/','*.json')
+    #playerSelectWindow
+    filename = QtGui.QFileDialog.getOpenFileName(QtGui.QWidget(), 'Lade ein Team','./Input/','*.json')
    # file=open(filename)
     tg.loadTeam('fullTeam','',filename)    
     refreshGUI(1)
         
     #data = file.read()
-    #werSp.textEdit.setText(data)
+    #playerSelectWindow.textEdit.setText(data)
         
     
     #winOpen.show()
@@ -340,7 +354,7 @@ def oeffnen():
     
 def speichern():
     print('speichern')
-    filename = QFileDialog.getSaveFileName(QWidget(), 'Speichere ein Team','./Input/','*.json')
+    filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere ein Team','./Input/','*.json')
     tg.dumpTeam('fullTeam','', filename)
     refreshGUI(1)
     
@@ -351,13 +365,13 @@ def speichern():
 #    tg.dumpTeam('fullTeam','./Input/', winSave.eingabe.displayText())
 #    refreshGUI(1)
     
-def werSpAdd():
+def playerSelectWindowAdd():
     tgmF.insertRows(0,1)
     refreshGUI(1)
     
-def werSpRemove():
-    selModelF = werSp.allView.selectionModel()
-    selModelA = werSp.aView.selectionModel()
+def playerSelectWindowRemove():
+    selModelF = playerSelectWindow.allView.selectionModel()
+    selModelA = playerSelectWindow.aView.selectionModel()
     
     indexes = selModelA.selectedIndexes()
     if (indexes != [] ):
@@ -374,32 +388,29 @@ def werSpRemove():
     refreshGUI(1)
     
 def willWeiter():
-    werSp.show()
-    welcome.close()
+    playerSelectWindow.show()
+    welcomeWindow.close()
     
     
             
     
 if __name__ == '__main__':
   
- 
    
     
     print('----- START -----')
     
-    app = QApplication(sys.argv)
-    s1 = loadUi('./.GUI/GUI_Number_1.ui')
-    werSp =     loadUi('./.GUI/werSpielt.ui')
-    warte =     loadUi('./.GUI/warte.ui')
-    winOpen =   loadUi('./.GUI/oeffnen.ui')
-    winSave =   loadUi('./.GUI/speichern.ui')
-    welcome =  loadUi('./.GUI/Oberfläche.ui')
+    app = QtGui.QApplication(sys.argv)
+    calculatedTeamWindow =   uic.loadUi('./.GUI/calculatedTeamWindow.ui')
+    playerSelectWindow =     uic.loadUi('./.GUI/playerSelectWindow.ui')
+    waitingCalculation =     uic.loadUi('./.GUI/waitingCalculation.ui')
+    welcomeWindow =   uic.loadUi('./.GUI/welcomeWindow.ui')
         
-    welcome.show()
-    welcome.startWeiterBtn.clicked.connect(willWeiter)
-    werSp.weiter_Btn.clicked.connect(weiter)
-    werSp.actionOeffnen.triggered.connect(oeffnen)
-    werSp.actionSpeichern.triggered.connect(speichern)
+    welcomeWindow.show()
+    welcomeWindow.startWeiterBtn.clicked.connect(willWeiter)
+    playerSelectWindow.weiter_Btn.clicked.connect(weiter)
+    playerSelectWindow.actionOeffnen.triggered.connect(oeffnen)
+    playerSelectWindow.actionSpeichern.triggered.connect(speichern)
     
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
@@ -433,10 +444,10 @@ if __name__ == '__main__':
     proxyF.setSourceModel(tgmF)
   
     # ProxyModel[proxyA]--->ViewModel[tableView_A]
-    s1.tableView_A.setModel(proxyA)  
-    s1.tableView_B.setModel(proxyB)
-    werSp.allView.setModel(proxyF)
-    werSp.aView.setModel(proxyA)
+    calculatedTeamWindow.tableView_A.setModel(proxyA)  
+    calculatedTeamWindow.tableView_B.setModel(proxyB)
+    playerSelectWindow.allView.setModel(proxyF)
+    playerSelectWindow.aView.setModel(proxyA)
     ##########################################################################
  
 
@@ -450,30 +461,30 @@ if __name__ == '__main__':
 
 
 
-    s1.pushButton_3.clicked.connect(removeFromTable)
-    s1.pushButton_2.clicked.connect(insertClicked)
-    s1.pushButton_1.clicked.connect(callBerechneManschaften)
-    werSp.add_Btn.clicked.connect(werSpAdd)
-    werSp.remove_Btn.clicked.connect(werSpRemove)
+    calculatedTeamWindow.pushButton_3.clicked.connect(removeFromTable)
+    calculatedTeamWindow.pushButton_2.clicked.connect(insertClicked)
+    calculatedTeamWindow.pushButton_1.clicked.connect(callBerechneManschaften)
+    playerSelectWindow.add_Btn.clicked.connect(playerSelectWindowAdd)
+    playerSelectWindow.remove_Btn.clicked.connect(playerSelectWindowRemove)
     
 
-    s1.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-    s1.angriff_A.setText(str(tg.teamA.attackpoints))
-    s1.abwehr_A.setText(str(tg.teamA.defencepoints))
-    s1.tor_A.setText(str(tg.teamA.keeperpoints))
-    s1.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
-    s1.angriff_B.setText(str(tg.teamB.attackpoints))
-    s1.abwehr_B.setText(str(tg.teamB.defencepoints))
-    s1.tor_B.setText(str(tg.teamB.keeperpoints))
+    calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+    calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
+    calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
+    calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))
+    calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+    calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
+    calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
+    calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
     
     
-    s1.pushButton.clicked.connect(switch)
+    calculatedTeamWindow.pushButton.clicked.connect(switch)
     print('----- END -----')
     
-    selModelA = s1.tableView_A.selectionModel()
-    selModelB = s1.tableView_B.selectionModel()
+    selModelA = calculatedTeamWindow.tableView_A.selectionModel()
+    selModelB = calculatedTeamWindow.tableView_B.selectionModel()
     
-    werSp.jaNein_Btn.clicked.connect(spieltMit)
+    playerSelectWindow.jaNein_Btn.clicked.connect(spieltMit)
     
     sys.exit(app.exec_())
     

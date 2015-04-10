@@ -59,8 +59,8 @@ class Team:
 
         :param name: Name
         :type name: str 
-        :returns: None
-        
+        :returns: -
+        :rtype: -
         """
     
         for index, element in enumerate(self.players):
