@@ -178,13 +178,13 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Datei</string>
     </property>
-    <addaction name="actionOeffnen"/>
+    <addaction name="actionOpen"/>
     <addaction name="actionSpeichern"/>
    </widget>
    <addaction name="menuDatei"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionOeffnen">
+  <action name="actionOpen">
    <property name="text">
     <string>Öffnen</string>
    </property>
