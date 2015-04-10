@@ -162,10 +162,10 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
          """Sort table by given column number.
          """
          #self.emit(SIGNAL("layoutAboutToBeChanged()"))
-         self.__ptable = sorted(self.__ptable, key=operator.itemgetter(Ncol))        
-         if order == Qt.DescendingOrder:
+         self.__ptable = sorted(self.__ptable, key=QtCore.operator.itemgetter(Ncol))        
+         if order == QtCore.Qt.DescendingOrder:
              self.arraydata.reverse()
-         self.emit(SIGNAL("layoutChanged()"))
+         self.emit(QtCore.SIGNAL("layoutChanged()"))
 
 #==============================================================================
 
@@ -179,30 +179,93 @@ class PlayerFilterProxyModel(QtGui.QSortFilterProxyModel):
 
 
 #==============================================================================
-def insertClicked():
-    '''Dependent on the focus one row on Table A or Table B is inserted'''
+class calcTeamWindow:
+    def __init__(self):
+        calculatedTeamWindow.pushButton_2.clicked.connect(lambda: self.insertClicked())
+        calculatedTeamWindow.pushButton_1.clicked.connect(lambda: self.callBerechneManschaften())
+        calculatedTeamWindow.pushButton.clicked.connect(lambda: self.switch())
+        calculatedTeamWindow.pushButton_3.clicked.connect(lambda: self.removeFromTable())
+        self.refreshGUI()
     
-    currentTable = getCurrentPlayer()[1]
-    if currentTable == 'A':    
-        tgmA.insertRows(0,1)
-    elif currentTable == 'B':
-        tgmB.insertRows(0,1)             
-    refreshGUI()    
 
+    def getCurrentPlayer(self):
+        print("getCurrentPlayer")    
+        
+        selModelA = calculatedTeamWindow.tableView_A.selectionModel()
+        selModelB = calculatedTeamWindow.tableView_B.selectionModel()
+        
+        indexes = selModelA.selectedIndexes()
+        if (indexes != [] ):
+            indexes = selModelA.selectedIndexes()
+            return [indexes, 'A']
+        else:
+            indexes = selModelB.selectedIndexes()
+            if (indexes != [] ):
+                indexes = selModelB.selectedIndexes()
+                return [indexes, 'B']
+                       
+        return [[], 'x']
     
-def callBerechneManschaften():
-    print("### callBerechneManschaften() ###")
-    tg.berechneMannschaften()    
-    print("########### TEAM A: ############")
-    tg.teamA.print()
-    print("########### TEAM B: ############")
-    tg.teamB.print()
-    refreshGUI()    
+    
+    def insertClicked(self):
+        '''Dependent on the focus one row on Table A or Table B is inserted'''
+        
+        currentTable = self.getCurrentPlayer()[1]
+        if currentTable == 'A':    
+            tgmA.insertRows(0,1)
+        elif currentTable == 'B':
+            tgmB.insertRows(0,1)             
+        self.refreshGUI()
 
+   
     
-def refreshGUI(window = 2):
-    ''' method to refresh all displayed data '''
-    if window == 2:
+    def switch(self):
+        indexes = self.getCurrentPlayer()
+        #    x_sauber = list(set(x))
+        selectetPlayers = []
+        
+        for index in(indexes[0]):
+            selectetPlayers.append(int(index.row()))
+        
+        selectetPlayers = list(set(selectetPlayers))
+        selectetPlayers.sort(reverse = True)
+            
+        if indexes[1] == 'A':
+            for i in selectetPlayers:
+                tg.teamB.addPlayer(tg.teamA.removeByIndex(i))
+            
+        elif indexes[1] == 'B':
+            for i in selectetPlayers:
+                tg.teamA.addPlayer(tg.teamB.removeByIndex(i))
+        else:
+            pass
+        
+        self.refreshGUI()   
+    
+    def removeFromTable(self):
+        indexes = self.getCurrentPlayer()
+        selectetPlayers = []
+        
+        for index in(indexes[0]):
+            selectetPlayers.append(int(index.row()))
+        
+        selectetPlayers = list(set(selectetPlayers))
+        selectetPlayers.sort(reverse = True)
+            
+        if indexes[1] == 'A':
+            for i in selectetPlayers:
+                tg.teamA.removeByIndex(i)
+            
+        elif indexes[1] == 'B':
+            for i in selectetPlayers:
+                tg.teamB.removeByIndex(i)
+        else:
+            pass
+        
+        self.refreshGUI()
+    
+    def refreshGUI(self):
+        ''' method to refresh all displayed data '''
         calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
         calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
         calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
@@ -216,8 +279,8 @@ def refreshGUI(window = 2):
         tgmB = TeamGeneratorModel(tg.teamB.players)
         calculatedTeamWindow.tableView_A.setModel(tgmA)
         calculatedTeamWindow.tableView_B.setModel(tgmB)
-            
-    
+           
+        
         proxyA = PlayerFilterProxyModel(tgmA)
         proxyA.setSourceModel(tgmA)
         calculatedTeamWindow.tableView_A.setModel(proxyA)  
@@ -225,8 +288,93 @@ def refreshGUI(window = 2):
         proxyB = PlayerFilterProxyModel(tgmB)
         proxyB.setSourceModel(tgmB) 
         calculatedTeamWindow.tableView_B.setModel(proxyB)
+        
+#==============================================================================    
+class playerSelWindow:
     
-    elif window == 1:
+    def __init__(self):
+        playerSelectWindow.add_Btn.clicked.connect(lambda: self.playerSelectWindowAdd())
+        playerSelectWindow.remove_Btn.clicked.connect(lambda: self.playerSelectWindowRemove())
+        playerSelectWindow.jaNein_Btn.clicked.connect(lambda: self.spieltMit())
+        playerSelectWindow.weiter_Btn.clicked.connect(lambda: self.weiter())
+        playerSelectWindow.actionOpen.triggered.connect(lambda: self.open())
+        playerSelectWindow.actionSave.triggered.connect(lambda: self.save())    
+    
+        self.refreshGUI()
+
+    def open(self):
+        print ('öffnen clicked')
+        #playerSelectWindow
+        filename = QtGui.QFileDialog.getOpenFileName(QtGui.QWidget(), 'Lade ein Team','./Input/','*.json')
+       # file=open(filename)
+        tg.loadTeam('fullTeam','',filename)    
+        self.refreshGUI()
+                  
+    def save(self):
+        print('speichern')
+        filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere ein Team','./Input/','*.json')
+        tg.dumpTeam('fullTeam','', filename)
+        self.refreshGUI()
+      
+    def callBerechneManschaften(self):
+        print("### callBerechneManschaften() ###")
+        tg.berechneMannschaften()    
+        print("########### TEAM A: ############")
+        tg.teamA.print()
+        print("########### TEAM B: ############")
+        tg.teamB.print()
+        self.refreshGUI()        
+    
+    def weiter(self):
+        playerSelectWindow.close()
+        waitingCalculation.show()
+        self.callBerechneManschaften()
+        calculatedTeamWindow.show()
+        waitingCalculation.close()
+    
+    def spieltMit(self):
+        print ('spieltMit')
+        selModelF = playerSelectWindow.allView.selectionModel()
+        selModelA = playerSelectWindow.aView.selectionModel()
+        
+        indexes = selModelA.selectedIndexes()
+        if (indexes != [] ):
+            indexes = selModelA.selectedIndexes()
+            for index in reversed(indexes):
+                tg.fullTeam.addPlayer(tg.teamA.removeByIndex(index.row()))
+        
+        else:
+            indexes = selModelF.selectedIndexes()
+            if (indexes != [] ):
+                indexes = selModelF.selectedIndexes()
+                for index in reversed(indexes):
+                    tg.teamA.addPlayer(tg.fullTeam.removeByIndex(index.row()))
+        self.refreshGUI()
+    
+    def playerSelectWindowAdd(self):
+        tgmF.insertRows(0,1)
+        self.refreshGUI()
+        
+    def playerSelectWindowRemove(self):
+        selModelF = playerSelectWindow.allView.selectionModel()
+        selModelA = playerSelectWindow.aView.selectionModel()
+        
+        indexes = selModelA.selectedIndexes()
+        if (indexes != [] ):
+            indexes = selModelA.selectedIndexes()
+            for index in reversed(indexes):
+                tg.teamA.removeByIndex(index.row())
+    
+        else:
+            indexes = selModelF.selectedIndexes()
+            if (indexes != [] ):
+                indexes = selModelF.selectedIndexes()
+                for index in reversed(indexes):
+                    tg.fullTeam.removeByIndex(index.row())
+        self.refreshGUI()
+
+     
+    def refreshGUI(self):
         tgmA = TeamGeneratorModel(tg.teamA.players)
         tgmF = TeamGeneratorModel(tg.fullTeam.players)
         
@@ -237,155 +385,9 @@ def refreshGUI(window = 2):
         
         playerSelectWindow.allView.setModel(proxyF)
         playerSelectWindow.aView.setModel(proxyA)
-        
-
-def getCurrentPlayer():
-    print("getCurrentPlayer")    
-    
-    selModelA = calculatedTeamWindow.tableView_A.selectionModel()
-    selModelB = calculatedTeamWindow.tableView_B.selectionModel()
-    
-    indexes = selModelA.selectedIndexes()
-    if (indexes != [] ):
-        indexes = selModelA.selectedIndexes()
-        return [indexes, 'A']
-#        for index in indexes:
-#            text = u"(%i,%i)" % (index.row(), index.column())
-#            print(text)
-#            return [index, "A"]
-    else:
-        indexes = selModelB.selectedIndexes()
-        if (indexes != [] ):
-            indexes = selModelB.selectedIndexes()
-            return [indexes, 'B']
-                   
-    return [[], 'x']
-    
-def switch():
-    indexes = getCurrentPlayer()
-#    x_sauber = list(set(x))
-    selectetPlayers = []
-    
-    for index in(indexes[0]):
-        selectetPlayers.append(int(index.row()))
-    
-    selectetPlayers = list(set(selectetPlayers))
-    selectetPlayers.sort(reverse = True)
-        
-    if indexes[1] == 'A':
-        for i in selectetPlayers:
-            tg.teamB.addPlayer(tg.teamA.removeByIndex(i))
-        
-    elif indexes[1] == 'B':
-        for i in selectetPlayers:
-            tg.teamA.addPlayer(tg.teamB.removeByIndex(i))
-    else:
-        pass
-    
-    refreshGUI()
-    
-def removeFromTable():
-    indexes = getCurrentPlayer()
-    selectetPlayers = []
-    
-    for index in(indexes[0]):
-        selectetPlayers.append(int(index.row()))
-    
-    selectetPlayers = list(set(selectetPlayers))
-    selectetPlayers.sort(reverse = True)
-        
-    if indexes[1] == 'A':
-        for i in selectetPlayers:
-            tg.teamA.removeByIndex(i)
-        
-    elif indexes[1] == 'B':
-        for i in selectetPlayers:
-            tg.teamB.removeByIndex(i)
-    else:
-        pass
-    
-    refreshGUI()
-    
-def weiter():
-    playerSelectWindow.close()
-    waitingCalculation.show()
-    callBerechneManschaften()
-    calculatedTeamWindow.show()
-    waitingCalculation.close()
-    
-def spieltMit():
-    print ('spieltMit')
-    selModelF = playerSelectWindow.allView.selectionModel()
-    selModelA = playerSelectWindow.aView.selectionModel()
-    
-    indexes = selModelA.selectedIndexes()
-    if (indexes != [] ):
-        indexes = selModelA.selectedIndexes()
-        for index in reversed(indexes):
-            tg.fullTeam.addPlayer(tg.teamA.removeByIndex(index.row()))
-
-    else:
-        indexes = selModelF.selectedIndexes()
-        if (indexes != [] ):
-            indexes = selModelF.selectedIndexes()
-            for index in reversed(indexes):
-                tg.teamA.addPlayer(tg.fullTeam.removeByIndex(index.row()))
-    refreshGUI(1)
             
-def oeffnen():
-    print ('öffnen clicked')
-    #playerSelectWindow
-    filename = QtGui.QFileDialog.getOpenFileName(QtGui.QWidget(), 'Lade ein Team','./Input/','*.json')
-   # file=open(filename)
-    tg.loadTeam('fullTeam','',filename)    
-    refreshGUI(1)
-        
-    #data = file.read()
-    #playerSelectWindow.textEdit.setText(data)
-        
-    
-    #winOpen.show()
-    
-    #winOpen.Btn.clicked.connect(oeffnen2)
 
-#def oeffnen2():  
- #tg.loadTeam('fullTeam','./Input/', winOpen.eingabe.displayText())
- #refreshGUI(1)
-    
-def speichern():
-    print('speichern')
-    filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere ein Team','./Input/','*.json')
-    tg.dumpTeam('fullTeam','', filename)
-    refreshGUI(1)
-    
-  # winSave.show()
-    #winSave.Btn.clicked.connect(speichern2)
-    
-#def speichern2():
-#    tg.dumpTeam('fullTeam','./Input/', winSave.eingabe.displayText())
-#    refreshGUI(1)
-    
-def playerSelectWindowAdd():
-    tgmF.insertRows(0,1)
-    refreshGUI(1)
-    
-def playerSelectWindowRemove():
-    selModelF = playerSelectWindow.allView.selectionModel()
-    selModelA = playerSelectWindow.aView.selectionModel()
-    
-    indexes = selModelA.selectedIndexes()
-    if (indexes != [] ):
-        indexes = selModelA.selectedIndexes()
-        for index in reversed(indexes):
-            tg.teamA.removeByIndex(index.row())
 
-    else:
-        indexes = selModelF.selectedIndexes()
-        if (indexes != [] ):
-            indexes = selModelF.selectedIndexes()
-            for index in reversed(indexes):
-                tg.fullTeam.removeByIndex(index.row())
-    refreshGUI(1)
     
 def willWeiter():
     playerSelectWindow.show()
@@ -395,97 +397,61 @@ def willWeiter():
             
     
 if __name__ == '__main__':
-  
-   
+    print('----- START of TeamGenerator_GUI -----')
     
-    print('----- START -----')
-    
-    app = QtGui.QApplication(sys.argv)
-    calculatedTeamWindow =   uic.loadUi('./.GUI/calculatedTeamWindow.ui')
-    playerSelectWindow =     uic.loadUi('./.GUI/playerSelectWindow.ui')
-    waitingCalculation =     uic.loadUi('./.GUI/waitingCalculation.ui')
-    welcomeWindow =   uic.loadUi('./.GUI/welcomeWindow.ui')
-        
-    welcomeWindow.show()
-    welcomeWindow.startWeiterBtn.clicked.connect(willWeiter)
-    playerSelectWindow.weiter_Btn.clicked.connect(weiter)
-    playerSelectWindow.actionOeffnen.triggered.connect(oeffnen)
-    playerSelectWindow.actionSpeichern.triggered.connect(speichern)
+       
     
     tg = TeamGenerator.TeamGenerator()
     print('---- Load both teams as they have been the saved to file ----')
-#    tg.loadTeam('teamA','./Input/', 'SmallTeam.json')
-
-
-    print("########### TEAM A: ############")
-    tg.teamA.print()
-    print("########### TEAM B: ############")
-    tg.teamB.print()
+    #    tg.loadTeam('teamA','./Input/', 'SmallTeam.json')
     
-    print("########### TEST START ############")
-    #print(str(p.name) for p in tg.fullTeam.players)    
-    #print("++++++++++++++++++")
+    
+    print("########### TEAM A: ############")
+    print(tg.teamA.print())
+    print("########### TEAM B: ############")
+    print(tg.teamB.print())
     
     ##########################################################################
-    # Data[tg.teamA.players] ---> DataModel[tgmA] 
+    #: Data[tg.teamA.players] ---> DataModel[tgmA] 
     tgmF = TeamGeneratorModel(tg.fullTeam.players)
-#    tgmF.insertRows(0,5)  
-#    print('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
     
     tgmA = TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     tgmB = TeamGeneratorModel(tg.teamB.players)
     
-    # DataModel[tgmA]  ---> ProxyModel[proxyA]
+    
+    #:
+    app = QtGui.QApplication(sys.argv)
+    
+    welcomeWindow =         uic.loadUi('./.GUI/welcomeWindow.ui')
+    playerSelectWindow =    uic.loadUi('./.GUI/playerSelectWindow.ui')     
+    calculatedTeamWindow =  uic.loadUi('./.GUI/calculatedTeamWindow.ui')   
+    waitingCalculation =    uic.loadUi('./.GUI/waitingCalculation.ui')
+    
+    welcomeWindow.show()
+    welcomeWindow.startWeiterBtn.clicked.connect(willWeiter)
+  
+     
+    
+    #: DataModel[tgmA]  ---> ProxyModel[proxyA]
     proxyA = PlayerFilterProxyModel(tgmA)
     proxyA.setSourceModel(tgmA)
     proxyB = PlayerFilterProxyModel(tgmB)
     proxyB.setSourceModel(tgmB) 
     proxyF = PlayerFilterProxyModel(tgmF)
     proxyF.setSourceModel(tgmF)
-  
-    # ProxyModel[proxyA]--->ViewModel[tableView_A]
+      
+    #: ProxyModel[proxyA]--->ViewModel[tableView_A]
     calculatedTeamWindow.tableView_A.setModel(proxyA)  
     calculatedTeamWindow.tableView_B.setModel(proxyB)
     playerSelectWindow.allView.setModel(proxyF)
     playerSelectWindow.aView.setModel(proxyA)
     ##########################################################################
+     
  
-
-
-
-    # QtCore.QObject.connect(self.uiTree.selectionModel(),
-    #           QtCore.SIGNAL("currentChanged(QModelIndex, QModelIndex)"),
-    #                                       self._propEditor.setSelection)
-
-
-
-
-
-    calculatedTeamWindow.pushButton_3.clicked.connect(removeFromTable)
-    calculatedTeamWindow.pushButton_2.clicked.connect(insertClicked)
-    calculatedTeamWindow.pushButton_1.clicked.connect(callBerechneManschaften)
-    playerSelectWindow.add_Btn.clicked.connect(playerSelectWindowAdd)
-    playerSelectWindow.remove_Btn.clicked.connect(playerSelectWindowRemove)
-    
-
-    calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-    calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
-    calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
-    calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))
-    calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
-    calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
-    calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
-    calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
+    ctw = calcTeamWindow()
     
     
-    calculatedTeamWindow.pushButton.clicked.connect(switch)
-    print('----- END -----')
-    
-    selModelA = calculatedTeamWindow.tableView_A.selectionModel()
-    selModelB = calculatedTeamWindow.tableView_B.selectionModel()
-    
-    playerSelectWindow.jaNein_Btn.clicked.connect(spieltMit)
-    
-    sys.exit(app.exec_())
-    
-    print('----- STOP -----')
+    print(' GUI up and running now ')
+     
+    app.exec_()
+    print('----- END of TeamGenerator_GUI -----')
