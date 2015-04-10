@@ -179,7 +179,7 @@ p, li { white-space: pre-wrap; }
      <string>Datei</string>
     </property>
     <addaction name="actionOpen"/>
-    <addaction name="actionSpeichern"/>
+    <addaction name="actionSave"/>
    </widget>
    <addaction name="menuDatei"/>
   </widget>
@@ -189,7 +189,7 @@ p, li { white-space: pre-wrap; }
     <string>Öffnen</string>
    </property>
   </action>
-  <action name="actionSpeichern">
+  <action name="actionSave">
    <property name="text">
     <string>Speichern</string>
    </property>
