@@ -176,15 +176,28 @@ class PlayerFilterProxyModel(QtGui.QSortFilterProxyModel):
     pass
 #==============================================================================       
 
+class welcomeWind:
+    def __init__(self):
+        welcomeWindow.startWeiterBtn.clicked.connect(lambda: self.welcomeDone())
+        welcomeWindow.show()
+    
+    def welcomeDone(self):
+        tg.loadTeam('fullTeam','./Input/','FullTeam.json')    
+        playerSelectWindow.show()
+        pswin.refreshGUI()
+        welcomeWindow.close()
+    
 
 
 #==============================================================================
-class calcTeamWindow:
+class calculateTeamWind:
     def __init__(self):
         calculatedTeamWindow.pushButton_2.clicked.connect(lambda: self.insertClicked())
         calculatedTeamWindow.pushButton_1.clicked.connect(lambda: self.callBerechneManschaften())
         calculatedTeamWindow.pushButton.clicked.connect(lambda: self.switch())
         calculatedTeamWindow.pushButton_3.clicked.connect(lambda: self.removeFromTable())
+        calculatedTeamWindow.actionSpeichern.triggered.connect(lambda: self.save())
+        calculatedTeamWindow.actionSpeichern_unter.triggered.connect(lambda: self.saveAsDia())
         self.refreshGUI()
     
 
@@ -217,7 +230,14 @@ class calcTeamWindow:
             tgmB.insertRows(0,1)             
         self.refreshGUI()
 
-   
+    def callBerechneManschaften(self):
+        print("### callBerechneManschaften() ###")
+        tg.berechneMannschaften()    
+        print("########### TEAM A: ############")
+        tg.teamA.print()
+        print("########### TEAM B: ############")
+        tg.teamB.print()
+        self.refreshGUI()    
     
     def switch(self):
         indexes = self.getCurrentPlayer()
@@ -263,7 +283,23 @@ class calcTeamWindow:
             pass
         
         self.refreshGUI()
-    
+
+    def save(self):
+        print('Speichern in default directory')
+        #savedir = QtGui.QFileDialog.getExistingDirectory(QtGui.QWidget(),'','./Results')
+        # getSaveFileName(QtGui.QWidget(), 'Speichere beide Teams','./Result/','*.json')
+        tg.dumpTeams('./Result/')
+        self.refreshGUI()
+        
+    def saveAsDia(self):
+        ''' Save both Team with save dialog window '''
+        filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere TeamA','./Result/','*.json')
+        tg.dumpTeam('teamA','', filename)
+        filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere TeamA','./Result/','*.json')
+        tg.dumpTeam('teamB','', filename)
+        self.refreshGUI()        
+        
+        
     def refreshGUI(self):
         ''' method to refresh all displayed data '''
         calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
@@ -290,29 +326,28 @@ class calcTeamWindow:
         calculatedTeamWindow.tableView_B.setModel(proxyB)
         
 #==============================================================================    
-class playerSelWindow:
+class playerSelectWind:
     
     def __init__(self):
         playerSelectWindow.add_Btn.clicked.connect(lambda: self.playerSelectWindowAdd())
         playerSelectWindow.remove_Btn.clicked.connect(lambda: self.playerSelectWindowRemove())
         playerSelectWindow.jaNein_Btn.clicked.connect(lambda: self.spieltMit())
-        playerSelectWindow.weiter_Btn.clicked.connect(lambda: self.weiter())
-        playerSelectWindow.actionOpen.triggered.connect(lambda: self.open())
-        playerSelectWindow.actionSave.triggered.connect(lambda: self.save())    
-    
+        playerSelectWindow.weiter_Btn.clicked.connect(lambda: self.gotoNextWindow())
+        playerSelectWindow.actionOpen.triggered.connect(lambda: self.openDia())
+        playerSelectWindow.actionSave.triggered.connect(lambda: self.saveDia())    
         self.refreshGUI()
 
-    def open(self):
+    def openDia(self):
         print ('öffnen clicked')
         #playerSelectWindow
-        filename = QtGui.QFileDialog.getOpenFileName(QtGui.QWidget(), 'Lade ein Team','./Input/','*.json')
+        filename = QtGui.QFileDialog.getOpenFileName(QtGui.QWidget(), 'Lade eine Spielerliste oder ein Team','./Input/','*.json')
        # file=open(filename)
         tg.loadTeam('fullTeam','',filename)    
         self.refreshGUI()
                   
-    def save(self):
+    def saveDia(self):
         print('speichern')
-        filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere ein Team','./Input/','*.json')
+        filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere eine Spielerliste oder ein Team','./Input/','*.json')
         tg.dumpTeam('fullTeam','', filename)
         self.refreshGUI()
       
@@ -325,11 +360,12 @@ class playerSelWindow:
         tg.teamB.print()
         self.refreshGUI()        
     
-    def weiter(self):
+    def gotoNextWindow(self):
         playerSelectWindow.close()
         waitingCalculation.show()
         self.callBerechneManschaften()
         calculatedTeamWindow.show()
+        ctwin.refreshGUI()
         waitingCalculation.close()
     
     def spieltMit(self):
@@ -387,18 +423,21 @@ class playerSelWindow:
         playerSelectWindow.aView.setModel(proxyA)
             
 
-
+#===================================================================================================
+class waitingCalculationWind:
+    def __init__(self):
+        waitingCalculation.textBrowser.setText("Hallo")
+        pass
+#===================================================================================================
     
-def willWeiter():
-    playerSelectWindow.show()
-    welcomeWindow.close()
     
-    
-            
     
 if __name__ == '__main__':
     print('----- START of TeamGenerator_GUI -----')
     
+    #: Data[tg.teamA.players] ---> DataModel[tgmA] 
+    #: DataModel[tgmA]  ---> ProxyModel[proxyA]
+    #: ProxyModel[proxyA]--->ViewModel[tableView_A]
        
     
     tg = TeamGenerator.TeamGenerator()
@@ -406,10 +445,10 @@ if __name__ == '__main__':
     #    tg.loadTeam('teamA','./Input/', 'SmallTeam.json')
     
     
-    print("########### TEAM A: ############")
-    print(tg.teamA.print())
-    print("########### TEAM B: ############")
-    print(tg.teamB.print())
+    #print("########### TEAM A: ############")
+    #print(tg.teamA.print())
+    #print("########### TEAM B: ############")
+    #print(tg.teamB.print())
     
     ##########################################################################
     #: Data[tg.teamA.players] ---> DataModel[tgmA] 
@@ -426,32 +465,16 @@ if __name__ == '__main__':
     playerSelectWindow =    uic.loadUi('./.GUI/playerSelectWindow.ui')     
     calculatedTeamWindow =  uic.loadUi('./.GUI/calculatedTeamWindow.ui')   
     waitingCalculation =    uic.loadUi('./.GUI/waitingCalculation.ui')
+
+    wcwin = welcomeWind()
+    ctwin = calculateTeamWind()
+    pswin = playerSelectWind()
+    waitwin = waitingCalculationWind() 
     
+    #:Showing the first window. All the next windows are
+    #:called from the windows before. 
     welcomeWindow.show()
-    welcomeWindow.startWeiterBtn.clicked.connect(willWeiter)
-  
-     
-    
-    #: DataModel[tgmA]  ---> ProxyModel[proxyA]
-    proxyA = PlayerFilterProxyModel(tgmA)
-    proxyA.setSourceModel(tgmA)
-    proxyB = PlayerFilterProxyModel(tgmB)
-    proxyB.setSourceModel(tgmB) 
-    proxyF = PlayerFilterProxyModel(tgmF)
-    proxyF.setSourceModel(tgmF)
-      
-    #: ProxyModel[proxyA]--->ViewModel[tableView_A]
-    calculatedTeamWindow.tableView_A.setModel(proxyA)  
-    calculatedTeamWindow.tableView_B.setModel(proxyB)
-    playerSelectWindow.allView.setModel(proxyF)
-    playerSelectWindow.aView.setModel(proxyA)
-    ##########################################################################
-     
- 
-    ctw = calcTeamWindow()
-    
-    
-    print(' GUI up and running now ')
+    print('GUI up and running now ')
      
     app.exec_()
     print('----- END of TeamGenerator_GUI -----')
