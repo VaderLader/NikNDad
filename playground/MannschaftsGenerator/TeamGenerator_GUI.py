@@ -194,15 +194,20 @@ class calculateTeamWind:
     def __init__(self):
         calculatedTeamWindow.pushButton_2.clicked.connect(lambda: self.insertClicked())
         calculatedTeamWindow.pushButton_1.clicked.connect(lambda: self.callBerechneManschaften())
-        calculatedTeamWindow.pushButton.clicked.connect(lambda: self.switch())
+        calculatedTeamWindow.pushButton.clicked.connect(lambda: self.shiftPlayer())
         calculatedTeamWindow.pushButton_3.clicked.connect(lambda: self.removeFromTable())
         calculatedTeamWindow.actionSpeichern.triggered.connect(lambda: self.save())
         calculatedTeamWindow.actionSpeichern_unter.triggered.connect(lambda: self.saveAsDia())
         self.refreshGUI()
     
 
-    def getCurrentPlayer(self):
-        print("getCurrentPlayer")    
+    def getSelectedPlayers(self):
+        ''' Get the list currently selected indexes + table name
+        
+        :returns: [ [List of selected players], 'TableName' ]
+        :rtype: [ [], str]
+        '''
+        print("getSelectedPlayers")    
         
         selModelA = calculatedTeamWindow.tableView_A.selectionModel()
         selModelB = calculatedTeamWindow.tableView_B.selectionModel()
@@ -210,20 +215,20 @@ class calculateTeamWind:
         indexes = selModelA.selectedIndexes()
         if (indexes != [] ):
             indexes = selModelA.selectedIndexes()
-            return [indexes, 'A']
+            return [indexes, 'teamA']
         else:
             indexes = selModelB.selectedIndexes()
             if (indexes != [] ):
                 indexes = selModelB.selectedIndexes()
-                return [indexes, 'B']
+                return [indexes, 'teamB']
                        
-        return [[], 'x']
+        return [[], '']
     
     
     def insertClicked(self):
         '''Dependent on the focus one row on Table A or Table B is inserted'''
         
-        currentTable = self.getCurrentPlayer()[1]
+        currentTable = self.getSelectedPlayers()[1]
         if currentTable == 'A':    
             tgmA.insertRows(0,1)
         elif currentTable == 'B':
@@ -231,6 +236,7 @@ class calculateTeamWind:
         self.refreshGUI()
 
     def callBerechneManschaften(self):
+        #TODO: Shift all to teamA ....
         print("### callBerechneManschaften() ###")
         tg.berechneMannschaften()    
         print("########### TEAM A: ############")
@@ -239,23 +245,25 @@ class calculateTeamWind:
         tg.teamB.print()
         self.refreshGUI()    
     
-    def switch(self):
-        indexes = self.getCurrentPlayer()
-        #    x_sauber = list(set(x))
-        selectetPlayers = []
+    def shiftPlayer(self):
+        indexes = self.getSelectedPlayers()
+        selectedPlayers = []
         
+        #: Building a list of Players in reverse order to be shifted
+        #: The selectedPlayers list can contain players several times depending on what
+        #: was selected. => set(selectedPlayers) has only unique Players
         for index in(indexes[0]):
-            selectetPlayers.append(int(index.row()))
+            selectedPlayers.append(int(index.row()))
         
-        selectetPlayers = list(set(selectetPlayers))
-        selectetPlayers.sort(reverse = True)
+        selectedPlayers = list(set(selectedPlayers))
+        selectedPlayers.sort(reverse = True)
             
-        if indexes[1] == 'A':
-            for i in selectetPlayers:
+        if indexes[1] == 'teamA':
+            for i in selectedPlayers:
                 tg.teamB.addPlayer(tg.teamA.removeByIndex(i))
             
-        elif indexes[1] == 'B':
-            for i in selectetPlayers:
+        elif indexes[1] == 'teamB':
+            for i in selectedPlayers:
                 tg.teamA.addPlayer(tg.teamB.removeByIndex(i))
         else:
             pass
@@ -263,12 +271,13 @@ class calculateTeamWind:
         self.refreshGUI()   
     
     def removeFromTable(self):
-        indexes = self.getCurrentPlayer()
+        indexes = self.getSelectedPlayers()
         selectetPlayers = []
         
         for index in(indexes[0]):
             selectetPlayers.append(int(index.row()))
-        
+            
+        #: set() liste of unique elements
         selectetPlayers = list(set(selectetPlayers))
         selectetPlayers.sort(reverse = True)
             
@@ -295,7 +304,7 @@ class calculateTeamWind:
         ''' Save both Team with save dialog window '''
         filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere TeamA','./Result/','*.json')
         tg.dumpTeam('teamA','', filename)
-        filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere TeamA','./Result/','*.json')
+        filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'Speichere TeamB','./Result/','*.json')
         tg.dumpTeam('teamB','', filename)
         self.refreshGUI()        
         
@@ -331,7 +340,7 @@ class playerSelectWind:
     def __init__(self):
         playerSelectWindow.add_Btn.clicked.connect(lambda: self.playerSelectWindowAdd())
         playerSelectWindow.remove_Btn.clicked.connect(lambda: self.playerSelectWindowRemove())
-        playerSelectWindow.jaNein_Btn.clicked.connect(lambda: self.spieltMit())
+        playerSelectWindow.jaNein_Btn.clicked.connect(lambda: self.shiftPlayer())
         playerSelectWindow.weiter_Btn.clicked.connect(lambda: self.gotoNextWindow())
         playerSelectWindow.actionOpen.triggered.connect(lambda: self.openDia())
         playerSelectWindow.actionSave.triggered.connect(lambda: self.saveDia())    
@@ -361,38 +370,76 @@ class playerSelectWind:
         self.refreshGUI()        
     
     def gotoNextWindow(self):
+        #TODO: ggggg
         playerSelectWindow.close()
+       # waitingCalculation.show()
+        print("gotoNextWindow1")
+        waitingCalculation.textBrowser.setText("Hallo")
         waitingCalculation.show()
-        self.callBerechneManschaften()
+                
+        #self.callBerechneManschaften()
+        print("gotoNextWindow2")
         calculatedTeamWindow.show()
         ctwin.refreshGUI()
-        waitingCalculation.close()
-    
-    def spieltMit(self):
-        print ('spieltMit')
-        selModelF = playerSelectWindow.allView.selectionModel()
+        #waitingCalculation.close()
+
+    def getSelectedPlayers(self):
+        ''' Get the list currently selected indexes + table name
+        
+        :returns: [ [List of selected players], 'TableName' ]
+        :rtype: [ [], str]
+        '''
+        print("getSelectedPlayers")    
+        
+        selModelF = playerSelectWindow.fullView.selectionModel()
         selModelA = playerSelectWindow.aView.selectionModel()
         
-        indexes = selModelA.selectedIndexes()
-        if (indexes != [] ):
-            indexes = selModelA.selectedIndexes()
-            for index in reversed(indexes):
-                tg.fullTeam.addPlayer(tg.teamA.removeByIndex(index.row()))
         
-        else:
+        indexes = selModelF.selectedIndexes()
+        if (indexes != [] ):
             indexes = selModelF.selectedIndexes()
+            return [indexes, 'fullTeam']
+        else:
+            indexes = selModelA.selectedIndexes()
             if (indexes != [] ):
-                indexes = selModelF.selectedIndexes()
-                for index in reversed(indexes):
-                    tg.teamA.addPlayer(tg.fullTeam.removeByIndex(index.row()))
-        self.refreshGUI()
-    
+                indexes = selModelA.selectedIndexes()
+                return [indexes, 'teamA']
+                       
+        return [[], ''] 
+ 
+ 
+    def shiftPlayer(self):
+        indexes = self.getSelectedPlayers()
+        selectedPlayers = []
+        
+        #: Building a list of Players in reverse order to be shifted
+        #: The selectedPlayers list can contain players several times depending on what
+        #: was selected. => set(selectedPlayers) has only unique Players
+        for index in indexes[0]:
+            selectedPlayers.append(int(index.row()))
+        
+        selectedPlayers = list(set(selectedPlayers))
+        selectedPlayers.sort(reverse = True)
+            
+        if indexes[1] == 'fullTeam':
+            for i in selectedPlayers:
+                tg.teamA.addPlayer(tg.fullTeam.removeByIndex(i))
+            
+        elif indexes[1] == 'teamA':
+            for i in selectedPlayers:
+                tg.fullTeam.addPlayer(tg.teamA.removeByIndex(i))
+        else:
+            pass
+        
+        self.refreshGUI()  
+
+     
     def playerSelectWindowAdd(self):
         tgmF.insertRows(0,1)
         self.refreshGUI()
         
     def playerSelectWindowRemove(self):
-        selModelF = playerSelectWindow.allView.selectionModel()
+        selModelF = playerSelectWindow.fullView.selectionModel()
         selModelA = playerSelectWindow.aView.selectionModel()
         
         indexes = selModelA.selectedIndexes()
@@ -419,7 +466,7 @@ class playerSelectWind:
         proxyF = PlayerFilterProxyModel(tgmF)
         proxyF.setSourceModel(tgmF)
         
-        playerSelectWindow.allView.setModel(proxyF)
+        playerSelectWindow.fullView.setModel(proxyF)
         playerSelectWindow.aView.setModel(proxyA)
             
 
