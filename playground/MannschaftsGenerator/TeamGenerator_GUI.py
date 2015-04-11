@@ -20,8 +20,11 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
     def __init__(self, ptable = [], parent = None):
         QtCore.QAbstractTableModel.__init__(self, parent)
         self.__ptable = ptable
+        print("TeamGeneratorModel.__init__: len(__ptable)=", len(self.__ptable))
         
-      
+    def get_ptable(self):
+        return self.__ptable
+        
     def headerData(self, section, orientation, role):
         ''' Set fixed column header'''
         if role == QtCore.Qt.DisplayRole:
@@ -123,20 +126,27 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         
     def insertRows(self, position, rows, parent = QtCore.QModelIndex()):
         ''' Insert rows at position
-            
-        '''        
+        :param position: Number of the first row, which is inserted
+        :type position: int 
+        :param rows: Number of rows to be inserted
+        :type rows: int 
+        :returns: True
+        :rtype: bool
+        '''
+        print('position = ', position, "rows = ", rows)      
         # Syntax: self.beginInsertRows(index,first,last)
         self.beginInsertRows(parent, position, position + rows - 1)  
         newPlayer = TeamGenerator.Player.Player({'name': '<Neuer Spieler>',
                                           'attackpoints': 0,
                                           'defencepoints': 0, 
                                           'keeperpoints': 0,
-                                          'available': 0})        
+                                          'available': 0})
+        print("len(self.__ptable)=", len(self.__ptable))                                  
         self.__ptable.insert(position,newPlayer)
-
+        print("len(self.__ptable)=", len(self.__ptable))                                  
         self.endInsertRows()
         return True
-        
+  
     def removeRows(self, position, rows, parent = QtCore.QModelIndex()):
         """Removes rows from the table 
 
@@ -182,17 +192,34 @@ class welcomeWind:
         welcomeWindow.show()
     
     def welcomeDone(self):
+        print("\n### welcomeDone ###")
+        print(" len(tgmF.get_ptable())=",len(tgmF.get_ptable()))
+        print(" len(tg.fullTeam.players)=",len(tg.fullTeam.players))
+        print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+        print(" len(tg.teamA.players)=",len(tg.teamA.players))
         tg.loadTeam('fullTeam','./Input/','FullTeam.json')    
-        playerSelectWindow.show()
+        print("\n### welcomeDone after loadTeam ###")
+        print(" len(tgmF.get_ptable())=",len(tgmF.get_ptable()))
+        print(" len(tg.fullTeam.players)=",len(tg.fullTeam.players))
+        print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+        print(" len(tg.teamA.players)=",len(tg.teamA.players))
         pswin.refreshGUI()
+                
+        playerSelectWindow.show()
+                
+        print("\n### welcomeDone after RefreshGUI ###")
+        print(" len(tgmF.get_ptable())=",len(tgmF.get_ptable()))
+        print(" len(tg.fullTeam.players)=",len(tg.fullTeam.players))
+        print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+        print(" len(tg.teamA.players)=",len(tg.teamA.players))        
         welcomeWindow.close()
     
 
 
-#==============================================================================
+#===================================================================================================
 class calculateTeamWind:
     def __init__(self):
-        calculatedTeamWindow.pushButton_2.clicked.connect(lambda: self.insertClicked())
+        calculatedTeamWindow.pushButton_2.clicked.connect(lambda: self.addPlayer())
         calculatedTeamWindow.pushButton_1.clicked.connect(lambda: self.callBerechneManschaften())
         calculatedTeamWindow.pushButton.clicked.connect(lambda: self.shiftPlayer())
         calculatedTeamWindow.pushButton_3.clicked.connect(lambda: self.removeFromTable())
@@ -215,36 +242,65 @@ class calculateTeamWind:
         indexes = selModelA.selectedIndexes()
         if (indexes != [] ):
             indexes = selModelA.selectedIndexes()
+            print(len(indexes), ", teamA")
             return [indexes, 'teamA']
         else:
             indexes = selModelB.selectedIndexes()
             if (indexes != [] ):
                 indexes = selModelB.selectedIndexes()
+                print(len(indexes), ", teamB")
                 return [indexes, 'teamB']
                        
         return [[], '']
     
     
-    def insertClicked(self):
-        '''Dependent on the focus one row on Table A or Table B is inserted'''
+    def addPlayer(self):
+        '''Dependent on the focus one row on Table A or Table B is added'''
         
         currentTable = self.getSelectedPlayers()[1]
-        if currentTable == 'A':    
+        if currentTable == 'teamA':
+            print("\n§§§ addPlayer in teamA §§§")
+            print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+            print(" len(tg.teamA.players)=",len(tg.teamA.players))        
+            print(" len(tgmB.get_ptable())=",len(tgmB.get_ptable()))
+            print(" len(tg.teamB.players)=",len(tg.teamB.players))
             tgmA.insertRows(0,1)
-        elif currentTable == 'B':
-            tgmB.insertRows(0,1)             
+            print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+            print(" len(tg.teamA.players)=",len(tg.teamA.players))        
+            print(" len(tgmB.get_ptable())=",len(tgmB.get_ptable()))
+            print(" len(tg.teamB.players)=",len(tg.teamB.players))            
+        elif currentTable == 'teamB':
+            print("\n§§§ addPlayer in teamB §§§")
+            print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+            print(" len(tg.teamA.players)=",len(tg.teamA.players))        
+            print(" len(tgmB.get_ptable())=",len(tgmB.get_ptable()))
+            print(" len(tg.teamB.players)=",len(tg.teamB.players))
+            tgmB.insertRows(0,1)
+            print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+            print(" len(tg.teamA.players)=",len(tg.teamA.players))        
+            print(" len(tgmB.get_ptable())=",len(tgmB.get_ptable()))
+            print(" len(tg.teamB.players)=",len(tg.teamB.players))
+        else:
+            showMessage('TeamA oder TeamB selektieren!')             
         self.refreshGUI()
 
+
     def callBerechneManschaften(self):
-        #TODO: Shift all to teamA ....
+        ''' Calculate best Teams
+        '''
+        
+        tg.teamA.shiftPlayersFromTeam(tg.teamB)
+        
         print("### callBerechneManschaften() ###")
         tg.berechneMannschaften()    
         print("########### TEAM A: ############")
         tg.teamA.print()
         print("########### TEAM B: ############")
         tg.teamB.print()
+        
         self.refreshGUI()    
-    
+  
+  
     def shiftPlayer(self):
         indexes = self.getSelectedPlayers()
         selectedPlayers = []
@@ -266,7 +322,7 @@ class calculateTeamWind:
             for i in selectedPlayers:
                 tg.teamA.addPlayer(tg.teamB.removeByIndex(i))
         else:
-            pass
+            showMessage('Erst Spieler selektieren!')
         
         self.refreshGUI()   
     
@@ -274,22 +330,22 @@ class calculateTeamWind:
         indexes = self.getSelectedPlayers()
         selectetPlayers = []
         
-        for index in(indexes[0]):
+        for index in indexes[0]:
             selectetPlayers.append(int(index.row()))
             
         #: set() liste of unique elements
         selectetPlayers = list(set(selectetPlayers))
         selectetPlayers.sort(reverse = True)
-            
-        if indexes[1] == 'A':
+        print("selectetPlayers",selectetPlayers)    
+        if indexes[1] == 'teamA':
             for i in selectetPlayers:
                 tg.teamA.removeByIndex(i)
             
-        elif indexes[1] == 'B':
+        elif indexes[1] == 'teamB':
             for i in selectetPlayers:
                 tg.teamB.removeByIndex(i)
         else:
-            pass
+            showMessage('Erst Spieler selektieren!')
         
         self.refreshGUI()
 
@@ -311,6 +367,20 @@ class calculateTeamWind:
         
     def refreshGUI(self):
         ''' method to refresh all displayed data '''
+        global tgmA 
+        tgmA = TeamGeneratorModel(tg.teamA.players)
+        calculatedTeamWindow.tableView_A.setModel(tgmA)
+        proxyA = PlayerFilterProxyModel(tgmA)
+        proxyA.setSourceModel(tgmA)
+        calculatedTeamWindow.tableView_A.setModel(proxyA)  
+        
+        global tgmB 
+        tgmB = TeamGeneratorModel(tg.teamB.players)        
+        calculatedTeamWindow.tableView_B.setModel(tgmB)
+        proxyB = PlayerFilterProxyModel(tgmB)
+        proxyB.setSourceModel(tgmB) 
+        calculatedTeamWindow.tableView_B.setModel(proxyB)
+ 
         calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
         calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
         calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
@@ -319,27 +389,14 @@ class calculateTeamWind:
         calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
         calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
         calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
-        
-        tgmA = TeamGeneratorModel(tg.teamA.players)
-        tgmB = TeamGeneratorModel(tg.teamB.players)
-        calculatedTeamWindow.tableView_A.setModel(tgmA)
-        calculatedTeamWindow.tableView_B.setModel(tgmB)
-           
-        
-        proxyA = PlayerFilterProxyModel(tgmA)
-        proxyA.setSourceModel(tgmA)
-        calculatedTeamWindow.tableView_A.setModel(proxyA)  
-        
-        proxyB = PlayerFilterProxyModel(tgmB)
-        proxyB.setSourceModel(tgmB) 
-        calculatedTeamWindow.tableView_B.setModel(proxyB)
+             
         
 #==============================================================================    
 class playerSelectWind:
     
     def __init__(self):
         playerSelectWindow.add_Btn.clicked.connect(lambda: self.playerSelectWindowAdd())
-        playerSelectWindow.remove_Btn.clicked.connect(lambda: self.playerSelectWindowRemove())
+        playerSelectWindow.remove_Btn.clicked.connect(lambda: self.removeFromTable())
         playerSelectWindow.jaNein_Btn.clicked.connect(lambda: self.shiftPlayer())
         playerSelectWindow.weiter_Btn.clicked.connect(lambda: self.gotoNextWindow())
         playerSelectWindow.actionOpen.triggered.connect(lambda: self.openDia())
@@ -370,19 +427,24 @@ class playerSelectWind:
         self.refreshGUI()        
     
     def gotoNextWindow(self):
-        #TODO: ggggg
-        playerSelectWindow.close()
-       # waitingCalculation.show()
         print("gotoNextWindow1")
-        waitingCalculation.textBrowser.setText("Hallo")
-        waitingCalculation.show()
+        
+        playerProTeam = len(tg.teamA.players)
+        if (playerProTeam > 1):        
+            print("playerProTeam =", playerProTeam)
+            if playerProTeam % 2 != 0:          
+                playerProTeam = playerProTeam + 1
                 
-        #self.callBerechneManschaften()
-        print("gotoNextWindow2")
-        calculatedTeamWindow.show()
-        ctwin.refreshGUI()
-        #waitingCalculation.close()
-
+            message = str('Es gibt ' +
+                        str(int( tg.binomial(playerProTeam, int(playerProTeam*0.5)))) +
+                        ' verschiedene Kombinationen. Es kann also dauern ...')
+            waitingCalculation.textBrowser.setText(message)
+            waitingCalculation.show()
+        else:
+            showMessage('Bitte erst ein paar Spieler wählen!')
+    
+    
+                    
     def getSelectedPlayers(self):
         ''' Get the list currently selected indexes + table name
         
@@ -391,8 +453,8 @@ class playerSelectWind:
         '''
         print("getSelectedPlayers")    
         
-        selModelF = playerSelectWindow.fullView.selectionModel()
-        selModelA = playerSelectWindow.aView.selectionModel()
+        selModelF = playerSelectWindow.tableView_full.selectionModel()
+        selModelA = playerSelectWindow.tableView_A.selectionModel()
         
         
         indexes = selModelF.selectedIndexes()
@@ -420,7 +482,7 @@ class playerSelectWind:
         
         selectedPlayers = list(set(selectedPlayers))
         selectedPlayers.sort(reverse = True)
-            
+        
         if indexes[1] == 'fullTeam':
             for i in selectedPlayers:
                 tg.teamA.addPlayer(tg.fullTeam.removeByIndex(i))
@@ -429,55 +491,110 @@ class playerSelectWind:
             for i in selectedPlayers:
                 tg.fullTeam.addPlayer(tg.teamA.removeByIndex(i))
         else:
-            pass
+            showMessage('Erst Spieler selektieren!')
         
         self.refreshGUI()  
 
      
     def playerSelectWindowAdd(self):
+        print("\n$$$$ playerSelectWindowAdd $$$$")
+        print(" len(tgmF.get_ptable())=",len(tgmF.get_ptable()))
+        print(" len(tg.fullTeam.players)=",len(tg.fullTeam.players))
+        print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+        print(" len(tg.teamA.players)=",len(tg.teamA.players))
         tgmF.insertRows(0,1)
+        print(" len(tgmF.get_ptable())=",len(tgmF.get_ptable()))
+        print(" len(tg.fullTeam.players)=",len(tg.fullTeam.players))
+        print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+        print(" len(tg.teamA.players)=",len(tg.teamA.players))
+        print("$$$$ playerSelectWindowAdd $$$$")
         self.refreshGUI()
-        
-    def playerSelectWindowRemove(self):
-        selModelF = playerSelectWindow.fullView.selectionModel()
-        selModelA = playerSelectWindow.aView.selectionModel()
-        
-        indexes = selModelA.selectedIndexes()
-        if (indexes != [] ):
-            indexes = selModelA.selectedIndexes()
-            for index in reversed(indexes):
-                tg.teamA.removeByIndex(index.row())
+        print("$$$$ playerSelectWindowAdd After GUI refresh $$$$")
+        print(" len(tgmF.get_ptable())=",len(tgmF.get_ptable()))
+        print(" len(tg.fullTeam.players)=",len(tg.fullTeam.players))
+        print(" len(tgmA.get_ptable())=",len(tgmA.get_ptable()))
+        print(" len(tg.teamA.players)=",len(tg.teamA.players))
     
-        else:
-            indexes = selModelF.selectedIndexes()
-            if (indexes != [] ):
-                indexes = selModelF.selectedIndexes()
-                for index in reversed(indexes):
-                    tg.fullTeam.removeByIndex(index.row())
-        self.refreshGUI()
-
-     
-    def refreshGUI(self):
-        tgmA = TeamGeneratorModel(tg.teamA.players)
-        tgmF = TeamGeneratorModel(tg.fullTeam.players)
+    def removeFromTable(self):
+        indexes = self.getSelectedPlayers()
+        selectetPlayers = []
         
-        proxyA = PlayerFilterProxyModel(tgmA)
-        proxyA.setSourceModel(tgmA)
+        for index in indexes[0]:
+            selectetPlayers.append(int(index.row()))
+            
+        #: set() liste of unique elements
+        selectetPlayers = list(set(selectetPlayers))
+        selectetPlayers.sort(reverse = True)
+        print("selectetPlayers",selectetPlayers)    
+        if indexes[1] == 'fullTeam':
+            for i in selectetPlayers:
+                tg.fullTeam.removeByIndex(i)
+            
+        elif indexes[1] == 'teamA':
+            for i in selectetPlayers:
+                tg.teamA.removeByIndex(i)
+        else:
+            showMessage('Erst Spieler selektieren!')
+        
+        self.refreshGUI()
+      
+    def refreshGUI(self):
+        #: tableView_full is connected with fullTeam
+        global tgmF
+        tgmF = TeamGeneratorModel(tg.fullTeam.players)
+        playerSelectWindow.tableView_full.setModel(tgmF)
         proxyF = PlayerFilterProxyModel(tgmF)
         proxyF.setSourceModel(tgmF)
+        playerSelectWindow.tableView_full.setModel(proxyF)
         
-        playerSelectWindow.fullView.setModel(proxyF)
-        playerSelectWindow.aView.setModel(proxyA)
-            
+        #: tableView_A is connected with teamA
+        global tgmA        
+        tgmA = TeamGeneratorModel(tg.teamA.players)
+        playerSelectWindow.tableView_A.setModel(tgmA)
+        proxyA = PlayerFilterProxyModel(tgmA)
+        proxyA.setSourceModel(tgmA)
+        playerSelectWindow.tableView_A.setModel(proxyA)
+
 
 #===================================================================================================
 class waitingCalculationWind:
     def __init__(self):
-        waitingCalculation.textBrowser.setText("Hallo")
-        pass
+        waitingCalculation.calculateButton.clicked.connect(lambda: self.calculate())
+        waitingCalculation.cancelButton.clicked.connect(lambda: self.cancel())
+    
+    def calculate(self):
+        print("### callBerechneManschaften() ###")
+        tg.berechneMannschaften()    
+        print("########### TEAM A: ############")
+        tg.teamA.print()
+        print("########### TEAM B: ############")
+        tg.teamB.print()
+        playerSelectWindow.close()
+        ctwin.refreshGUI()
+        calculatedTeamWindow.show()
+        waitingCalculation.close()        
+   
+    def cancel(self):
+        waitingCalculation.close()        
+        
+
 #===================================================================================================
+def showMessage(message = ""):
+    ''' Pop-up of a simple message box
     
-    
+    :params message: Text to display
+    :message type: str
+    :returns: -
+    '''
+    qwid = QtGui.QWidget()
+    qmb  = QtGui.QMessageBox(qwid)
+    qmb.setText(message)
+    qmb.setWindowTitle('Team Generator Message')
+    qmb.setDefaultButton(QtGui.QMessageBox.Ok) 
+    qmb.show()
+    ret = qmb.exec_()
+    print(ret)
+#===================================================================================================        
     
 if __name__ == '__main__':
     print('----- START of TeamGenerator_GUI -----')
@@ -499,8 +616,8 @@ if __name__ == '__main__':
     
     ##########################################################################
     #: Data[tg.teamA.players] ---> DataModel[tgmA] 
-    tgmF = TeamGeneratorModel(tg.fullTeam.players)
-    
+    tgmF = TeamGeneratorModel(tg.fullTeam.players) # All players empty !
+
     tgmA = TeamGeneratorModel(tg.teamA.players)#[[tg.fullTeam.players.name], [tg.fullTeam.players.attackpoints], [tg.fullTeam.players.defencepoints]] ) #     ['1', '2', '3'])
     tgmB = TeamGeneratorModel(tg.teamB.players)
     

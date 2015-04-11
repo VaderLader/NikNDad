@@ -32,11 +32,15 @@ class TeamGenerator:
         res=1
         for i in range(1,k+1):
             res = (res*(n-i+1))/i
+        print("binomial(",n,",",k,")=", res )       
         return res
             
          
     def berechneMannschaften(self):
-        ''' Method to calculate and select two teams which are most equal '''
+        ''' Method to calculate and select two teams which are most equal.
+            At the beginning all players have to be in teamA.
+            After the calculation some players are in teamB also.
+        '''
         print ("In berechneMannschaften()")
         if len(self.teamA.players)%2 != 0:
             self.teamA.addPlayer(Player.Player({'name': 'NullPlayer',
@@ -55,8 +59,7 @@ class TeamGenerator:
                                         
         lTeamA = list(combos)  
         print("Anzahl der verschiedenen Teams = ", len(lTeamA))
-        print("binomial(",n,",",k,")=", self.binomial(n,k) )
-        #print("Verschiedene Teams lTeamA =",lTeamA)
+        self.binomial(n,k) #print("Verschiedene Teams lTeamA =",lTeamA)
         
         # Erzeuge das jeweils passenden Team B
         lTeamB = []
@@ -133,8 +136,8 @@ class TeamGenerator:
                             print ('pop')
                 
                 
-        self.teamA.print()
-        self.teamB.print()          
+        print(self.teamA.print())
+        print(self.teamB.print())          
         print("End of berechneMannschaften()")
 #==============================================================================
     
@@ -191,11 +194,11 @@ class TeamGenerator:
         s = str(location + filename)         
         f = open(s,"r")
         self.__dict__[teamName] = myjson.OrderedDecoder().decode(f.read())
-        print('self.__dict__[teamName]= ',self.__dict__[teamName].print())
+        #print('self.__dict__[teamName]= ',self.__dict__[teamName].print())
         
-        print('-------- loadTeam: self.__dict__[',teamName,'].print()\n',
-              self.__dict__[teamName].print())
-        print('-------- loadTeam: self.fullTeam.print()',self.fullTeam.print(),'\n')
+        #print('-------- loadTeam: self.__dict__[',teamName,'].print()\n',
+        self.__dict__[teamName].print()
+        #print('-------- loadTeam: self.fullTeam.print()',self.fullTeam.print(),'\n')
               
         
     def loadTeams(self, location):    
