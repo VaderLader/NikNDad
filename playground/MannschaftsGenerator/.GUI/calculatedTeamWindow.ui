@@ -370,6 +370,7 @@
     </property>
     <addaction name="actionSpeichern"/>
     <addaction name="actionSpeichern_unter"/>
+    <addaction name="actionPrint_to_txt"/>
    </widget>
    <addaction name="menuDatei"/>
   </widget>
@@ -386,6 +387,11 @@
   <action name="actionSpeichern_unter">
    <property name="text">
     <string>Speichern unter</string>
+   </property>
+  </action>
+  <action name="actionPrint_to_txt">
+   <property name="text">
+    <string>Print to *.txt</string>
    </property>
   </action>
  </widget>

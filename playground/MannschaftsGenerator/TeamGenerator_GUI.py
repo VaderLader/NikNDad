@@ -218,6 +218,7 @@ class welcomeWind:
 
 #===================================================================================================
 class calculateTeamWind:
+    
     def __init__(self):
         calculatedTeamWindow.pushButton_2.clicked.connect(lambda: self.addPlayer())
         calculatedTeamWindow.pushButton_1.clicked.connect(lambda: self.callBerechneManschaften())
@@ -225,7 +226,24 @@ class calculateTeamWind:
         calculatedTeamWindow.pushButton_3.clicked.connect(lambda: self.removeFromTable())
         calculatedTeamWindow.actionSpeichern.triggered.connect(lambda: self.save())
         calculatedTeamWindow.actionSpeichern_unter.triggered.connect(lambda: self.saveAsDia())
+        calculatedTeamWindow.actionPrint_to_txt.triggered.connect(lambda: self.printTxt())
         self.refreshGUI()
+        
+    def printTxt(self):
+        print('print to txt')
+        filename = QtGui.QFileDialog.getSaveFileName(QtGui.QWidget(), 'print to *txt','./Result/','*.txt')
+        file = open(filename, "w")
+        print(filename)
+
+        file.write("Nach langem rechnen haben wir die besten Manschaften zusammengestellt:\n\n")
+
+        file.write(str(tg.teamA.print()+'\n\n'))
+        file.write(str(tg.teamB.print()+'\n\n'))
+        
+        file.write('Viel Spaß beim kicken und bis zum nächsten Mal\nDein Teamgenerator')
+        print('close')
+        file.close()
+        print('closed')
     
 
     def getSelectedPlayers(self):
