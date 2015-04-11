@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Manschafts Generator</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Fussball.jpg</normaloff>Fussball.jpg</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
