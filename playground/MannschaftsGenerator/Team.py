@@ -114,7 +114,7 @@ class Team:
         return self.teampoints
 
     def print(self):
-        Mitglieder = 'Team ' + self.name + ' hat'+ str(len(self.players)) + ' Spieler:\n'
+        Mitglieder = 'Team ' + self.name + ' hat '+ str(len(self.players)) + ' Spieler:\n'
         for index, element in enumerate(self.players):
             Mitglieder += ('{} {}'.format(index, element.name) +'\n')
         Mitglieder += 'Die Angriffstärke liegt bei: '+ str(self.attackpoints) + '\n'
