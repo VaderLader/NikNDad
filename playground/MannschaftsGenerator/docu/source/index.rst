@@ -9,12 +9,12 @@ Willkomen zur Mannschafts-Generator-Dokumentation
 
 
 Contents:
-
+=========
 .. toctree::
    :maxdepth: 2
    
    modules
-	
+   ...	
 
 
 

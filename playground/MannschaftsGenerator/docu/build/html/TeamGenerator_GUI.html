@@ -31,7 +31,7 @@
 
   
     <link rel="top" title="Mannschafts Generator 0.9.1 documentation" href="index.html"/>
-        <link rel="up" title="." href="modules.html"/>
+        <link rel="up" title="&lt;no title&gt;" href="modules.html"/>
         <link rel="next" title="json_object_en_n_decoder" href="json_object_en_n_decoder.html"/>
         <link rel="prev" title="TeamGenerator module" href="TeamGenerator.html"/> 
 
@@ -65,15 +65,12 @@
           
           
               <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">.</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Player.html">Player module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Player.html#player-class">Player Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Team.html">Team module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">TeamGenerator_GUI module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="Player.html">Player module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Player.html#player-class">Player Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Team.html">Team module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">TeamGenerator_GUI module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
 </ul>
 
           
@@ -98,7 +95,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-          <li><a href="modules.html">.</a> &raquo;</li>
+          <li><a href="modules.html">&lt;no title&gt;</a> &raquo;</li>
       
     <li>TeamGenerator_GUI module</li>
       <li class="wy-breadcrumbs-aside">
@@ -114,11 +111,12 @@
   <div class="section" id="module-TeamGenerator_GUI">
 <span id="teamgenerator-gui-module"></span><h1>TeamGenerator_GUI module<a class="headerlink" href="#module-TeamGenerator_GUI" title="Permalink to this headline">¶</a></h1>
 <p>Created on Sat Feb 28 16:43:55 2015</p>
-<p>&#64;author: pi</p>
+<p>&#64;author: SohnyBohny</p>
 <dl class="class">
 <dt id="TeamGenerator_GUI.PlayerFilterProxyModel">
 <em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">PlayerFilterProxyModel</code><a class="reference internal" href="_modules/TeamGenerator_GUI.html#PlayerFilterProxyModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.PlayerFilterProxyModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QSortFilterProxyModel</span></code></p>
+<p>Just inherited from the base class as it is</p>
 </dd></dl>
 
 <dl class="class">
@@ -128,42 +126,120 @@
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.columnCount">
 <code class="descname">columnCount</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.columnCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.columnCount" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Fixed number of columns = 5</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.data">
 <code class="descname">data</code><span class="sig-paren">(</span><em>index</em>, <em>role</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Return data from __ptable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>index</strong> (<em>QModelIndex</em>) &#8211; index</li>
+<li><strong>role</strong> (<em>QtCore.Qt.DisplayRole</em>) &#8211; role</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Table Cell Value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str/int/float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.flags">
 <code class="descname">flags</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.flags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controls if item is enabled; editable and selectable</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.get_ptable">
+<code class="descname">get_ptable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.get_ptable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.get_ptable" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.headerData">
 <code class="descname">headerData</code><span class="sig-paren">(</span><em>section</em>, <em>orientation</em>, <em>role</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.headerData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.headerData" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set fixed column header</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.insertRows">
-<code class="descname">insertRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x0000000005842CF8&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.insertRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.insertRows" title="Permalink to this definition">¶</a></dt>
+<code class="descname">insertRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.insertRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.insertRows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert rows at position
+:param position: Number of the first row, which is inserted
+:type position: int 
+:param rows: Number of rows to be inserted
+:type rows: int 
+:returns: True
+:rtype: bool</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.TeamGeneratorModel.ptableUpdate">
+<code class="descname">ptableUpdate</code><span class="sig-paren">(</span><em>ptable=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.ptableUpdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.ptableUpdate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.removeRows">
-<code class="descname">removeRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x0000000005842D68&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.removeRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.removeRows" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">removeRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.removeRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.removeRows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes rows from the table</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>position</strong> &#8211; Number of the first row, which is removed</li>
+<li><strong>rows</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Number of rows to be removed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.rowCount">
 <code class="descname">rowCount</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.rowCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.rowCount" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Number of rows in the table</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.setData">
 <code class="descname">setData</code><span class="sig-paren">(</span><em>index</em>, <em>value</em>, <em>role=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.setData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.setData" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>This method is always called if data has to be displayed in the GUI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>index</strong> &#8211; index</li>
+<li><strong>value</strong> &#8211; value of the cell</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True/False</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)">bool</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.sort">
@@ -171,87 +247,193 @@
 <dd><p>Sort table by given column number.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="TeamGenerator_GUI.calculateTeamWind">
+<em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">calculateTeamWind</code><span class="sig-paren">(</span><em>tgModelA</em>, <em>tgModelB</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <dl class="method">
-<dt id="TeamGenerator_GUI.TeamGeneratorModel.sortColumn">
-<code class="descname">sortColumn</code><span class="sig-paren">(</span><em>section</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.sortColumn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.sortColumn" title="Permalink to this definition">¶</a></dt>
+<dt id="TeamGenerator_GUI.calculateTeamWind.addPlayer">
+<code class="descname">addPlayer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.addPlayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.addPlayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dependent on the focus one row on Table A or Table B is added</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.callBerechneManschaften">
+<code class="descname">callBerechneManschaften</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.callBerechneManschaften"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.callBerechneManschaften" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate best Teams</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.getSelectedPlayers">
+<code class="descname">getSelectedPlayers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.getSelectedPlayers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.getSelectedPlayers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the list currently selected indexes + table name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[ [List of selected players], &#8216;TableName&#8217; ]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[ [], str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.printTxt">
+<code class="descname">printTxt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.printTxt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.printTxt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.refreshGUI">
+<code class="descname">refreshGUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.refreshGUI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.refreshGUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>method to refresh all displayed data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.removeFromTable">
+<code class="descname">removeFromTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.removeFromTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.removeFromTable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.save">
+<code class="descname">save</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.saveAsDia">
+<code class="descname">saveAsDia</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.saveAsDia"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.saveAsDia" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save both Team with save dialog window</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.shiftPlayer">
+<code class="descname">shiftPlayer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.shiftPlayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.shiftPlayer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.signalReceived">
+<code class="descname">signalReceived</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.signalReceived"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.signalReceived" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.calculateTeamWind.updateTextBoxes">
+<code class="descname">updateTextBoxes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.updateTextBoxes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.updateTextBoxes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="TeamGenerator_GUI.playerSelectWind">
+<em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">playerSelectWind</code><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="TeamGenerator_GUI.playerSelectWind.callBerechneManschaften">
+<code class="descname">callBerechneManschaften</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.callBerechneManschaften"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.callBerechneManschaften" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.playerSelectWind.getSelectedPlayers">
+<code class="descname">getSelectedPlayers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.getSelectedPlayers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.getSelectedPlayers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the list currently selected indexes + table name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">[ [List of selected players], &#8216;TableName&#8217; ]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">[ [], str]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.playerSelectWind.gotoNextWindow">
+<code class="descname">gotoNextWindow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.gotoNextWindow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.gotoNextWindow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.playerSelectWind.openDia">
+<code class="descname">openDia</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.openDia"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.openDia" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.playerSelectWind.playerSelectWindowAdd">
+<code class="descname">playerSelectWindowAdd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.playerSelectWindowAdd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.playerSelectWindowAdd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.playerSelectWind.refreshGUI">
+<code class="descname">refreshGUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.refreshGUI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.refreshGUI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.playerSelectWind.removeFromTable">
+<code class="descname">removeFromTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.removeFromTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.removeFromTable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.playerSelectWind.saveDia">
+<code class="descname">saveDia</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.saveDia"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.saveDia" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator_GUI.playerSelectWind.shiftPlayer">
+<code class="descname">shiftPlayer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.shiftPlayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.shiftPlayer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="function">
-<dt id="TeamGenerator_GUI.callBerechneManschaften">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">callBerechneManschaften</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#callBerechneManschaften"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.callBerechneManschaften" title="Permalink to this definition">¶</a></dt>
+<dt id="TeamGenerator_GUI.showMessage">
+<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">showMessage</code><span class="sig-paren">(</span><em>message=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#showMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.showMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pop-up of a simple message box</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Params message:</th><td class="field-body">Text to display</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Message type:</th><td class="field-body">str</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="TeamGenerator_GUI.waitingCalculationWind">
+<em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">waitingCalculationWind</code><a class="reference internal" href="_modules/TeamGenerator_GUI.html#waitingCalculationWind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.waitingCalculationWind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="TeamGenerator_GUI.waitingCalculationWind.calculate">
+<code class="descname">calculate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#waitingCalculationWind.calculate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.waitingCalculationWind.calculate" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="TeamGenerator_GUI.getCurrentPlayer">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">getCurrentPlayer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#getCurrentPlayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.getCurrentPlayer" title="Permalink to this definition">¶</a></dt>
+<dl class="method">
+<dt id="TeamGenerator_GUI.waitingCalculationWind.cancel">
+<code class="descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#waitingCalculationWind.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.waitingCalculationWind.cancel" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="TeamGenerator_GUI.headerClick">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">headerClick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#headerClick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.headerClick" title="Permalink to this definition">¶</a></dt>
+</dd></dl>
+
+<dl class="class">
+<dt id="TeamGenerator_GUI.welcomeWind">
+<em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">welcomeWind</code><a class="reference internal" href="_modules/TeamGenerator_GUI.html#welcomeWind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.welcomeWind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="TeamGenerator_GUI.welcomeWind.welcomeDone">
+<code class="descname">welcomeDone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#welcomeWind.welcomeDone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.welcomeWind.welcomeDone" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
-<dt id="TeamGenerator_GUI.insertClicked">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">insertClicked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#insertClicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.insertClicked" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.oeffnen">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">oeffnen</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#oeffnen"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.oeffnen" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.refreshGUI">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">refreshGUI</code><span class="sig-paren">(</span><em>seite=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#refreshGUI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.refreshGUI" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.removeFromTable">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">removeFromTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#removeFromTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.removeFromTable" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.speichern">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">speichern</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#speichern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.speichern" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.spieltMit">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">spieltMit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#spieltMit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.spieltMit" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.switch">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">switch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#switch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.switch" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.tableClick">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">tableClick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#tableClick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.tableClick" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.weiter">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">weiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#weiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.weiter" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.werSpAdd">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">werSpAdd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#werSpAdd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.werSpAdd" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.werSpRemove">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">werSpRemove</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#werSpRemove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.werSpRemove" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="TeamGenerator_GUI.willWeiter">
-<code class="descclassname">TeamGenerator_GUI.</code><code class="descname">willWeiter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#willWeiter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.willWeiter" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+</dd></dl>
 
 </div>
 
