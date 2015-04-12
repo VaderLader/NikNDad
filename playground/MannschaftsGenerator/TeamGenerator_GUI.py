@@ -2,7 +2,7 @@
 """
 Created on Sat Feb 28 16:43:55 2015
 
-@author: pi
+@author: SohnyBohny
 """
 
 import sys
@@ -14,7 +14,7 @@ import PyQt4.uic as uic
 
 import TeamGenerator
 
-#==============================================================================
+#===================================================================================================
 class TeamGeneratorModel(QtCore.QAbstractTableModel):
 
     def __init__(self, ptable = [], parent = None):
@@ -24,6 +24,9 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         
     def get_ptable(self):
         return self.__ptable
+
+    def ptableUpdate(self, ptable = []):
+        self.__ptable = ptable
         
     def headerData(self, section, orientation, role):
         ''' Set fixed column header'''
@@ -110,18 +113,20 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 self.__ptable[row].keeperpoints = int(value) 
             
             self.__ptable[row].calcPlayerpoints()
-            calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-            calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
-            calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
-            calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))
-            calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
-            calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
-            calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
-            calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
+#            calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+#            calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
+#            calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
+#            calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))
+#            calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+#            calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
+#            calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
+#            calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
+            print('TeamGeneratorModel.setData() going to emit the signal')            
+            self.dataChanged.emit(index, index)
             return True
         
-        calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-        calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+#        calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+#        calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
         return False
         
     def insertRows(self, position, rows, parent = QtCore.QModelIndex()):
@@ -177,14 +182,13 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
              self.arraydata.reverse()
          self.emit(QtCore.SIGNAL("layoutChanged()"))
 
-#==============================================================================
-
-#==============================================================================
+#===================================================================================================
+#===================================================================================================
 class PlayerFilterProxyModel(QtGui.QSortFilterProxyModel):
     ''' Just inherited from the base class as it is
     '''
     pass
-#==============================================================================       
+#===================================================================================================       
 
 class welcomeWind:
     def __init__(self):
@@ -218,8 +222,14 @@ class welcomeWind:
 
 #===================================================================================================
 class calculateTeamWind:
-    
-    def __init__(self):
+    def __init__(self, tgModelA, tgModelB):
+        ''' The two model parameters are needed to connect to the signals from these models
+        
+        '''
+        self.tgModelA = tgModelA
+        self.tgModelB = tgModelB
+        self.tgModelA.dataChanged.connect(lambda: self.signalReceived())
+        self.tgModelB.dataChanged.connect(lambda: self.signalReceived())
         calculatedTeamWindow.pushButton_2.clicked.connect(lambda: self.addPlayer())
         calculatedTeamWindow.pushButton_1.clicked.connect(lambda: self.callBerechneManschaften())
         calculatedTeamWindow.pushButton.clicked.connect(lambda: self.shiftPlayer())
@@ -228,6 +238,10 @@ class calculateTeamWind:
         calculatedTeamWindow.actionSpeichern_unter.triggered.connect(lambda: self.saveAsDia())
         calculatedTeamWindow.actionPrint_to_txt.triggered.connect(lambda: self.printTxt())
         self.refreshGUI()
+    
+    def signalReceived(self):
+        print("calculateTeamWind.signalReceived(): received signal")
+        self.updateTextBoxes()
         
     def printTxt(self):
         print('print to txt')
@@ -244,8 +258,7 @@ class calculateTeamWind:
         print('close')
         file.close()
         print('closed')
-    
-
+        
     def getSelectedPlayers(self):
         ''' Get the list currently selected indexes + table name
         
@@ -382,34 +395,39 @@ class calculateTeamWind:
         tg.dumpTeam('teamB','', filename)
         self.refreshGUI()        
         
-        
+    def updateTextBoxes(self):
+        #: TextBoxes A
+        calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
+        calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
+        calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
+        calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))
+        #: TextBoxes B
+        calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+        calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
+        calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
+        calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
+    
     def refreshGUI(self):
         ''' method to refresh all displayed data '''
-        global tgmA 
-        tgmA = TeamGeneratorModel(tg.teamA.players)
+#        global tgmA 
+#        tgmA = TeamGeneratorModel(tg.teamA.players)
+        tgmA.ptableUpdate(tg.teamA.players)
         calculatedTeamWindow.tableView_A.setModel(tgmA)
         proxyA = PlayerFilterProxyModel(tgmA)
         proxyA.setSourceModel(tgmA)
         calculatedTeamWindow.tableView_A.setModel(proxyA)  
         
-        global tgmB 
-        tgmB = TeamGeneratorModel(tg.teamB.players)        
+#        global tgmB 
+#        tgmB = TeamGeneratorModel(tg.teamB.players)
+        tgmB.ptableUpdate(tg.teamB.players)        
         calculatedTeamWindow.tableView_B.setModel(tgmB)
         proxyB = PlayerFilterProxyModel(tgmB)
         proxyB.setSourceModel(tgmB) 
         calculatedTeamWindow.tableView_B.setModel(proxyB)
  
-        calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-        calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
-        calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
-        calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))
-        calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
-        calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
-        calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
-        calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
-             
+        self.updateTextBoxes()
         
-#==============================================================================    
+#===================================================================================================   
 class playerSelectWind:
     
     def __init__(self):
@@ -558,16 +576,18 @@ class playerSelectWind:
       
     def refreshGUI(self):
         #: tableView_full is connected with fullTeam
-        global tgmF
-        tgmF = TeamGeneratorModel(tg.fullTeam.players)
+#        global tgmF
+#        tgmF = TeamGeneratorModel(tg.fullTeam.players)
+        tgmF.ptableUpdate(tg.fullTeam.players)
         playerSelectWindow.tableView_full.setModel(tgmF)
         proxyF = PlayerFilterProxyModel(tgmF)
         proxyF.setSourceModel(tgmF)
         playerSelectWindow.tableView_full.setModel(proxyF)
         
         #: tableView_A is connected with teamA
-        global tgmA        
-        tgmA = TeamGeneratorModel(tg.teamA.players)
+#        global tgmA        
+#        tgmA = TeamGeneratorModel(tg.teamA.players)
+        tgmA.ptableUpdate(tg.teamA.players)
         playerSelectWindow.tableView_A.setModel(tgmA)
         proxyA = PlayerFilterProxyModel(tgmA)
         proxyA.setSourceModel(tgmA)
@@ -649,7 +669,7 @@ if __name__ == '__main__':
     waitingCalculation =    uic.loadUi('./.GUI/waitingCalculation.ui')
 
     wcwin = welcomeWind()
-    ctwin = calculateTeamWind()
+    ctwin = calculateTeamWind(tgmA, tgmB)
     pswin = playerSelectWind()
     waitwin = waitingCalculationWind() 
     
