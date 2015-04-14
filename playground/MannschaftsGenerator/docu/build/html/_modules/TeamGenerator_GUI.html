@@ -64,8 +64,9 @@
           
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Player.html">Player module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Player.html#player-class">Player Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Player.html#module-Player">Class Player</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Team.html">Team module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Team.html#module-Team">Class Team</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../TeamGenerator.html">TeamGenerator module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../TeamGenerator_GUI.html">TeamGenerator_GUI module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
@@ -136,7 +137,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span> <span class="o">=</span> <span class="n">ptable</span>
         </div>
 <div class="viewcode-block" id="TeamGeneratorModel.headerData"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.headerData">[docs]</a>    <span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Set fixed column header&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39; Defines the fixed column header</span>
+<span class="sd">        </span>
+<span class="sd">        :param section:</span>
+<span class="sd">        :type section: </span>
+<span class="sd">        :param orientation:</span>
+<span class="sd">        :type orientation: QtCore.Qt</span>
+<span class="sd">        :returns: Header - this is th title of each column</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
         <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">:</span>
             
             <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">:</span>
@@ -332,6 +342,10 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tgModelA</span><span class="p">,</span> <span class="n">tgModelB</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; The two model parameters are needed to connect to the signals from these models</span>
 <span class="sd">        </span>
+<span class="sd">        :param tgModelA: Model representing the one Team</span>
+<span class="sd">        :type tgModelA: TeamGeneratorModel</span>
+<span class="sd">        :param tgModelB: Model representing the one Team</span>
+<span class="sd">        :type tgModelB: TeamGeneratorModel</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tgModelA</span> <span class="o">=</span> <span class="n">tgModelA</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tgModelB</span> <span class="o">=</span> <span class="n">tgModelB</span>
@@ -767,14 +781,16 @@
     <span class="n">tgmB</span> <span class="o">=</span> <span class="n">TeamGeneratorModel</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
     
     
-    <span class="c">#:</span>
+    <span class="c">#: Needed to start Qt</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
     
+    <span class="c">#: Now loading the Qt Designer &quot;.ui&quot;-files and instanciating the user interfaces:</span>
     <span class="n">welcomeWindow</span> <span class="o">=</span>         <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/welcomeWindow.ui&#39;</span><span class="p">)</span>
     <span class="n">playerSelectWindow</span> <span class="o">=</span>    <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/playerSelectWindow.ui&#39;</span><span class="p">)</span>     
     <span class="n">calculatedTeamWindow</span> <span class="o">=</span>  <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/calculatedTeamWindow.ui&#39;</span><span class="p">)</span>   
     <span class="n">waitingCalculation</span> <span class="o">=</span>    <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/waitingCalculation.ui&#39;</span><span class="p">)</span>
-
+    
+    <span class="c">#: To setup all the Qt models and Views of for each window one class is instanciated</span>
     <span class="n">wcwin</span> <span class="o">=</span> <span class="n">welcomeWind</span><span class="p">()</span>
     <span class="n">ctwin</span> <span class="o">=</span> <span class="n">calculateTeamWind</span><span class="p">(</span><span class="n">tgmA</span><span class="p">,</span> <span class="n">tgmB</span><span class="p">)</span>
     <span class="n">pswin</span> <span class="o">=</span> <span class="n">playerSelectWind</span><span class="p">()</span>

@@ -64,8 +64,9 @@
           
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Player.html">Player module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Player.html#player-class">Player Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Player.html#module-Player">Class Player</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Team.html">Team module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Team.html#module-Team">Class Team</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../TeamGenerator.html">TeamGenerator module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../TeamGenerator_GUI.html">TeamGenerator_GUI module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
@@ -132,12 +133,18 @@
         <span class="c"># Calculate all points of the team        </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">teampoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">()</span>
                 
-        <span class="bp">self</span><span class="o">.</span><span class="n">Mitglieder</span> <span class="o">=</span> <span class="s">&quot;Mitglieder&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Mitglieder</span> <span class="o">=</span> <span class="s">&quot;Mitglieder&quot;</span> <span class="c">#TODO: Wird nicht gebraucht</span>
         <span class="c">#self.teampoints = d[&#39;teampoints&#39;]</span>
 
 <div class="viewcode-block" id="Team.addPlayer"><a class="viewcode-back" href="../Team.html#Team.Team.addPlayer">[docs]</a>    <span class="k">def</span> <span class="nf">addPlayer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Add one player to the team</span>
+<span class="sd">        </span>
+<span class="sd">        :param p: Player to be added</span>
+<span class="sd">        :type p: Player</span>
+<span class="sd">        :returns: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Error:&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&#39;ist schon in diesem Team!&#39;</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Error: &#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&#39;ist schon in diesem Team!&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">()</span>
@@ -148,7 +155,7 @@
 <span class="sd">        :returns: The newly input player.</span>
 <span class="sd">        :rtype: Player.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        
+        <span class="c">#TODO: Delete or not?</span>
         <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&#39;Wie heißt der neue Spieler?</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
         <span class="n">angriff</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">&#39;Wie gut ist er im Angriff?</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">))</span>
         <span class="n">abwehr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">&#39;Wie gut ist er in der Abwehr?</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">))</span>
@@ -161,13 +168,12 @@
         <span class="k">return</span> <span class="n">p</span>
 
 </div>
-<div class="viewcode-block" id="Team.removeName"><a class="viewcode-back" href="../Team.html#Team.Team.removeName">[docs]</a>    <span class="k">def</span> <span class="nf">removeName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="Team.removeByName"><a class="viewcode-back" href="../Team.html#Team.Team.removeByName">[docs]</a>    <span class="k">def</span> <span class="nf">removeByName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Removes a Player by it&#39;s Name</span>
 
 <span class="sd">        :param name: Name</span>
 <span class="sd">        :type name: str </span>
-<span class="sd">        :returns: -</span>
-<span class="sd">        :rtype: -</span>
+<span class="sd">        :returns: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
     
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">):</span>
@@ -178,16 +184,22 @@
 <div class="viewcode-block" id="Team.removeByIndex"><a class="viewcode-back" href="../Team.html#Team.Team.removeByIndex">[docs]</a>    <span class="k">def</span> <span class="nf">removeByIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Removes a Player by it&#39;s index </span>
 
-<span class="sd">        :param index: index is the position in the Team&#39;s players list.</span>
-<span class="sd">        :type index: int. </span>
-<span class="sd">        :returns: The removed Player is returned.</span>
-<span class="sd">        :rtype: Player.</span>
+<span class="sd">        :param index: Position in the Team&#39;s players list.</span>
+<span class="sd">        :type index: int </span>
+<span class="sd">        :returns: The removed Player object.</span>
+<span class="sd">        :rtype: Player</span>
 <span class="sd">        &quot;&quot;&quot;</span>        
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">p</span> 
                 </div>
 <div class="viewcode-block" id="Team.removePlayer"><a class="viewcode-back" href="../Team.html#Team.Team.removePlayer">[docs]</a>    <span class="k">def</span> <span class="nf">removePlayer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Removes a specific player from the team  </span>
+
+<span class="sd">        :param p: Player to be removed</span>
+<span class="sd">        :type p: Player </span>
+<span class="sd">        :returns: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
@@ -199,15 +211,26 @@
         <span class="c">#self.players.pop( self.players.index(p) )</span>
         </div>
 <div class="viewcode-block" id="Team.removeAllPlayers"><a class="viewcode-back" href="../Team.html#Team.Team.removeAllPlayers">[docs]</a>    <span class="k">def</span> <span class="nf">removeAllPlayers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Removes all players of a team</span>
+<span class="sd">        </span>
+<span class="sd">        :param: None</span>
+<span class="sd">        :returns: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="p">[]</span>            
         <span class="bp">self</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">()</span>
             </div>
 <div class="viewcode-block" id="Team.calcTeampoints"><a class="viewcode-back" href="../Team.html#Team.Team.calcTeampoints">[docs]</a>    <span class="k">def</span> <span class="nf">calcTeampoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c">#: Calculate all points from scratch</span>
+        <span class="sd">&#39;&#39;&#39; Calculate all points of the team. The single points of the team members</span>
+<span class="sd">        are simply added. For the teampoints the single points are added with weight. </span>
+<span class="sd">                     </span>
+<span class="sd">        :param: None</span>
+<span class="sd">        :returns: teampoints</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">attackpoints</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keeperpoints</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">defencepoints</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">teampoints</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">teampoints</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">attackpoints</span> <span class="o">+=</span> <span class="n">p</span><span class="o">.</span><span class="n">attackpoints</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">keeperpoints</span> <span class="o">+=</span> <span class="n">p</span><span class="o">.</span><span class="n">keeperpoints</span>
@@ -221,6 +244,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">teampoints</span>
 </div>
 <div class="viewcode-block" id="Team.print"><a class="viewcode-back" href="../Team.html#Team.Team.print">[docs]</a>    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Provides information about the team and all it&#39;s players</span>
+<span class="sd">        </span>
+<span class="sd">        :returns: info</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">Mitglieder</span> <span class="o">=</span> <span class="s">&#39;Team &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">&#39; hat &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">))</span> <span class="o">+</span> <span class="s">&#39; Spieler:</span><span class="se">\n</span><span class="s">&#39;</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">):</span>
             <span class="n">Mitglieder</span> <span class="o">+=</span> <span class="p">(</span><span class="s">&#39;{} {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">element</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
@@ -232,9 +260,15 @@
         <span class="k">return</span> <span class="n">Mitglieder</span>
 </div>
 <div class="viewcode-block" id="Team.shiftPlayersFromTeam"><a class="viewcode-back" href="../Team.html#Team.Team.shiftPlayersFromTeam">[docs]</a>    <span class="k">def</span> <span class="nf">shiftPlayersFromTeam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">otherTeam</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Method to shift all players from otherTeam. The otherTeam has no players </span>
-<span class="sd">            afterwards &#39;&#39;&#39;</span>   
-        <span class="k">print</span><span class="p">(</span><span class="s">&#39;In shiftPlayersFromTeam&#39;</span><span class="p">,</span><span class="s">&#39;id(otherTeam)=&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">otherTeam</span><span class="p">),</span> <span class="s">&#39;otherTeam.name=&#39;</span><span class="p">,</span> <span class="n">otherTeam</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&#39; len=&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">otherTeam</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
+        <span class="sd">&#39;&#39;&#39; Method to shift all players from another team to the team.</span>
+<span class="sd">            As the result the other team has no players anymore.</span>
+<span class="sd">            </span>
+<span class="sd">        :param otherTeam: The team from which you want to shift the players</span>
+<span class="sd">        :type otherTeam: Team</span>
+<span class="sd">        :returns: None            </span>
+<span class="sd">        &#39;&#39;&#39;</span>   
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;In shiftPlayersFromTeam&#39;</span><span class="p">,</span><span class="s">&#39;id(otherTeam)=&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">otherTeam</span><span class="p">),</span> <span class="s">&#39;otherTeam.name=&#39;</span><span class="p">,</span>
+              <span class="n">otherTeam</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&#39; len=&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">otherTeam</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
         <span class="k">print</span><span class="p">(</span><span class="s">&#39;len(self.players)&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">players</span> <span class="o">+</span> <span class="n">otherTeam</span><span class="o">.</span><span class="n">players</span>    
         <span class="k">print</span><span class="p">(</span><span class="s">&#39;len(self.players)&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
@@ -242,24 +276,24 @@
         <span class="n">otherTeam</span><span class="o">.</span><span class="n">removeAllPlayers</span><span class="p">()</span> 
     </div>
 <div class="viewcode-block" id="Team.shiftNPlayersFromTeam"><a class="viewcode-back" href="../Team.html#Team.Team.shiftNPlayersFromTeam">[docs]</a>    <span class="k">def</span> <span class="nf">shiftNPlayersFromTeam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">otherTeam</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; Method to shift the first n players from otherTeam. The otherTeam has no players </span>
-<span class="sd">            afterwards &#39;&#39;&#39;</span>   
+        <span class="sd">&#39;&#39;&#39; Method to shift the first n players from anotherTeam to the team.</span>
+<span class="sd">           </span>
+<span class="sd">        :param otherTeam: The team from which you want to shift the players</span>
+<span class="sd">        :type otherTeam: Team</span>
+<span class="sd">        :param n: Numer of players to shift</span>
+<span class="sd">        :type n: int        </span>
+<span class="sd">        :returns: None            </span>
+<span class="sd">        &#39;&#39;&#39;</span> 
         <span class="k">print</span><span class="p">(</span><span class="s">&#39;In shiftNPlayersFromTeam&#39;</span><span class="p">,</span><span class="s">&#39;id(otherTeam)=&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">otherTeam</span><span class="p">),</span>
               <span class="s">&#39;otherTeam.name=&#39;</span><span class="p">,</span> <span class="n">otherTeam</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s">&#39; len=&#39;</span><span class="p">,</span>
               <span class="nb">len</span><span class="p">(</span><span class="n">otherTeam</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
         <span class="k">print</span><span class="p">(</span><span class="s">&#39;len(self.players)&#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
         
-        <span class="c">#for index, p in enumerate(otherTeam.players):</span>
-            
-        <span class="c">#    if index &lt; n :</span>
         <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">otherTeam</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
             <span class="k">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="n">n</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
-        <span class="c">#for index in range(0, n):</span>
-        <span class="c">#    otherTeam.removePlayer(otherTeam.players[index])</span>
                   
         <span class="k">print</span><span class="p">(</span><span class="s">&quot;+++&quot;</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;vvvv&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">()</span>
         <span class="n">otherTeam</span><span class="o">.</span><span class="n">calcTeampoints</span><span class="p">()</span>
         <span class="k">print</span><span class="p">(</span><span class="s">&#39;End of shiftNPlayersFromTeam&#39;</span><span class="p">)</span>

@@ -66,8 +66,9 @@
           
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Player.html">Player module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Player.html#player-class">Player Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Player.html#module-Player">Class Player</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Team module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-Team">Class Team</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html">TeamGenerator_GUI module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
@@ -108,8 +109,25 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="module-Team">
-<span id="team-module"></span><h1>Team module<a class="headerlink" href="#module-Team" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="team-module">
+<h1>Team module<a class="headerlink" href="#team-module" title="Permalink to this headline">¶</a></h1>
+<p>Eine Mannschaft (<code class="docutils literal"><span class="pre">Team</span></code>) besteht aus mehreren Spielern (<code class="docutils literal"><span class="pre">player</span></code>).</p>
+<p>Ein <strong>Team</strong> hat einen <em>Namen</em> und <em>Einzel-Spielstärke Punkte</em>:</p>
+<ul class="simple">
+<li>Angriffs Punkte <code class="docutils literal"><span class="pre">attackpoints</span></code></li>
+<li>Abwehr Punkte <code class="docutils literal"><span class="pre">defencepoints</span></code></li>
+<li>Torwart Punkte <code class="docutils literal"><span class="pre">keeperpoints</span></code></li>
+</ul>
+<p>Aus diesen Einzel Punkten werden die <em>Gesamtspielstärke Punkte</em> (<code class="docutils literal"><span class="pre">teampoints</span></code>) des Teams berechnet.</p>
+<p>Es gibt 3 besondere Teams:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">fullTeam</span></code>: Beinhaltet alles bekannten Spieler die mit ihrern Spilestärken bekannt sind</li>
+<li><code class="docutils literal"><span class="pre">teamA</span></code>: Vorgeschlagene Mannschaft A</li>
+<li><code class="docutils literal"><span class="pre">teamB</span></code>: Vorgeschlagene Mannschaft B</li>
+</ul>
+</div>
+<div class="section" id="module-Team">
+<span id="class-team"></span><h1>Class Team<a class="headerlink" href="#module-Team" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="Team.Team">
 <em class="property">class </em><code class="descclassname">Team.</code><code class="descname">Team</code><span class="sig-paren">(</span><em>d={'players': []</em>, <em>'name': 'Team name'}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team" title="Permalink to this definition">¶</a></dt>
@@ -122,12 +140,37 @@ Usage: Team({&#8216;name&#8217;: &#8216;Team name&#8217;,</p>
 <dl class="method">
 <dt id="Team.Team.addPlayer">
 <code class="descname">addPlayer</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team.addPlayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team.addPlayer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Add one player to the team</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<a class="reference internal" href="Player.html#module-Player" title="Player"><em>Player</em></a>) &#8211; Player to be added</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="Team.Team.calcTeampoints">
 <code class="descname">calcTeampoints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team.calcTeampoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team.calcTeampoints" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculate all points of the team. The single points of the team members
+are simply added. For the teampoints the single points are added with weight.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">teampoints</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="Team.Team.inputPlayer">
@@ -140,12 +183,34 @@ Usage: Team({&#8216;name&#8217;: &#8216;Team name&#8217;,</p>
 <dl class="method">
 <dt id="Team.Team.print">
 <code class="descname">print</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team.print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team.print" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Provides information about the team and all it&#8217;s players</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">info</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="Team.Team.removeAllPlayers">
 <code class="descname">removeAllPlayers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team.removeAllPlayers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team.removeAllPlayers" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Removes all players of a team</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="Team.Team.removeByIndex">
@@ -155,19 +220,19 @@ Usage: Team({&#8216;name&#8217;: &#8216;Team name&#8217;,</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<em>int.</em>) &#8211; index is the position in the Team&#8217;s players list.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>index</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Position in the Team&#8217;s players list.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The removed Player is returned.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The removed Player object.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Player.</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="Player.html#module-Player" title="Player">Player</a></td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
 <dl class="method">
-<dt id="Team.Team.removeName">
-<code class="descname">removeName</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team.removeName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team.removeName" title="Permalink to this definition">¶</a></dt>
+<dt id="Team.Team.removeByName">
+<code class="descname">removeByName</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team.removeByName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team.removeByName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes a Player by it&#8217;s Name</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -175,15 +240,7 @@ Usage: Team({&#8216;name&#8217;: &#8216;Team name&#8217;,</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li></li>
-</ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><ul class="simple">
-<li></li>
-</ul>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
 </tr>
 </tbody>
 </table>
@@ -192,20 +249,57 @@ Usage: Team({&#8216;name&#8217;: &#8216;Team name&#8217;,</p>
 <dl class="method">
 <dt id="Team.Team.removePlayer">
 <code class="descname">removePlayer</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team.removePlayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team.removePlayer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Removes a specific player from the team</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>p</strong> (<a class="reference internal" href="Player.html#module-Player" title="Player"><em>Player</em></a>) &#8211; Player to be removed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="Team.Team.shiftNPlayersFromTeam">
 <code class="descname">shiftNPlayersFromTeam</code><span class="sig-paren">(</span><em>otherTeam</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team.shiftNPlayersFromTeam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team.shiftNPlayersFromTeam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to shift the first n players from otherTeam. The otherTeam has no players 
-afterwards</p>
+<dd><p>Method to shift the first n players from anotherTeam to the team.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>otherTeam</strong> (<a class="reference internal" href="#module-Team" title="Team"><em>Team</em></a>) &#8211; The team from which you want to shift the players</li>
+<li><strong>n</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Numer of players to shift</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="Team.Team.shiftPlayersFromTeam">
 <code class="descname">shiftPlayersFromTeam</code><span class="sig-paren">(</span><em>otherTeam</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Team.html#Team.shiftPlayersFromTeam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Team.Team.shiftPlayersFromTeam" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to shift all players from otherTeam. The otherTeam has no players 
-afterwards</p>
+<dd><dl class="docutils">
+<dt>Method to shift all players from another team to the team.</dt>
+<dd>As the result the other team has no players anymore.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>otherTeam</strong> (<a class="reference internal" href="#module-Team" title="Team"><em>Team</em></a>) &#8211; The team from which you want to shift the players</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">

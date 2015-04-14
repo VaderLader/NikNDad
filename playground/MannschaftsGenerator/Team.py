@@ -25,12 +25,18 @@ class Team:
         # Calculate all points of the team        
         self.teampoints = self.calcTeampoints()
                 
-        self.Mitglieder = "Mitglieder"
+        self.Mitglieder = "Mitglieder" #TODO: Wird nicht gebraucht
         #self.teampoints = d['teampoints']
 
     def addPlayer(self, p):
+        ''' Add one player to the team
+        
+        :param p: Player to be added
+        :type p: Player
+        :returns: None
+        '''
         if p in self.players:
-            print('Error:', p.name, 'ist schon in diesem Team!')
+            print('Error: ', p.name, 'ist schon in diesem Team!')
         else:
             self.players.append(p)
             self.calcTeampoints()
@@ -41,7 +47,7 @@ class Team:
         :returns: The newly input player.
         :rtype: Player.
         """
-        
+        #TODO: Delete or not?
         name = input('Wie heißt der neue Spieler?\n')
         angriff = int(input('Wie gut ist er im Angriff?\n'))
         abwehr = int(input('Wie gut ist er in der Abwehr?\n'))
@@ -54,13 +60,12 @@ class Team:
         return p
 
 
-    def removeName(self, name):
+    def removeByName(self, name):
         """Removes a Player by it's Name
 
         :param name: Name
         :type name: str 
-        :returns: -
-        :rtype: -
+        :returns: None
         """
     
         for index, element in enumerate(self.players):
@@ -71,16 +76,22 @@ class Team:
     def removeByIndex(self, index):
         """Removes a Player by it's index 
 
-        :param index: index is the position in the Team's players list.
-        :type index: int. 
-        :returns: The removed Player is returned.
-        :rtype: Player.
+        :param index: Position in the Team's players list.
+        :type index: int 
+        :returns: The removed Player object.
+        :rtype: Player
         """        
         p = self.players.pop(index)
         self.calcTeampoints()
         return p 
                 
     def removePlayer(self, p):
+        """Removes a specific player from the team  
+
+        :param p: Player to be removed
+        :type p: Player 
+        :returns: None
+        """        
         for index, element in enumerate(self.players):
             if element == p:
                 self.players.pop(index)
@@ -92,15 +103,26 @@ class Team:
         #self.players.pop( self.players.index(p) )
         
     def removeAllPlayers(self):
+        '''Removes all players of a team
+        
+        :param: None
+        :returns: None
+        '''
         self.players = []            
         self.calcTeampoints()
             
     def calcTeampoints(self):
-        #: Calculate all points from scratch
+        ''' Calculate all points of the team. The single points of the team members
+        are simply added. For the teampoints the single points are added with weight. 
+                     
+        :param: None
+        :returns: teampoints
+        :rtype: float
+        '''
         self.attackpoints = 0
         self.keeperpoints = 0
         self.defencepoints = 0
-        self.teampoints = 0
+        self.teampoints = 0.0
         for p in self.players:
             self.attackpoints += p.attackpoints
             self.keeperpoints += p.keeperpoints
@@ -114,6 +136,11 @@ class Team:
         return self.teampoints
 
     def print(self):
+        ''' Provides information about the team and all it's players
+        
+        :returns: info
+        :rtype: str
+        '''
         Mitglieder = 'Team ' + self.name + ' hat '+ str(len(self.players)) + ' Spieler:\n'
         for index, element in enumerate(self.players):
             Mitglieder += ('{} {}'.format(index, element.name) +'\n')
@@ -125,9 +152,15 @@ class Team:
         return Mitglieder
 
     def shiftPlayersFromTeam(self, otherTeam):
-        ''' Method to shift all players from otherTeam. The otherTeam has no players 
-            afterwards '''   
-        print('In shiftPlayersFromTeam','id(otherTeam)=', id(otherTeam), 'otherTeam.name=', otherTeam.name, ' len=', len(otherTeam.players))
+        ''' Method to shift all players from another team to the team.
+            As the result the other team has no players anymore.
+            
+        :param otherTeam: The team from which you want to shift the players
+        :type otherTeam: Team
+        :returns: None            
+        '''   
+        print('In shiftPlayersFromTeam','id(otherTeam)=', id(otherTeam), 'otherTeam.name=',
+              otherTeam.name, ' len=', len(otherTeam.players))
         print('len(self.players)',len(self.players))
         self.players = self.players + otherTeam.players    
         print('len(self.players)',len(self.players))
@@ -135,24 +168,24 @@ class Team:
         otherTeam.removeAllPlayers() 
     
     def shiftNPlayersFromTeam(self, otherTeam, n):
-        ''' Method to shift the first n players from otherTeam. The otherTeam has no players 
-            afterwards '''   
+        ''' Method to shift the first n players from anotherTeam to the team.
+           
+        :param otherTeam: The team from which you want to shift the players
+        :type otherTeam: Team
+        :param n: Numer of players to shift
+        :type n: int        
+        :returns: None            
+        ''' 
         print('In shiftNPlayersFromTeam','id(otherTeam)=', id(otherTeam),
               'otherTeam.name=', otherTeam.name, ' len=',
               len(otherTeam.players))
         print('len(self.players)',len(self.players))
         
-        #for index, p in enumerate(otherTeam.players):
-            
-        #    if index < n :
         for index in range(0, n):
             self.addPlayer(otherTeam.players[index])
             print(index,n, len(self.players))
-        #for index in range(0, n):
-        #    otherTeam.removePlayer(otherTeam.players[index])
                   
         print("+++",index,n)
-        print("vvvv")
         self.calcTeampoints()
         otherTeam.calcTeampoints()
         print('End of shiftNPlayersFromTeam')

@@ -29,7 +29,16 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         self.__ptable = ptable
         
     def headerData(self, section, orientation, role):
-        ''' Set fixed column header'''
+        ''' Defines the fixed column header
+        
+        :param section:
+        :type section: 
+        :param orientation:
+        :type orientation: QtCore.Qt
+        :returns: Header - this is th title of each column
+        :rtype: str
+        '''
+        
         if role == QtCore.Qt.DisplayRole:
             
             if orientation == QtCore.Qt.Horizontal:
@@ -225,6 +234,10 @@ class calculateTeamWind:
     def __init__(self, tgModelA, tgModelB):
         ''' The two model parameters are needed to connect to the signals from these models
         
+        :param tgModelA: Model representing the one Team
+        :type tgModelA: TeamGeneratorModel
+        :param tgModelB: Model representing the one Team
+        :type tgModelB: TeamGeneratorModel
         '''
         self.tgModelA = tgModelA
         self.tgModelB = tgModelB
@@ -660,14 +673,16 @@ if __name__ == '__main__':
     tgmB = TeamGeneratorModel(tg.teamB.players)
     
     
-    #:
+    #: Needed to start Qt
     app = QtGui.QApplication(sys.argv)
     
+    #: Now loading the Qt Designer ".ui"-files and instanciating the user interfaces:
     welcomeWindow =         uic.loadUi('./.GUI/welcomeWindow.ui')
     playerSelectWindow =    uic.loadUi('./.GUI/playerSelectWindow.ui')     
     calculatedTeamWindow =  uic.loadUi('./.GUI/calculatedTeamWindow.ui')   
     waitingCalculation =    uic.loadUi('./.GUI/waitingCalculation.ui')
-
+    
+    #: To setup all the Qt models and Views of for each window one class is instanciated
     wcwin = welcomeWind()
     ctwin = calculateTeamWind(tgmA, tgmB)
     pswin = playerSelectWind()

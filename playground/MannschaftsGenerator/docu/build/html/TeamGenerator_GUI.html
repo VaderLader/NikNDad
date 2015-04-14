@@ -66,8 +66,9 @@
           
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Player.html">Player module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Player.html#player-class">Player Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Player.html#module-Player">Class Player</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Team.html">Team module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Team.html#module-Team">Class Team</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">TeamGenerator_GUI module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
@@ -108,10 +109,48 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="module-TeamGenerator_GUI">
-<span id="teamgenerator-gui-module"></span><h1>TeamGenerator_GUI module<a class="headerlink" href="#module-TeamGenerator_GUI" title="Permalink to this headline">¶</a></h1>
-<p>Created on Sat Feb 28 16:43:55 2015</p>
+  <div class="section" id="teamgenerator-gui-module">
+<h1>TeamGenerator_GUI module<a class="headerlink" href="#teamgenerator-gui-module" title="Permalink to this headline">¶</a></h1>
+<p>Das Module <strong>TeamGenerator_GUI</strong> erzeugt das GUI (Graphical User Interface) für den <strong>Mannschaftsgenerator</strong>.
+Es wird PyQt4 benutzt.</p>
+<p>Das Programm hat verschiedene Windows:</p>
+<ol class="arabic">
+<li><p class="first">Das sind die Windows:</p>
+<div class="highlight-python"><div class="highlight"><pre>     <span class="c">#: Needed to start Qt</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+
+<span class="c">#: Now loading the Qt Designer &quot;.ui&quot;-files and instanciating the user interfaces:</span>
+<span class="n">welcomeWindow</span> <span class="o">=</span>         <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/welcomeWindow.ui&#39;</span><span class="p">)</span>
+<span class="n">playerSelectWindow</span> <span class="o">=</span>    <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/playerSelectWindow.ui&#39;</span><span class="p">)</span>
+<span class="n">calculatedTeamWindow</span> <span class="o">=</span>  <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/calculatedTeamWindow.ui&#39;</span><span class="p">)</span>
+<span class="n">waitingCalculation</span> <span class="o">=</span>    <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/waitingCalculation.ui&#39;</span><span class="p">)</span>
+
+<span class="c">#: To setup all the Qt models and Views of for each window one class is instanciated</span>
+<span class="n">wcwin</span> <span class="o">=</span> <span class="n">welcomeWind</span><span class="p">()</span>
+<span class="n">ctwin</span> <span class="o">=</span> <span class="n">calculateTeamWind</span><span class="p">(</span><span class="n">tgmA</span><span class="p">,</span> <span class="n">tgmB</span><span class="p">)</span>
+<span class="n">pswin</span> <span class="o">=</span> <span class="n">playerSelectWind</span><span class="p">()</span>
+<span class="n">waitwin</span> <span class="o">=</span> <span class="n">waitingCalculationWind</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Qt</p>
+<blockquote>
+<div><blockquote>
+<div><p>Data[tg.teamA.players] &#8212;&gt; DataModel[tgmA]</p>
+</div></blockquote>
+<p>DataModel[tgmA]  &#8212;&gt; ProxyModel[proxyA]
+ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
+<blockquote>
+<div><p>Bild einfügen vom YouTube Tutorial oder Qt selber
+<a class="reference external" href="http://www.google.de/imgres?imgurl=http%3A%2F%2Fwww.yasinuludag.com%2Fmvd.png&amp;imgrefurl=http%3A%2F%2Fwww.yasinuludag.com%2Fblog%2F%3Fp%3D98&amp;h=257&amp;w=239&amp;tbnid=1YUfi4zIIfxmOM%3A&amp;zoom=1&amp;docid=_Tv9gCP091DVHM&amp;ei=_CAsVb_ZJIyHPZzagKgO&amp;tbm=isch&amp;iact=rc&amp;uact=3&amp;dur=1&amp;page=2&amp;start=24&amp;ndsp=32&amp;ved=0CKgBEK0DMCs">http://www.google.de/imgres?imgurl=http%3A%2F%2Fwww.yasinuludag.com%2Fmvd.png&amp;imgrefurl=http%3A%2F%2Fwww.yasinuludag.com%2Fblog%2F%3Fp%3D98&amp;h=257&amp;w=239&amp;tbnid=1YUfi4zIIfxmOM%3A&amp;zoom=1&amp;docid=_Tv9gCP091DVHM&amp;ei=_CAsVb_ZJIyHPZzagKgO&amp;tbm=isch&amp;iact=rc&amp;uact=3&amp;dur=1&amp;page=2&amp;start=24&amp;ndsp=32&amp;ved=0CKgBEK0DMCs</a></p>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ol>
+<span class="target" id="module-TeamGenerator_GUI"></span><p>Created on Sat Feb 28 16:43:55 2015</p>
 <p>&#64;author: SohnyBohny</p>
+<blockquote>
+<div>py:function:: enumerate(sequence[, start=0])</div></blockquote>
 <dl class="class">
 <dt id="TeamGenerator_GUI.PlayerFilterProxyModel">
 <em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">PlayerFilterProxyModel</code><a class="reference internal" href="_modules/TeamGenerator_GUI.html#PlayerFilterProxyModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.PlayerFilterProxyModel" title="Permalink to this definition">¶</a></dt>
@@ -167,12 +206,30 @@
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.headerData">
 <code class="descname">headerData</code><span class="sig-paren">(</span><em>section</em>, <em>orientation</em>, <em>role</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.headerData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.headerData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set fixed column header</p>
+<dd><p>Defines the fixed column header</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>section</strong> &#8211; </li>
+<li><strong>orientation</strong> (<em>QtCore.Qt</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Header - this is th title of each column</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#str" title="(in Python v2.7)">str</a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.insertRows">
-<code class="descname">insertRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.insertRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.insertRows" title="Permalink to this definition">¶</a></dt>
+<code class="descname">insertRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000063DB518&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.insertRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.insertRows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Insert rows at position
 :param position: Number of the first row, which is inserted
 :type position: int 
@@ -189,7 +246,7 @@
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.removeRows">
-<code class="descname">removeRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.removeRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.removeRows" title="Permalink to this definition">¶</a></dt>
+<code class="descname">removeRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000063DB588&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.removeRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.removeRows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes rows from the table</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
