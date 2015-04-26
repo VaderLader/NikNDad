@@ -5,7 +5,8 @@ Created on Sat Feb 28 16:43:55 2015
 @author: SohnyBohny
 """
 
-import sys
+import webbrowser
+import sys, os
 import PyQt4.QtCore as QtCore
 import PyQt4.QtGui as QtGui
 #from PyQt4.QtGui import *
@@ -194,9 +195,19 @@ class PlayerFilterProxyModel(QtGui.QSortFilterProxyModel):
 
 class welcomeWind:
     def __init__(self):
+        welcomeWindow.actionDocumentation.triggered.connect(lambda: self.help())
         welcomeWindow.startWeiterBtn.clicked.connect(lambda: self.welcomeDone())
         welcomeWindow.show()
     
+    def help(self):
+        '''
+        Shows browser with documentation
+        '''
+        pathname = os.path.dirname(sys.argv[0]) 
+        pathDocu = '/docu/build/html/index.html'
+        abspath = 'file:///'+pathname + pathDocu
+        webbrowser.open(abspath)
+
     def welcomeDone(self):
         print("\n### welcomeDone ###")
         print(" len(tgmF.get_ptable())=",len(tgmF.get_ptable()))
