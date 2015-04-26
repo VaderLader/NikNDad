@@ -11,15 +11,9 @@ Aus diesen Einzel Punkten werden auch die *Gesamtspielstärke Punkte* (``playerp
 
 .. note:: Nach Änderung der Spielstärke Punkten sollte man immer die ``playerpoints`` mit der Methode ``calcPlayerpoints`` neu berechnen.
 
-.. warning:: Das ist die letzte Warnung am |today|
-1. EINS
-#. ZWEI
-#. DREI
-
-
 
 Class Player
-============
+------------
 
 .. automodule:: Player
     :members:

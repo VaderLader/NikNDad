@@ -65,13 +65,43 @@
           
           
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Player module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#module-Player">Class Player</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Team.html">Team module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Team.html#module-Team">Class Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html">TeamGenerator_GUI module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Player module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-Player">Class Player</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Team.html">Team module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Team.html#module-Team">Class Team</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator.html#module-TeamGenerator">TeamGenerator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html">TeamGenerator_GUI module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#die-windows">1. Die Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html#qt-model-view-programming">Qt Model-View-Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#model">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#view">View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#proxy-model">Proxy model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#qt">2. Qt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html#module-TeamGenerator_GUI">Was Anderes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">Quellen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="References.html#kombinatorik">1. Kombinatorik</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#mathematik-programmieren-mit-python">#. MATHEMATIK PROGRAMMIEREN MIT PYTHON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#qt-reference-documentation-qt-v4-6">#. Qt Reference Documentation (QT V4.6)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#sphinx-documentation">#. Sphinx Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#stackoverflow-xxx">#. Stackoverflow XXX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#pyqt4-reference-guide">#. PyQt4 Reference Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#python-3-tutorial">#. Python 3 Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#jason-pretty-print">#. JASON Pretty Print</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx_examples.html">Some sphinx examples</a></li>
 </ul>
 
           
@@ -122,21 +152,11 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Nach Änderung der Spielstärke Punkten sollte man immer die <code class="docutils literal"><span class="pre">playerpoints</span></code> mit der Methode <code class="docutils literal"><span class="pre">calcPlayerpoints</span></code> neu berechnen.</p>
 </div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Das ist die letzte Warnung am April 14, 2015</p>
-</div>
-<ol class="arabic simple">
-<li>EINS</li>
-<li>ZWEI</li>
-<li>DREI</li>
-</ol>
-</div>
 <div class="section" id="module-Player">
-<span id="class-player"></span><h1>Class Player<a class="headerlink" href="#module-Player" title="Permalink to this headline">¶</a></h1>
+<span id="class-player"></span><h2>Class Player<a class="headerlink" href="#module-Player" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="Player.Player">
-<em class="property">class </em><code class="descclassname">Player.</code><code class="descname">Player</code><span class="sig-paren">(</span><em>d={'name': 'Vorname Name'</em>, <em>'keeperpoints': 0</em>, <em>'defencepoints': 0</em>, <em>'attackpoints': 0}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Player.html#Player"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Player.Player" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">Player.</code><code class="descname">Player</code><span class="sig-paren">(</span><em>d={'name': 'Vorname Name'</em>, <em>'defencepoints': 0</em>, <em>'keeperpoints': 0</em>, <em>'attackpoints': 0}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Player.html#Player"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Player.Player" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Class for Players</p>
 <dl class="docutils">
@@ -181,6 +201,7 @@ und Torwart-Punkte berechnet.</p>
 
 </dd></dl>
 
+</div>
 </div>
 
 

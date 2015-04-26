@@ -63,13 +63,43 @@
           
           
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Player.html">Player module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Player.html#module-Player">Class Player</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Team.html">Team module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Team.html#module-Team">Class Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../TeamGenerator.html">TeamGenerator module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../TeamGenerator_GUI.html">TeamGenerator_GUI module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Player.html">Player module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Player.html#module-Player">Class Player</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Team.html">Team module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Team.html#module-Team">Class Team</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../TeamGenerator.html">TeamGenerator module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator.html#module-TeamGenerator">TeamGenerator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../TeamGenerator_GUI.html">TeamGenerator_GUI module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator_GUI.html#die-windows">1. Die Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../TeamGenerator_GUI.html#qt-model-view-programming">Qt Model-View-Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator_GUI.html#model">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator_GUI.html#view">View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator_GUI.html#proxy-model">Proxy model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../TeamGenerator_GUI.html#qt">2. Qt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../TeamGenerator_GUI.html#module-TeamGenerator_GUI">Was Anderes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">Quellen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#kombinatorik">1. Kombinatorik</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#mathematik-programmieren-mit-python">#. MATHEMATIK PROGRAMMIEREN MIT PYTHON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#qt-reference-documentation-qt-v4-6">#. Qt Reference Documentation (QT V4.6)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#sphinx-documentation">#. Sphinx Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#stackoverflow-xxx">#. Stackoverflow XXX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#pyqt4-reference-guide">#. PyQt4 Reference Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#python-3-tutorial">#. Python 3 Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../References.html#jason-pretty-print">#. JASON Pretty Print</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx_examples.html">Some sphinx examples</a></li>
 </ul>
 
           
@@ -124,7 +154,10 @@
 
 <span class="c">#===================================================================================================</span>
 <div class="viewcode-block" id="TeamGeneratorModel"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel">[docs]</a><span class="k">class</span> <span class="nc">TeamGeneratorModel</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractTableModel</span><span class="p">):</span>
-
+    <span class="sd">&#39;&#39;&#39; Model to connect the data [the list of players of a Team] with AbstractTableViews</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptable</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">parent</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractTableModel</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span> <span class="o">=</span> <span class="n">ptable</span>
@@ -166,7 +199,7 @@
 <div class="viewcode-block" id="TeamGeneratorModel.data"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.data">[docs]</a>    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Return data from __ptable</span>
 <span class="sd">        </span>
-<span class="sd">        :param index: index</span>
+<span class="sd">        :param index: model index</span>
 <span class="sd">        :type index: QModelIndex</span>
 <span class="sd">        :param role: role</span>
 <span class="sd">        :type role: QtCore.Qt.DisplayRole</span>
@@ -200,7 +233,7 @@
         <span class="sd">&#39;&#39;&#39; Fixed number of columns = 5 &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="mi">5</span>
     </div>
-<div class="viewcode-block" id="TeamGeneratorModel.flags"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.flags">[docs]</a>    <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">index</span><span class="p">):</span>
+<div class="viewcode-block" id="TeamGeneratorModel.flags"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.flags">[docs]</a>    <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Controls if item is enabled; editable and selectable</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsEditable</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsEnabled</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemIsSelectable</span>
@@ -208,7 +241,7 @@
 <div class="viewcode-block" id="TeamGeneratorModel.setData"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.setData">[docs]</a>    <span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">EditRole</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; This method is always called if data has to be displayed in the GUI</span>
 <span class="sd">        </span>
-<span class="sd">        :param index: index</span>
+<span class="sd">        :param index: model index</span>
 <span class="sd">        :type index:</span>
 <span class="sd">        :param value: value of the cell</span>
 <span class="sd">        :type vale:</span>
@@ -230,20 +263,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">keeperpoints</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> 
             
             <span class="bp">self</span><span class="o">.</span><span class="n">__ptable</span><span class="p">[</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">calcPlayerpoints</span><span class="p">()</span>
-<span class="c">#            calculatedTeamWindow.gesammt_A.setText(&quot;%.2f&quot; % tg.teamA.calcTeampoints())</span>
-<span class="c">#            calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))</span>
-<span class="c">#            calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))</span>
-<span class="c">#            calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))</span>
-<span class="c">#            calculatedTeamWindow.gesammt_B.setText(&quot;%.2f&quot; % tg.teamB.calcTeampoints())</span>
-<span class="c">#            calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))</span>
-<span class="c">#            calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))</span>
-<span class="c">#            calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))</span>
             <span class="k">print</span><span class="p">(</span><span class="s">&#39;TeamGeneratorModel.setData() going to emit the signal&#39;</span><span class="p">)</span>            
             <span class="bp">self</span><span class="o">.</span><span class="n">dataChanged</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">True</span>
-        
-<span class="c">#        calculatedTeamWindow.gesammt_A.setText(&quot;%.2f&quot; % tg.teamA.calcTeampoints())</span>
-<span class="c">#        calculatedTeamWindow.gesammt_B.setText(&quot;%.2f&quot; % tg.teamB.calcTeampoints())</span>
+            
         <span class="k">return</span> <span class="bp">False</span>
         </div>
 <div class="viewcode-block" id="TeamGeneratorModel.insertRows"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.TeamGeneratorModel.insertRows">[docs]</a>    <span class="k">def</span> <span class="nf">insertRows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">()):</span>
@@ -352,7 +375,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tgModelA</span><span class="o">.</span><span class="n">dataChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">signalReceived</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tgModelB</span><span class="o">.</span><span class="n">dataChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">signalReceived</span><span class="p">())</span>
         <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">pushButton_2</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">())</span>
-        <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">pushButton_1</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">callBerechneManschaften</span><span class="p">())</span>
+        <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">pushButton_1</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">callBerechneMannschaften</span><span class="p">())</span>
         <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">pushButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">shiftPlayer</span><span class="p">())</span>
         <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">pushButton_3</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">removeFromTable</span><span class="p">())</span>
         <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">actionSpeichern</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">())</span>
@@ -370,12 +393,12 @@
         <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
-        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Nach langem rechnen haben wir die besten Manschaften zusammengestellt:</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Nach langem Rechnen haben wir die besten Mannschaften zusammengestellt:</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">)</span>
 
         <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">()</span><span class="o">+</span><span class="s">&#39;</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="p">))</span>
         <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="k">print</span><span class="p">()</span><span class="o">+</span><span class="s">&#39;</span><span class="se">\n\n</span><span class="s">&#39;</span><span class="p">))</span>
         
-        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;Viel Spaß beim kicken und bis zum nächsten Mal</span><span class="se">\n</span><span class="s">Dein Teamgenerator&#39;</span><span class="p">)</span>
+        <span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;Viel Spaß beim spielen und bis zum nächsten Mal</span><span class="se">\n</span><span class="s">Dein Teamgenerator&#39;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s">&#39;close&#39;</span><span class="p">)</span>
         <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">print</span><span class="p">(</span><span class="s">&#39;closed&#39;</span><span class="p">)</span>
@@ -437,13 +460,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">refreshGUI</span><span class="p">()</span>
 
 </div>
-<div class="viewcode-block" id="calculateTeamWind.callBerechneManschaften"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.calculateTeamWind.callBerechneManschaften">[docs]</a>    <span class="k">def</span> <span class="nf">callBerechneManschaften</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="calculateTeamWind.callBerechneMannschaften"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.calculateTeamWind.callBerechneMannschaften">[docs]</a>    <span class="k">def</span> <span class="nf">callBerechneMannschaften</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Calculate best Teams</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">shiftPlayersFromTeam</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="p">)</span>
         
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;### callBerechneManschaften() ###&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;### callBerechneMannschaften() ###&quot;</span><span class="p">)</span>
         <span class="n">tg</span><span class="o">.</span><span class="n">berechneMannschaften</span><span class="p">()</span>    
         <span class="k">print</span><span class="p">(</span><span class="s">&quot;########### TEAM A: ############&quot;</span><span class="p">)</span>
         <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>
@@ -529,21 +552,27 @@
         <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">tor_B</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">keeperpoints</span><span class="p">))</span>
     </div>
 <div class="viewcode-block" id="calculateTeamWind.refreshGUI"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.calculateTeamWind.refreshGUI">[docs]</a>    <span class="k">def</span> <span class="nf">refreshGUI</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39; method to refresh all displayed data &#39;&#39;&#39;</span>
-<span class="c">#        global tgmA </span>
-<span class="c">#        tgmA = TeamGeneratorModel(tg.teamA.players)</span>
+        <span class="sd">&#39;&#39;&#39; Shows refreshed data in the two TableViews (tableView_A, tableView_B) </span>
+<span class="sd">        </span>
+<span class="sd">        :params : -</span>
+<span class="sd">        :returns: -        </span>
+<span class="sd">        &#39;&#39;&#39;</span>        
+        <span class="c">#: Data of teamA.players is connected with the View tableView_A</span>
+        <span class="c">#: in three steps: </span>
+        <span class="c">#: teamA.players &lt;--&gt; tgmA</span>
         <span class="n">tgmA</span><span class="o">.</span><span class="n">ptableUpdate</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
-        <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
         <span class="n">proxyA</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+        <span class="c">#: teamA.players &lt;--&gt; tgmA &lt;--&gt; proxyA</span>
         <span class="n">proxyA</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+        <span class="c">#: teamA.players &lt;--&gt; tgmA &lt;--&gt; proxyA &lt;--&gt; tableView_A</span>
         <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyA</span><span class="p">)</span>  
         
-<span class="c">#        global tgmB </span>
-<span class="c">#        tgmB = TeamGeneratorModel(tg.teamB.players)</span>
+        <span class="c">#: teamB.players &lt;--&gt; tgmB</span>
         <span class="n">tgmB</span><span class="o">.</span><span class="n">ptableUpdate</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>        
-        <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">tableView_B</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">tgmB</span><span class="p">)</span>
         <span class="n">proxyB</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmB</span><span class="p">)</span>
+        <span class="c">#: teamB.players &lt;--&gt; tgmB &lt;--&gt; proxyB        </span>
         <span class="n">proxyB</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmB</span><span class="p">)</span> 
+        <span class="c">#: teamB.players &lt;--&gt; tgmB &lt;--&gt; proxyB &lt;--&gt; tableView_B</span>
         <span class="n">calculatedTeamWindow</span><span class="o">.</span><span class="n">tableView_B</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyB</span><span class="p">)</span>
  
         <span class="bp">self</span><span class="o">.</span><span class="n">updateTextBoxes</span><span class="p">()</span>
@@ -574,8 +603,8 @@
         <span class="n">tg</span><span class="o">.</span><span class="n">dumpTeam</span><span class="p">(</span><span class="s">&#39;fullTeam&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">refreshGUI</span><span class="p">()</span>
       </div>
-<div class="viewcode-block" id="playerSelectWind.callBerechneManschaften"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.playerSelectWind.callBerechneManschaften">[docs]</a>    <span class="k">def</span> <span class="nf">callBerechneManschaften</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;### callBerechneManschaften() ###&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="playerSelectWind.callBerechneMannschaften"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.playerSelectWind.callBerechneMannschaften">[docs]</a>    <span class="k">def</span> <span class="nf">callBerechneMannschaften</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;### callBerechneMannschaften() ###&quot;</span><span class="p">)</span>
         <span class="n">tg</span><span class="o">.</span><span class="n">berechneMannschaften</span><span class="p">()</span>    
         <span class="k">print</span><span class="p">(</span><span class="s">&quot;########### TEAM A: ############&quot;</span><span class="p">)</span>
         <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>
@@ -696,22 +725,29 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">refreshGUI</span><span class="p">()</span>
       </div>
 <div class="viewcode-block" id="playerSelectWind.refreshGUI"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.playerSelectWind.refreshGUI">[docs]</a>    <span class="k">def</span> <span class="nf">refreshGUI</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c">#: tableView_full is connected with fullTeam</span>
-<span class="c">#        global tgmF</span>
-<span class="c">#        tgmF = TeamGeneratorModel(tg.fullTeam.players)</span>
+        <span class="sd">&#39;&#39;&#39; Shows refreshed data in the two TableViews (tableView_full, tableView_A) </span>
+<span class="sd">        </span>
+<span class="sd">        :params : -</span>
+<span class="sd">        :returns: -        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c">#: Data of fullTeam.players is connected with the View tableView_full</span>
+        <span class="c">#: in three steps: </span>
+        <span class="c">#: fullTeam.players &lt;--&gt; tgmF</span>
         <span class="n">tgmF</span><span class="o">.</span><span class="n">ptableUpdate</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
-        <span class="n">playerSelectWindow</span><span class="o">.</span><span class="n">tableView_full</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">tgmF</span><span class="p">)</span>
         <span class="n">proxyF</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmF</span><span class="p">)</span>
+        <span class="c">#: fullTeam.players &lt;--&gt; tgmF &lt;--&gt; proxyF        </span>
         <span class="n">proxyF</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmF</span><span class="p">)</span>
-        <span class="n">playerSelectWindow</span><span class="o">.</span><span class="n">tableView_full</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyF</span><span class="p">)</span>
+        <span class="c">#: fullTeam.players &lt;--&gt; tgmF &lt;--&gt; proxyF &lt;--&gt; tableView_full        </span>
+        <span class="n">playerSelectWindow</span><span class="o">.</span><span class="n">tableView_full</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyF</span><span class="p">)</span> 
         
-        <span class="c">#: tableView_A is connected with teamA</span>
-<span class="c">#        global tgmA        </span>
-<span class="c">#        tgmA = TeamGeneratorModel(tg.teamA.players)</span>
+        <span class="c">#: Data of teamA.players is connected with the View tableView_A</span>
+        <span class="c">#: in three steps: </span>
+        <span class="c">#: teamA.players &lt;--&gt; tgmA</span>
         <span class="n">tgmA</span><span class="o">.</span><span class="n">ptableUpdate</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
-        <span class="n">playerSelectWindow</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
         <span class="n">proxyA</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+        <span class="c">#: teamA.players &lt;--&gt; tgmA &lt;--&gt; proxyA</span>
         <span class="n">proxyA</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+        <span class="c">#: teamA.players &lt;--&gt; tgmA &lt;--&gt; proxyA &lt;--&gt; tableView_A</span>
         <span class="n">playerSelectWindow</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyA</span><span class="p">)</span>
 
 
@@ -722,7 +758,7 @@
         <span class="n">waitingCalculation</span><span class="o">.</span><span class="n">cancelButton</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cancel</span><span class="p">())</span>
     
 <div class="viewcode-block" id="waitingCalculationWind.calculate"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.waitingCalculationWind.calculate">[docs]</a>    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;### callBerechneManschaften() ###&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;### callBerechneMannschaften() ###&quot;</span><span class="p">)</span>
         <span class="n">tg</span><span class="o">.</span><span class="n">berechneMannschaften</span><span class="p">()</span>    
         <span class="k">print</span><span class="p">(</span><span class="s">&quot;########### TEAM A: ############&quot;</span><span class="p">)</span>
         <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>
@@ -785,10 +821,19 @@
     <span class="n">app</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
     
     <span class="c">#: Now loading the Qt Designer &quot;.ui&quot;-files and instanciating the user interfaces:</span>
+    <span class="c">#: 1.) Instantiate a QMainWindow</span>
     <span class="n">welcomeWindow</span> <span class="o">=</span>         <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/welcomeWindow.ui&#39;</span><span class="p">)</span>
-    <span class="n">playerSelectWindow</span> <span class="o">=</span>    <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/playerSelectWindow.ui&#39;</span><span class="p">)</span>     
-    <span class="n">calculatedTeamWindow</span> <span class="o">=</span>  <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/calculatedTeamWindow.ui&#39;</span><span class="p">)</span>   
+
+    <span class="c">#: 2.) Instantiate a QMainWindow which has two QTableView    </span>
+    <span class="n">playerSelectWindow</span> <span class="o">=</span>    <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/playerSelectWindow.ui&#39;</span><span class="p">)</span>
+    
+    <span class="c">#: 3.) Instantiate a QMainWindow which has two QTableView</span>
+    <span class="n">calculatedTeamWindow</span> <span class="o">=</span>  <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/calculatedTeamWindow.ui&#39;</span><span class="p">)</span>    
+
+    <span class="c">#: 4.) Instantiate a QDialog    </span>
     <span class="n">waitingCalculation</span> <span class="o">=</span>    <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/waitingCalculation.ui&#39;</span><span class="p">)</span>
+    
+    
     
     <span class="c">#: To setup all the Qt models and Views of for each window one class is instanciated</span>
     <span class="n">wcwin</span> <span class="o">=</span> <span class="n">welcomeWind</span><span class="p">()</span>

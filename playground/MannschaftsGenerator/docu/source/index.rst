@@ -14,6 +14,8 @@ Contents:
    :maxdepth: 2
    
    modules
+   References
+   sphinx_examples
    ...	
 
 

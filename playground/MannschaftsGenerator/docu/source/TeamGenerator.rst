@@ -1,8 +1,15 @@
 TeamGenerator module
 ====================
+dslhkfhlk
+
+TeamGenerator
+-------------
 
 .. automodule:: TeamGenerator
     :members:
-	:private-members:
     :undoc-members:
+	:private-members:
+	:special-members:
     :show-inheritance:
+
+	

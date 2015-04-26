@@ -26,7 +26,7 @@ class TeamGenerator:
         
 #==============================================================================   
     def binomial(self, n, k):
-        ''' Calculate (n k) = n!/((n-k)!*k!) =
+        ''' Calculate (n k) = n!/((n-k)!*k!) 
             = ( n*(n-1)*...*(n-k+1) )/(1*2*3...*n)
         '''
         res=1
@@ -142,7 +142,7 @@ class TeamGenerator:
 #==============================================================================
     
     def sampleTeamSetup(self):
-        ''' Method to initial the two teams with dummy data'''
+        ''' Method to put some dummy players in teamA'''
         print('-------- sampleTeamSetup called ----')
         Otto = Player.Player({'name': 'Otto de Motto',
                               'attackpoints': 10,

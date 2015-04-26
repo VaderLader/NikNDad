@@ -16,7 +16,10 @@ import TeamGenerator
 
 #===================================================================================================
 class TeamGeneratorModel(QtCore.QAbstractTableModel):
-
+    ''' Model to connect the data [the list of players of a Team] with AbstractTableViews
+    
+    '''
+    
     def __init__(self, ptable = [], parent = None):
         QtCore.QAbstractTableModel.__init__(self, parent)
         self.__ptable = ptable
@@ -58,7 +61,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
     def data(self, index, role):
         ''' Return data from __ptable
         
-        :param index: index
+        :param index: model index
         :type index: QModelIndex
         :param role: role
         :type role: QtCore.Qt.DisplayRole
@@ -92,7 +95,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         ''' Fixed number of columns = 5 '''
         return 5
     
-    def flags(self,index):
+    def flags(self, index):
         ''' Controls if item is enabled; editable and selectable
         '''
         return QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
@@ -100,7 +103,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
     def setData(self, index, value, role = QtCore.Qt.EditRole):
         ''' This method is always called if data has to be displayed in the GUI
         
-        :param index: index
+        :param index: model index
         :type index:
         :param value: value of the cell
         :type vale:
@@ -122,20 +125,10 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
                 self.__ptable[row].keeperpoints = int(value) 
             
             self.__ptable[row].calcPlayerpoints()
-#            calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-#            calculatedTeamWindow.angriff_A.setText(str(tg.teamA.attackpoints))
-#            calculatedTeamWindow.abwehr_A.setText(str(tg.teamA.defencepoints))
-#            calculatedTeamWindow.tor_A.setText(str(tg.teamA.keeperpoints))
-#            calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
-#            calculatedTeamWindow.angriff_B.setText(str(tg.teamB.attackpoints))
-#            calculatedTeamWindow.abwehr_B.setText(str(tg.teamB.defencepoints))
-#            calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
             print('TeamGeneratorModel.setData() going to emit the signal')            
             self.dataChanged.emit(index, index)
             return True
-        
-#        calculatedTeamWindow.gesammt_A.setText("%.2f" % tg.teamA.calcTeampoints())
-#        calculatedTeamWindow.gesammt_B.setText("%.2f" % tg.teamB.calcTeampoints())
+            
         return False
         
     def insertRows(self, position, rows, parent = QtCore.QModelIndex()):
@@ -244,7 +237,7 @@ class calculateTeamWind:
         self.tgModelA.dataChanged.connect(lambda: self.signalReceived())
         self.tgModelB.dataChanged.connect(lambda: self.signalReceived())
         calculatedTeamWindow.pushButton_2.clicked.connect(lambda: self.addPlayer())
-        calculatedTeamWindow.pushButton_1.clicked.connect(lambda: self.callBerechneManschaften())
+        calculatedTeamWindow.pushButton_1.clicked.connect(lambda: self.callBerechneMannschaften())
         calculatedTeamWindow.pushButton.clicked.connect(lambda: self.shiftPlayer())
         calculatedTeamWindow.pushButton_3.clicked.connect(lambda: self.removeFromTable())
         calculatedTeamWindow.actionSpeichern.triggered.connect(lambda: self.save())
@@ -262,12 +255,12 @@ class calculateTeamWind:
         file = open(filename, "w")
         print(filename)
 
-        file.write("Nach langem rechnen haben wir die besten Manschaften zusammengestellt:\n\n")
+        file.write("Nach langem Rechnen haben wir die besten Mannschaften zusammengestellt:\n\n")
 
         file.write(str(tg.teamA.print()+'\n\n'))
         file.write(str(tg.teamB.print()+'\n\n'))
         
-        file.write('Viel Spaß beim kicken und bis zum nächsten Mal\nDein Teamgenerator')
+        file.write('Viel Spaß beim spielen und bis zum nächsten Mal\nDein Teamgenerator')
         print('close')
         file.close()
         print('closed')
@@ -329,13 +322,13 @@ class calculateTeamWind:
         self.refreshGUI()
 
 
-    def callBerechneManschaften(self):
+    def callBerechneMannschaften(self):
         ''' Calculate best Teams
         '''
         
         tg.teamA.shiftPlayersFromTeam(tg.teamB)
         
-        print("### callBerechneManschaften() ###")
+        print("### callBerechneMannschaften() ###")
         tg.berechneMannschaften()    
         print("########### TEAM A: ############")
         tg.teamA.print()
@@ -421,21 +414,27 @@ class calculateTeamWind:
         calculatedTeamWindow.tor_B.setText(str(tg.teamB.keeperpoints))
     
     def refreshGUI(self):
-        ''' method to refresh all displayed data '''
-#        global tgmA 
-#        tgmA = TeamGeneratorModel(tg.teamA.players)
+        ''' Shows refreshed data in the two TableViews (tableView_A, tableView_B) 
+        
+        :params : -
+        :returns: -        
+        '''        
+        #: Data of teamA.players is connected with the View tableView_A
+        #: in three steps: 
+        #: teamA.players <--> tgmA
         tgmA.ptableUpdate(tg.teamA.players)
-        calculatedTeamWindow.tableView_A.setModel(tgmA)
         proxyA = PlayerFilterProxyModel(tgmA)
+        #: teamA.players <--> tgmA <--> proxyA
         proxyA.setSourceModel(tgmA)
+        #: teamA.players <--> tgmA <--> proxyA <--> tableView_A
         calculatedTeamWindow.tableView_A.setModel(proxyA)  
         
-#        global tgmB 
-#        tgmB = TeamGeneratorModel(tg.teamB.players)
+        #: teamB.players <--> tgmB
         tgmB.ptableUpdate(tg.teamB.players)        
-        calculatedTeamWindow.tableView_B.setModel(tgmB)
         proxyB = PlayerFilterProxyModel(tgmB)
+        #: teamB.players <--> tgmB <--> proxyB        
         proxyB.setSourceModel(tgmB) 
+        #: teamB.players <--> tgmB <--> proxyB <--> tableView_B
         calculatedTeamWindow.tableView_B.setModel(proxyB)
  
         self.updateTextBoxes()
@@ -466,8 +465,8 @@ class playerSelectWind:
         tg.dumpTeam('fullTeam','', filename)
         self.refreshGUI()
       
-    def callBerechneManschaften(self):
-        print("### callBerechneManschaften() ###")
+    def callBerechneMannschaften(self):
+        print("### callBerechneMannschaften() ###")
         tg.berechneMannschaften()    
         print("########### TEAM A: ############")
         tg.teamA.print()
@@ -588,22 +587,29 @@ class playerSelectWind:
         self.refreshGUI()
       
     def refreshGUI(self):
-        #: tableView_full is connected with fullTeam
-#        global tgmF
-#        tgmF = TeamGeneratorModel(tg.fullTeam.players)
-        tgmF.ptableUpdate(tg.fullTeam.players)
-        playerSelectWindow.tableView_full.setModel(tgmF)
-        proxyF = PlayerFilterProxyModel(tgmF)
-        proxyF.setSourceModel(tgmF)
-        playerSelectWindow.tableView_full.setModel(proxyF)
+        ''' Shows refreshed data in the two TableViews (tableView_full, tableView_A) 
         
-        #: tableView_A is connected with teamA
-#        global tgmA        
-#        tgmA = TeamGeneratorModel(tg.teamA.players)
+        :params : -
+        :returns: -        
+        '''
+        #: Data of fullTeam.players is connected with the View tableView_full
+        #: in three steps: 
+        #: fullTeam.players <--> tgmF
+        tgmF.ptableUpdate(tg.fullTeam.players)
+        proxyF = PlayerFilterProxyModel(tgmF)
+        #: fullTeam.players <--> tgmF <--> proxyF        
+        proxyF.setSourceModel(tgmF)
+        #: fullTeam.players <--> tgmF <--> proxyF <--> tableView_full        
+        playerSelectWindow.tableView_full.setModel(proxyF) 
+        
+        #: Data of teamA.players is connected with the View tableView_A
+        #: in three steps: 
+        #: teamA.players <--> tgmA
         tgmA.ptableUpdate(tg.teamA.players)
-        playerSelectWindow.tableView_A.setModel(tgmA)
         proxyA = PlayerFilterProxyModel(tgmA)
+        #: teamA.players <--> tgmA <--> proxyA
         proxyA.setSourceModel(tgmA)
+        #: teamA.players <--> tgmA <--> proxyA <--> tableView_A
         playerSelectWindow.tableView_A.setModel(proxyA)
 
 
@@ -614,7 +620,7 @@ class waitingCalculationWind:
         waitingCalculation.cancelButton.clicked.connect(lambda: self.cancel())
     
     def calculate(self):
-        print("### callBerechneManschaften() ###")
+        print("### callBerechneMannschaften() ###")
         tg.berechneMannschaften()    
         print("########### TEAM A: ############")
         tg.teamA.print()
@@ -677,10 +683,19 @@ if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     
     #: Now loading the Qt Designer ".ui"-files and instanciating the user interfaces:
+    #: 1.) Instantiate a QMainWindow
     welcomeWindow =         uic.loadUi('./.GUI/welcomeWindow.ui')
-    playerSelectWindow =    uic.loadUi('./.GUI/playerSelectWindow.ui')     
-    calculatedTeamWindow =  uic.loadUi('./.GUI/calculatedTeamWindow.ui')   
+
+    #: 2.) Instantiate a QMainWindow which has two QTableView    
+    playerSelectWindow =    uic.loadUi('./.GUI/playerSelectWindow.ui')
+    
+    #: 3.) Instantiate a QMainWindow which has two QTableView
+    calculatedTeamWindow =  uic.loadUi('./.GUI/calculatedTeamWindow.ui')    
+
+    #: 4.) Instantiate a QDialog    
     waitingCalculation =    uic.loadUi('./.GUI/waitingCalculation.ui')
+    
+    
     
     #: To setup all the Qt models and Views of for each window one class is instanciated
     wcwin = welcomeWind()

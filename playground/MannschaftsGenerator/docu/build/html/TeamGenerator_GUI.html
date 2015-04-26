@@ -65,13 +65,43 @@
           
           
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Player.html">Player module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Player.html#module-Player">Class Player</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Team.html">Team module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Team.html#module-Team">Class Team</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">TeamGenerator_GUI module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Player.html">Player module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Player.html#module-Player">Class Player</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Team.html">Team module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Team.html#module-Team">Class Team</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator.html#module-TeamGenerator">TeamGenerator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">TeamGenerator_GUI module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#die-windows">1. Die Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#qt-model-view-programming">Qt Model-View-Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#model">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#view">View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proxy-model">Proxy model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#qt">2. Qt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-TeamGenerator_GUI">Was Anderes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">Quellen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="References.html#kombinatorik">1. Kombinatorik</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#mathematik-programmieren-mit-python">#. MATHEMATIK PROGRAMMIEREN MIT PYTHON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#qt-reference-documentation-qt-v4-6">#. Qt Reference Documentation (QT V4.6)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#sphinx-documentation">#. Sphinx Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#stackoverflow-xxx">#. Stackoverflow XXX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#pyqt4-reference-guide">#. PyQt4 Reference Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#python-3-tutorial">#. Python 3 Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#jason-pretty-print">#. JASON Pretty Print</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx_examples.html">Some sphinx examples</a></li>
 </ul>
 
           
@@ -112,11 +142,13 @@
   <div class="section" id="teamgenerator-gui-module">
 <h1>TeamGenerator_GUI module<a class="headerlink" href="#teamgenerator-gui-module" title="Permalink to this headline">¶</a></h1>
 <p>Das Module <strong>TeamGenerator_GUI</strong> erzeugt das GUI (Graphical User Interface) für den <strong>Mannschaftsgenerator</strong>.
-Es wird PyQt4 benutzt.</p>
+Es wird PyQt4 benutzt. Das ist eine Qt4 Implementierung für Python3.</p>
 <p>Das Programm hat verschiedene Windows:</p>
-<ol class="arabic">
-<li><p class="first">Das sind die Windows:</p>
-<div class="highlight-python"><div class="highlight"><pre>     <span class="c">#: Needed to start Qt</span>
+<div class="section" id="die-windows">
+<h2>1. Die Windows<a class="headerlink" href="#die-windows" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Windows aus main:</p>
+<div class="highlight-python"><div class="highlight"><pre> <span class="c">#: Needed to start Qt</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
 
 <span class="c">#: Now loading the Qt Designer &quot;.ui&quot;-files and instanciating the user interfaces:</span>
@@ -132,22 +164,125 @@ Es wird PyQt4 benutzt.</p>
 <span class="n">waitwin</span> <span class="o">=</span> <span class="n">waitingCalculationWind</span><span class="p">()</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Qt</p>
+</div></blockquote>
+<p>Es werden QWidgets mit dem QT Designer gemacht und mit uic.loadUi geladen.</p>
+<p>Für weitere Informationen siehe:
+<a class="reference external" href="http://pyqt.sourceforge.net/Docs/PyQt4/qwidget.html#details">http://pyqt.sourceforge.net/Docs/PyQt4/qwidget.html#details</a></p>
+<p><a class="reference external" href="http://pyqt.sourceforge.net/Docs/PyQt4/qmainwindow.html#details">http://pyqt.sourceforge.net/Docs/PyQt4/qmainwindow.html#details</a></p>
+<div class="section" id="welcomewindow">
+<h3>1.1 welcomeWindow<a class="headerlink" href="#welcomewindow" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="playerselectwindow">
+<h3>1.2 playerSelectWindow<a class="headerlink" href="#playerselectwindow" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="calculatedteamwindow">
+<h3>1.3     calculatedTeamWindow<a class="headerlink" href="#calculatedteamwindow" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="section" id="qt-model-view-programming">
+<h1>Qt Model-View-Programming<a class="headerlink" href="#qt-model-view-programming" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://doc.qt.io/qt-4.8/model-view-programming.html">http://doc.qt.io/qt-4.8/model-view-programming.html</a></p>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>Das Model ist die Schnittstelle über die ein View auf die Daten zugreift. Die Daten gehören nicht zum Model sondern zu einer anderen Klasse.
+Wenn man die Daten in einer Tabelle darstellen will benutzt man am besten das <strong>QAbstractTableModel</strong>.
+Ein <strong>Team</strong> hat ja eine Liste von playern und die sollen  immer in einer Tabelle aufgelistet werden.
+Das Model heist <code class="docutils literal"><span class="pre">TeamGeneratorModel</span></code> und implementiert <code class="docutils literal"><span class="pre">QtCore.QAbstractTableModel</span></code>.</p>
+<p>Das Model regelt also wie und welche Daten im View dargestellt werden. Dazu muss mann verschiedene Methoden implementieren die vom View benutzt werden.</p>
+</div>
+<div class="section" id="view">
+<h2>View<a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h2>
+<p>Für die Darstellung der Daten in Tabellen Form wird ein <code class="docutils literal"><span class="pre">QTableView</span></code> implementiert.</p>
+<p><a class="reference external" href="http://pyqt.sourceforge.net/Docs/PyQt4/qtableview.html">http://pyqt.sourceforge.net/Docs/PyQt4/qtableview.html</a></p>
+</div>
+<div class="section" id="proxy-model">
+<h2>Proxy model<a class="headerlink" href="#proxy-model" title="Permalink to this headline">¶</a></h2>
+<p>Für einen View ist ein Proxy model Objekt das gleiche wie ein Model. Der View kann über ein oder viele Proxy model auf das Grundmodel und darüber auf die die Daten zugreifen.
+<code class="docutils literal"><span class="pre">QtGui.QSortFilterProxyModel</span></code> ist ein solches ProxyModel das verschiedene Sortierungen bereitstellt.</p>
+<p>Table der verschiedenen benutzten Fälle:</p>
 <blockquote>
-<div><blockquote>
-<div><p>Data[tg.teamA.players] &#8212;&gt; DataModel[tgmA]</p>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="9%" />
+<col width="14%" />
+<col width="8%" />
+<col width="12%" />
+<col width="9%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">data</th>
+<th class="head">&lt;&#8211;&gt;</th>
+<th class="head">model</th>
+<th class="head">&lt;&#8211;&gt;</th>
+<th class="head">proxy</th>
+<th class="head">&lt;&#8211;&gt;</th>
+<th class="head">view</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>fullTeam.players</td>
+<td>&lt;&#8211;&gt;</td>
+<td>tgmF</td>
+<td>&lt;&#8211;&gt;</td>
+<td>proxyF</td>
+<td>&lt;&#8211;&gt;</td>
+<td>tableView_full</td>
+</tr>
+<tr class="row-odd"><td>teamA.players</td>
+<td>&lt;&#8211;&gt;</td>
+<td>tgmA</td>
+<td>&lt;&#8211;&gt;</td>
+<td>proxyA</td>
+<td>&lt;&#8211;&gt;</td>
+<td>tableView_A</td>
+</tr>
+<tr class="row-even"><td>teamB.players</td>
+<td>&lt;&#8211;&gt;</td>
+<td>tgmB</td>
+<td>&lt;&#8211;&gt;</td>
+<td>proxyB</td>
+<td>&lt;&#8211;&gt;</td>
+<td>tableView_B</td>
+</tr>
+</tbody>
+</table>
 </div></blockquote>
-<p>DataModel[tgmA]  &#8212;&gt; ProxyModel[proxyA]
-ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
+<p>Gesammt sieht das dann zum Beispiel so aus:</p>
+<div class="highlight-python"><div class="highlight"><pre>        <span class="c">#: Data of teamA.players is connected with the View tableView_A</span>
+<span class="c">#: in three steps:</span>
+
+        <span class="c">#: teamA.players &lt;--&gt; tgmA</span>
+<span class="n">tgmA</span><span class="o">.</span><span class="n">ptableUpdate</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
+<span class="n">proxyA</span> <span class="o">=</span> <span class="n">PlayerFilterProxyModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+
+        <span class="c">#: teamA.players &lt;--&gt; tgmA &lt;--&gt; proxyA</span>
+<span class="n">proxyA</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">tgmA</span><span class="p">)</span>
+
+        <span class="c">#: teamA.players &lt;--&gt; tgmA &lt;--&gt; proxyA &lt;--&gt; tableView_A</span>
+<span class="n">playerSelectWindow</span><span class="o">.</span><span class="n">tableView_A</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">proxyA</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="http://doc.qt.io/qt-4.8/images/modelview-models.png">http://doc.qt.io/qt-4.8/images/modelview-models.png</a></p>
+<img alt="_images/modelview-models.png" src="_images/modelview-models.png" />
+</div>
+<div class="section" id="qt">
+<h2>2. Qt<a class="headerlink" href="#qt" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><p>Bild einfügen vom YouTube Tutorial oder Qt selber
-<a class="reference external" href="http://www.google.de/imgres?imgurl=http%3A%2F%2Fwww.yasinuludag.com%2Fmvd.png&amp;imgrefurl=http%3A%2F%2Fwww.yasinuludag.com%2Fblog%2F%3Fp%3D98&amp;h=257&amp;w=239&amp;tbnid=1YUfi4zIIfxmOM%3A&amp;zoom=1&amp;docid=_Tv9gCP091DVHM&amp;ei=_CAsVb_ZJIyHPZzagKgO&amp;tbm=isch&amp;iact=rc&amp;uact=3&amp;dur=1&amp;page=2&amp;start=24&amp;ndsp=32&amp;ved=0CKgBEK0DMCs">http://www.google.de/imgres?imgurl=http%3A%2F%2Fwww.yasinuludag.com%2Fmvd.png&amp;imgrefurl=http%3A%2F%2Fwww.yasinuludag.com%2Fblog%2F%3Fp%3D98&amp;h=257&amp;w=239&amp;tbnid=1YUfi4zIIfxmOM%3A&amp;zoom=1&amp;docid=_Tv9gCP091DVHM&amp;ei=_CAsVb_ZJIyHPZzagKgO&amp;tbm=isch&amp;iact=rc&amp;uact=3&amp;dur=1&amp;page=2&amp;start=24&amp;ndsp=32&amp;ved=0CKgBEK0DMCs</a></p>
+<div><dl class="docutils">
+<dt>Die Daten [tg.fullTeam.players] sind mit dem Daten Model [TeamGeneratorModel] verbunden und das Daten Model ist mit dem View [QtableView] verbunden.</dt>
+<dd>Daten &lt;&#8212;&#8212;&gt; Model &lt;&#8212;&#8212;&gt; View
+Daten &lt;&#8212;&#8212;&gt; Model &lt;&#8212;&#8212;&gt; Proxy &lt;&#8212;-&gt; , ... , Proxy &lt;&#8212;-&gt; View</dd>
+</dl>
 </div></blockquote>
-</div></blockquote>
-</li>
-</ol>
-<span class="target" id="module-TeamGenerator_GUI"></span><p>Created on Sat Feb 28 16:43:55 2015</p>
+<p>Das Model regelt wie und welche Daten im View dargestellt werden. Dazu muss mann verschiedene Methoden implementieren die vom View benutzt werden.</p>
+</div>
+</div>
+<div class="section" id="module-TeamGenerator_GUI">
+<span id="was-anderes"></span><h1>Was Anderes<a class="headerlink" href="#module-TeamGenerator_GUI" title="Permalink to this headline">¶</a></h1>
+<p>Created on Sat Feb 28 16:43:55 2015</p>
 <p>&#64;author: SohnyBohny</p>
 <blockquote>
 <div>py:function:: enumerate(sequence[, start=0])</div></blockquote>
@@ -162,6 +297,7 @@ ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
 <dt id="TeamGenerator_GUI.TeamGeneratorModel">
 <em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">TeamGeneratorModel</code><span class="sig-paren">(</span><em>ptable=[]</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt4.QtCore.QAbstractTableModel</span></code></p>
+<p>Model to connect the data [the list of players of a Team] with AbstractTableViews</p>
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.columnCount">
 <code class="descname">columnCount</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.columnCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.columnCount" title="Permalink to this definition">¶</a></dt>
@@ -177,7 +313,7 @@ ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>index</strong> (<em>QModelIndex</em>) &#8211; index</li>
+<li><strong>index</strong> (<em>QModelIndex</em>) &#8211; model index</li>
 <li><strong>role</strong> (<em>QtCore.Qt.DisplayRole</em>) &#8211; role</li>
 </ul>
 </td>
@@ -229,7 +365,7 @@ ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.insertRows">
-<code class="descname">insertRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000063DB518&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.insertRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.insertRows" title="Permalink to this definition">¶</a></dt>
+<code class="descname">insertRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000062C6CF8&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.insertRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.insertRows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Insert rows at position
 :param position: Number of the first row, which is inserted
 :type position: int 
@@ -246,7 +382,7 @@ ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.removeRows">
-<code class="descname">removeRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000063DB588&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.removeRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.removeRows" title="Permalink to this definition">¶</a></dt>
+<code class="descname">removeRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000062C6D68&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.removeRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.removeRows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes rows from the table</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -283,7 +419,7 @@ ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>index</strong> &#8211; index</li>
+<li><strong>index</strong> &#8211; model index</li>
 <li><strong>value</strong> &#8211; value of the cell</li>
 </ul>
 </td>
@@ -317,8 +453,8 @@ ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="TeamGenerator_GUI.calculateTeamWind.callBerechneManschaften">
-<code class="descname">callBerechneManschaften</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.callBerechneManschaften"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.callBerechneManschaften" title="Permalink to this definition">¶</a></dt>
+<dt id="TeamGenerator_GUI.calculateTeamWind.callBerechneMannschaften">
+<code class="descname">callBerechneMannschaften</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.callBerechneMannschaften"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.callBerechneMannschaften" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate best Teams</p>
 </dd></dl>
 
@@ -346,7 +482,9 @@ ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
 <dl class="method">
 <dt id="TeamGenerator_GUI.calculateTeamWind.refreshGUI">
 <code class="descname">refreshGUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#calculateTeamWind.refreshGUI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.calculateTeamWind.refreshGUI" title="Permalink to this definition">¶</a></dt>
-<dd><p>method to refresh all displayed data</p>
+<dd><p>Shows refreshed data in the two TableViews (tableView_A, tableView_B)</p>
+<p>:params : -
+:returns: -</p>
 </dd></dl>
 
 <dl class="method">
@@ -387,8 +525,8 @@ ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
 <em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">playerSelectWind</code><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <dl class="method">
-<dt id="TeamGenerator_GUI.playerSelectWind.callBerechneManschaften">
-<code class="descname">callBerechneManschaften</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.callBerechneManschaften"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.callBerechneManschaften" title="Permalink to this definition">¶</a></dt>
+<dt id="TeamGenerator_GUI.playerSelectWind.callBerechneMannschaften">
+<code class="descname">callBerechneMannschaften</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.callBerechneMannschaften"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.callBerechneMannschaften" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -425,7 +563,10 @@ ProxyModel[proxyA]&#8212;&gt;ViewModel[tableView_A]</p>
 <dl class="method">
 <dt id="TeamGenerator_GUI.playerSelectWind.refreshGUI">
 <code class="descname">refreshGUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#playerSelectWind.refreshGUI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.playerSelectWind.refreshGUI" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Shows refreshed data in the two TableViews (tableView_full, tableView_A)</p>
+<p>:params : -
+:returns: -</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.playerSelectWind.removeFromTable">

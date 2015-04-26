@@ -65,13 +65,43 @@
           
           
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Player.html">Player module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Player.html#module-Player">Class Player</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Team.html">Team module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Team.html#module-Team">Class Team</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">TeamGenerator module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html">TeamGenerator_GUI module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Player.html">Player module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Player.html#module-Player">Class Player</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Team.html">Team module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Team.html#module-Team">Class Team</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">TeamGenerator module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-TeamGenerator">TeamGenerator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html">TeamGenerator_GUI module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#die-windows">1. Die Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html#qt-model-view-programming">Qt Model-View-Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#model">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#view">View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#proxy-model">Proxy model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TeamGenerator_GUI.html#qt">2. Qt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html#module-TeamGenerator_GUI">Was Anderes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="json_object_en_n_decoder.html">json_object_en_n_decoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">Quellen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="References.html#kombinatorik">1. Kombinatorik</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#mathematik-programmieren-mit-python">#. MATHEMATIK PROGRAMMIEREN MIT PYTHON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#qt-reference-documentation-qt-v4-6">#. Qt Reference Documentation (QT V4.6)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#sphinx-documentation">#. Sphinx Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#stackoverflow-xxx">#. Stackoverflow XXX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#pyqt4-reference-guide">#. PyQt4 Reference Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#python-3-tutorial">#. Python 3 Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="References.html#jason-pretty-print">#. JASON Pretty Print</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx_examples.html">Some sphinx examples</a></li>
 </ul>
 
           
@@ -111,7 +141,66 @@
             
   <div class="section" id="teamgenerator-module">
 <h1>TeamGenerator module<a class="headerlink" href="#teamgenerator-module" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-TeamGenerator"></span></div>
+<p>dslhkfhlk</p>
+<div class="section" id="module-TeamGenerator">
+<span id="teamgenerator"></span><h2>TeamGenerator<a class="headerlink" href="#module-TeamGenerator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="TeamGenerator.TeamGenerator">
+<em class="property">class </em><code class="descclassname">TeamGenerator.</code><code class="descname">TeamGenerator</code><a class="reference internal" href="_modules/TeamGenerator.html#TeamGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator.TeamGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>TeamGenerator class for Calculating best team distributions 
+COOOL!</p>
+<dl class="method">
+<dt id="TeamGenerator.TeamGenerator.berechneMannschaften">
+<code class="descname">berechneMannschaften</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator.html#TeamGenerator.berechneMannschaften"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator.TeamGenerator.berechneMannschaften" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to calculate and select two teams which are most equal.
+At the beginning all players have to be in teamA.
+After the calculation some players are in teamB also.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator.TeamGenerator.binomial">
+<code class="descname">binomial</code><span class="sig-paren">(</span><em>n</em>, <em>k</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator.html#TeamGenerator.binomial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator.TeamGenerator.binomial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate (n k) = n!/((n-k)!*k!) 
+= ( n*(n-1)*...*(n-k+1) )/(1*2*3...*n)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator.TeamGenerator.dumpTeam">
+<code class="descname">dumpTeam</code><span class="sig-paren">(</span><em>teamName</em>, <em>location</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator.html#TeamGenerator.dumpTeam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator.TeamGenerator.dumpTeam" title="Permalink to this definition">¶</a></dt>
+<dd><p>dumpTeam(&lt;Name of the Team Variable&gt;, &lt;filesystem path&gt;,
+&lt;jason filename&gt;)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator.TeamGenerator.dumpTeams">
+<code class="descname">dumpTeams</code><span class="sig-paren">(</span><em>location='./'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator.html#TeamGenerator.dumpTeams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator.TeamGenerator.dumpTeams" title="Permalink to this definition">¶</a></dt>
+<dd><p>method to write the two teams to disk</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator.TeamGenerator.loadTeam">
+<code class="descname">loadTeam</code><span class="sig-paren">(</span><em>teamName</em>, <em>location</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator.html#TeamGenerator.loadTeam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator.TeamGenerator.loadTeam" title="Permalink to this definition">¶</a></dt>
+<dd><p>loadTeam(&lt;Name of the Team Variable&gt;, &lt;filesystem path&gt;,
+&lt;jason filename&gt;)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator.TeamGenerator.loadTeams">
+<code class="descname">loadTeams</code><span class="sig-paren">(</span><em>location</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator.html#TeamGenerator.loadTeams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator.TeamGenerator.loadTeams" title="Permalink to this definition">¶</a></dt>
+<dd><p>method to load the two teams from disk</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="TeamGenerator.TeamGenerator.sampleTeamSetup">
+<code class="descname">sampleTeamSetup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator.html#TeamGenerator.sampleTeamSetup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator.TeamGenerator.sampleTeamSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to put some dummy players in teamA</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
 
 
           </div>

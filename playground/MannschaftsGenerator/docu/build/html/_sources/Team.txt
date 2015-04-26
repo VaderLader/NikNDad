@@ -19,7 +19,7 @@ Es gibt 3 besondere Teams:
 
 
 Class Team
-==========
+----------
 .. automodule:: Team
     :members:
     :undoc-members:
