@@ -26,7 +26,7 @@ Das Programm hat verschiedene Windows:
 		ctwin = calculateTeamWind(tgmA, tgmB)
 		waitwin = waitingCalculationWind()
 		pswin = playerSelectWind()
- 
+
 
 
 
@@ -56,11 +56,11 @@ http://pyqt.sourceforge.net/Docs/PyQt4/qmainwindow.html#details
 ^^^^^^^^^^^^^^^^^^^^^^^^
 .. image:: calculatedTeamWindow.jpg
 =============================	=============================================================================================
-Untermenü			Funktion
+Untermenü						Funktion
 =============================	=============================================================================================
--Datei-  -Speichern-		generiert ein *json file mit den generierten Manschaften in .\Result (TeamA.json; TeamB.json)
+-Datei-  -Speichern-			generiert ein *json file mit den generierten Manschaften in .\Result (TeamA.json; TeamB.json)
 -Datei-  -Speichern unter-   	generiert ein *json file mit den generierten Manschaften
--Datei-  -print to *txt-   	generiert ein *txt file mit den generierten Manschaften
+-Datei-  -print to *txt-   		generiert ein *txt file mit den generierten Manschaften
 =============================	=============================================================================================
 
 Qt Model-View-Programming
