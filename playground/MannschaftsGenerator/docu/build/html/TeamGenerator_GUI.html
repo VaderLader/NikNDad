@@ -154,14 +154,15 @@ Es wird PyQt4 benutzt. Das ist eine Qt4 Implementierung für Python3.</p>
 <span class="c">#: Now loading the Qt Designer &quot;.ui&quot;-files and instanciating the user interfaces:</span>
 <span class="n">welcomeWindow</span> <span class="o">=</span>         <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/welcomeWindow.ui&#39;</span><span class="p">)</span>
 <span class="n">playerSelectWindow</span> <span class="o">=</span>    <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/playerSelectWindow.ui&#39;</span><span class="p">)</span>
-<span class="n">calculatedTeamWindow</span> <span class="o">=</span>  <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/calculatedTeamWindow.ui&#39;</span><span class="p">)</span>
 <span class="n">waitingCalculation</span> <span class="o">=</span>    <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/waitingCalculation.ui&#39;</span><span class="p">)</span>
+<span class="n">calculatedTeamWindow</span> <span class="o">=</span>  <span class="n">uic</span><span class="o">.</span><span class="n">loadUi</span><span class="p">(</span><span class="s">&#39;./.GUI/calculatedTeamWindow.ui&#39;</span><span class="p">)</span>
+
 
 <span class="c">#: To setup all the Qt models and Views of for each window one class is instanciated</span>
 <span class="n">wcwin</span> <span class="o">=</span> <span class="n">welcomeWind</span><span class="p">()</span>
 <span class="n">ctwin</span> <span class="o">=</span> <span class="n">calculateTeamWind</span><span class="p">(</span><span class="n">tgmA</span><span class="p">,</span> <span class="n">tgmB</span><span class="p">)</span>
-<span class="n">pswin</span> <span class="o">=</span> <span class="n">playerSelectWind</span><span class="p">()</span>
 <span class="n">waitwin</span> <span class="o">=</span> <span class="n">waitingCalculationWind</span><span class="p">()</span>
+<span class="n">pswin</span> <span class="o">=</span> <span class="n">playerSelectWind</span><span class="p">()</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -171,12 +172,68 @@ Es wird PyQt4 benutzt. Das ist eine Qt4 Implementierung für Python3.</p>
 <p><a class="reference external" href="http://pyqt.sourceforge.net/Docs/PyQt4/qmainwindow.html#details">http://pyqt.sourceforge.net/Docs/PyQt4/qmainwindow.html#details</a></p>
 <div class="section" id="welcomewindow">
 <h3>1.1 welcomeWindow<a class="headerlink" href="#welcomewindow" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/welcomeWindow.jpg" src="_images/welcomeWindow.jpg" />
 </div>
 <div class="section" id="playerselectwindow">
 <h3>1.2 playerSelectWindow<a class="headerlink" href="#playerselectwindow" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/playerSelectWindow.jpg" src="_images/playerSelectWindow.jpg" />
+</div>
+<div class="section" id="waitingcalculation">
+<h3>1.3 waitingCalculation<a class="headerlink" href="#waitingcalculation" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/waitingCalculation.jpg" src="_images/waitingCalculation.jpg" />
 </div>
 <div class="section" id="calculatedteamwindow">
-<h3>1.3     calculatedTeamWindow<a class="headerlink" href="#calculatedteamwindow" title="Permalink to this headline">¶</a></h3>
+<h3>1.4 calculatedTeamWindow<a class="headerlink" href="#calculatedteamwindow" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/calculatedTeamWindow.jpg" src="_images/calculatedTeamWindow.jpg" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Untermenü</th>
+<th class="head">Funktion</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-D<var>atei-</var></span></kbd></td>
+<td>-Speichern-</td></tr>
+</tbody>
+</table>
+</td>
+<td>generiert ein <a href="#id1"><span class="problematic" id="id2">*</span></a>json file mit den generierten Manschaften in .Result (TeamA.json; TeamB.json)</td>
+</tr>
+<tr class="row-odd"><td><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-D<var>atei-</var></span></kbd></td>
+<td>-Speichern unter-</td></tr>
+</tbody>
+</table>
+</td>
+<td>generiert ein <a href="#id3"><span class="problematic" id="id4">*</span></a>json file mit den generierten Manschaften</td>
+</tr>
+<tr class="row-even"><td><table class="first last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-D<var>atei-</var></span></kbd></td>
+<td>-print to <a href="#id5"><span class="problematic" id="id6">*</span></a>txt-</td></tr>
+</tbody>
+</table>
+</td>
+<td>generiert ein <a href="#id7"><span class="problematic" id="id8">*</span></a>txt file mit den generierten Manschaften</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -365,7 +422,7 @@ Daten &lt;&#8212;&#8212;&gt; Model &lt;&#8212;&#8212;&gt; Proxy &lt;&#8212;-&gt;
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.insertRows">
-<code class="descname">insertRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000062C6CF8&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.insertRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.insertRows" title="Permalink to this definition">¶</a></dt>
+<code class="descname">insertRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000058A9198&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.insertRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.insertRows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Insert rows at position
 :param position: Number of the first row, which is inserted
 :type position: int 
@@ -382,7 +439,7 @@ Daten &lt;&#8212;&#8212;&gt; Model &lt;&#8212;&#8212;&gt; Proxy &lt;&#8212;-&gt;
 
 <dl class="method">
 <dt id="TeamGenerator_GUI.TeamGeneratorModel.removeRows">
-<code class="descname">removeRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000062C6D68&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.removeRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.removeRows" title="Permalink to this definition">¶</a></dt>
+<code class="descname">removeRows</code><span class="sig-paren">(</span><em>position</em>, <em>rows</em>, <em>parent=&lt;PyQt4.QtCore.QModelIndex object at 0x00000000058A9208&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#TeamGeneratorModel.removeRows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.TeamGeneratorModel.removeRows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes rows from the table</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -626,6 +683,12 @@ Daten &lt;&#8212;&#8212;&gt; Model &lt;&#8212;&#8212;&gt; Proxy &lt;&#8212;-&gt;
 <dt id="TeamGenerator_GUI.welcomeWind">
 <em class="property">class </em><code class="descclassname">TeamGenerator_GUI.</code><code class="descname">welcomeWind</code><a class="reference internal" href="_modules/TeamGenerator_GUI.html#welcomeWind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.welcomeWind" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="TeamGenerator_GUI.welcomeWind.help">
+<code class="descname">help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#welcomeWind.help"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.welcomeWind.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows browser with documentation</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="TeamGenerator_GUI.welcomeWind.welcomeDone">
 <code class="descname">welcomeDone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/TeamGenerator_GUI.html#welcomeWind.welcomeDone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#TeamGenerator_GUI.welcomeWind.welcomeDone" title="Permalink to this definition">¶</a></dt>

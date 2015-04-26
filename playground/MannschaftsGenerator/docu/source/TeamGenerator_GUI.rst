@@ -1,4 +1,4 @@
-TeamGenerator_GUI module
+﻿TeamGenerator_GUI module
 ========================
 Das Module **TeamGenerator_GUI** erzeugt das GUI (Graphical User Interface) für den **Mannschaftsgenerator**.
 Es wird PyQt4 benutzt. Das ist eine Qt4 Implementierung für Python3.
@@ -16,15 +16,17 @@ Das Programm hat verschiedene Windows:
 		
 		#: Now loading the Qt Designer ".ui"-files and instanciating the user interfaces:
 		welcomeWindow =         uic.loadUi('./.GUI/welcomeWindow.ui')
-		playerSelectWindow =    uic.loadUi('./.GUI/playerSelectWindow.ui')     
+		playerSelectWindow =    uic.loadUi('./.GUI/playerSelectWindow.ui')
+		waitingCalculation =    uic.loadUi('./.GUI/waitingCalculation.ui')    
 		calculatedTeamWindow =  uic.loadUi('./.GUI/calculatedTeamWindow.ui')   
-		waitingCalculation =    uic.loadUi('./.GUI/waitingCalculation.ui')
+		
 		
 		#: To setup all the Qt models and Views of for each window one class is instanciated
 		wcwin = welcomeWind()
 		ctwin = calculateTeamWind(tgmA, tgmB)
+		waitwin = waitingCalculationWind()
 		pswin = playerSelectWind()
-		waitwin = waitingCalculationWind() 
+ 
 
 
 
@@ -37,18 +39,29 @@ http://pyqt.sourceforge.net/Docs/PyQt4/qmainwindow.html#details
 		
 1.1 welcomeWindow
 ^^^^^^^^^^^^^^^^^
+.. image:: welcomeWindow.jpg
 
 
 
 1.2 playerSelectWindow
 ^^^^^^^^^^^^^^^^^
+.. image:: playerSelectWindow.jpg
+
+1.3 waitingCalculation
+^^^^^^^^^^^^^^^^^^^^
+.. image:: waitingCalculation.jpg
 
 
-1.3	calculatedTeamWindow
+1.4 calculatedTeamWindow
 ^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
+.. image:: calculatedTeamWindow.jpg
+=============================	=============================================================================================
+Untermenü			Funktion
+=============================	=============================================================================================
+-Datei-  -Speichern-		generiert ein *json file mit den generierten Manschaften in .\Result (TeamA.json; TeamB.json)
+-Datei-  -Speichern unter-   	generiert ein *json file mit den generierten Manschaften
+-Datei-  -print to *txt-   	generiert ein *txt file mit den generierten Manschaften
+=============================	=============================================================================================
 
 Qt Model-View-Programming
 =========================

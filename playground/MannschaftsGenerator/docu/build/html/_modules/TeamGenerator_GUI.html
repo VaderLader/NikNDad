@@ -143,7 +143,8 @@
 <span class="sd">@author: SohnyBohny</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">webbrowser</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">PyQt4.QtCore</span> <span class="kn">as</span> <span class="nn">QtCore</span>
 <span class="kn">import</span> <span class="nn">PyQt4.QtGui</span> <span class="kn">as</span> <span class="nn">QtGui</span>
 <span class="c">#from PyQt4.QtGui import *</span>
@@ -332,9 +333,19 @@
 </div>
 <div class="viewcode-block" id="welcomeWind"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.welcomeWind">[docs]</a><span class="k">class</span> <span class="nc">welcomeWind</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">welcomeWindow</span><span class="o">.</span><span class="n">actionDocumentation</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">help</span><span class="p">())</span>
         <span class="n">welcomeWindow</span><span class="o">.</span><span class="n">startWeiterBtn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">welcomeDone</span><span class="p">())</span>
         <span class="n">welcomeWindow</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     
+<div class="viewcode-block" id="welcomeWind.help"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.welcomeWind.help">[docs]</a>    <span class="k">def</span> <span class="nf">help</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Shows browser with documentation</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">pathname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
+        <span class="n">pathDocu</span> <span class="o">=</span> <span class="s">&#39;/docu/build/html/index.html&#39;</span>
+        <span class="n">abspath</span> <span class="o">=</span> <span class="s">&#39;file:///&#39;</span><span class="o">+</span><span class="n">pathname</span> <span class="o">+</span> <span class="n">pathDocu</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">abspath</span><span class="p">)</span>
+</div>
 <div class="viewcode-block" id="welcomeWind.welcomeDone"><a class="viewcode-back" href="../TeamGenerator_GUI.html#TeamGenerator_GUI.welcomeWind.welcomeDone">[docs]</a>    <span class="k">def</span> <span class="nf">welcomeDone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">### welcomeDone ###&quot;</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="s">&quot; len(tgmF.get_ptable())=&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tgmF</span><span class="o">.</span><span class="n">get_ptable</span><span class="p">()))</span>
