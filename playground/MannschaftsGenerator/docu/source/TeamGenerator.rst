@@ -1,6 +1,5 @@
 TeamGenerator module
 ====================
-dslhkfhlk
 
 TeamGenerator
 -------------

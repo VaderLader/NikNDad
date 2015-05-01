@@ -1,5 +1,5 @@
-﻿TeamGenerator_GUI module
-========================
+﻿TeamGenerator_GUI
+=================
 Das Module **TeamGenerator_GUI** erzeugt das GUI (Graphical User Interface) für den **Mannschaftsgenerator**.
 Es wird PyQt4 benutzt. Das ist eine Qt4 Implementierung für Python3.
 
@@ -11,17 +11,17 @@ Das Programm hat verschiedene Windows:
 	
 	Windows aus main::
 	
-		 #: Needed to start Qt
+		#: Needed to start Qt
 		app = QtGui.QApplication(sys.argv)
 		
-		#: Now loading the Qt Designer ".ui"-files and instanciating the user interfaces:
+		#: Load the Qt Designer ".ui"-files and instantiate the user interfaces:
 		welcomeWindow =         uic.loadUi('./.GUI/welcomeWindow.ui')
 		playerSelectWindow =    uic.loadUi('./.GUI/playerSelectWindow.ui')
 		waitingCalculation =    uic.loadUi('./.GUI/waitingCalculation.ui')    
 		calculatedTeamWindow =  uic.loadUi('./.GUI/calculatedTeamWindow.ui')   
 		
 		
-		#: To setup all the Qt models and Views of for each window one class is instanciated
+		#: Setup all the Qt models and views. For each window one class is instantiated
 		wcwin = welcomeWind()
 		ctwin = calculateTeamWind(tgmA, tgmB)
 		waitwin = waitingCalculationWind()
@@ -33,6 +33,7 @@ Das Programm hat verschiedene Windows:
 Es werden QWidgets mit dem QT Designer gemacht und mit uic.loadUi geladen.
 
 Für weitere Informationen siehe:
+
 http://pyqt.sourceforge.net/Docs/PyQt4/qwidget.html#details
 
 http://pyqt.sourceforge.net/Docs/PyQt4/qmainwindow.html#details
@@ -55,40 +56,44 @@ http://pyqt.sourceforge.net/Docs/PyQt4/qmainwindow.html#details
 1.4 calculatedTeamWindow
 ^^^^^^^^^^^^^^^^^^^^^^^^
 .. image:: calculatedTeamWindow.jpg
-=============================	=============================================================================================
-Untermenü						Funktion
-=============================	=============================================================================================
--Datei-  -Speichern-			generiert ein *json file mit den generierten Manschaften in .\Result (TeamA.json; TeamB.json)
--Datei-  -Speichern unter-   	generiert ein *json file mit den generierten Manschaften
--Datei-  -print to *txt-   		generiert ein *txt file mit den generierten Manschaften
-=============================	=============================================================================================
+================================	=========================================================================================================
+Untermenü							Funktion
+================================	=========================================================================================================
+``Datei`` ``Speichern``				generiert ein .json file mit den generierten Manschaften in .\Result (TeamA.json; TeamB.json)
+``Datei`` ``Speichern unter`` 		generiert ein .json file mit den generierten Manschaften
+``Datei`` ``print to .txt`` 		generiert ein .txt file mit den generierten Manschaften
+================================	=========================================================================================================
 
-Qt Model-View-Programming
-=========================
+2. Qt Model-View-Programming
+-------------------------
 
 http://doc.qt.io/qt-4.8/model-view-programming.html
 
-Model
------
+2.1 Model
+^^^^^^^^^
 Das Model ist die Schnittstelle über die ein View auf die Daten zugreift. Die Daten gehören nicht zum Model sondern zu einer anderen Klasse.
 Wenn man die Daten in einer Tabelle darstellen will benutzt man am besten das **QAbstractTableModel**.
 Ein **Team** hat ja eine Liste von playern und die sollen  immer in einer Tabelle aufgelistet werden.
 Das Model heist ``TeamGeneratorModel`` und implementiert ``QtCore.QAbstractTableModel``.
 
-Das Model regelt also wie und welche Daten im View dargestellt werden. Dazu muss mann verschiedene Methoden implementieren die vom View benutzt werden.
+Das Model regelt also wie und welche Daten im View dargestellt werden. Dazu muss man verschiedene Methoden implementieren die vom View benutzt werden.
+
+.. image:: modelview-models.png
+http://doc.qt.io/qt-4.8/images/modelview-models.png
   
-View
-----
+2.2 View
+^^^^^^^^
 Für die Darstellung der Daten in Tabellen Form wird ein ``QTableView`` implementiert.  
 
 http://pyqt.sourceforge.net/Docs/PyQt4/qtableview.html
 
-Proxy model
------------
+2.3 Proxy model
+^^^^^^^^^^^^^^
 Für einen View ist ein Proxy model Objekt das gleiche wie ein Model. Der View kann über ein oder viele Proxy model auf das Grundmodel und darüber auf die die Daten zugreifen.
 ``QtGui.QSortFilterProxyModel`` ist ein solches ProxyModel das verschiedene Sortierungen bereitstellt.
 
-	
+2.4 Von den Daten bis zum View
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Table der verschiedenen benutzten Fälle:
 
 	================= ====== ========= ===== ======== ====== ==============
@@ -117,10 +122,7 @@ Gesammt sieht das dann zum Beispiel so aus::
 		
 		
 
-http://doc.qt.io/qt-4.8/images/modelview-models.png	
 
-
-.. image:: modelview-models.png
 
 
 2. Qt 
@@ -142,8 +144,8 @@ Das Model regelt wie und welche Daten im View dargestellt werden. Dazu muss mann
 
 
 
-Was Anderes
-===========
+3. TeamGenerator_GUI module
+---------------------------
 
 	
 .. automodule:: TeamGenerator_GUI

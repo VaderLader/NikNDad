@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Feb 28 16:43:55 2015
-
-@author: SohnyBohny
-"""
 
 import webbrowser
 import sys, os
@@ -39,7 +34,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         :type section: 
         :param orientation:
         :type orientation: QtCore.Qt
-        :returns: Header - this is th title of each column
+        :returns: Header - this is the title of each column
         :rtype: str
         '''
         
@@ -67,7 +62,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         :param role: role
         :type role: QtCore.Qt.DisplayRole
         :returns: Table Cell Value
-        :rtype: str/int/float
+        :rtype: str / int / float
         
         '''
         row = index.row()
@@ -89,7 +84,11 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
             return self.__ptable[row].name
             
     def rowCount(self, parent):
-        ''' Number of rows in the table '''
+        ''' Number of rows in the table 
+		
+		:returns: len(self.__ptable)
+        :rtype: int
+		'''
         return len(self.__ptable)
         
     def columnCount(self, parent):
@@ -156,7 +155,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         return True
   
     def removeRows(self, position, rows, parent = QtCore.QModelIndex()):
-        """Removes rows from the table 
+        '''Removes rows from the table 
 
         :param position: Number of the first row, which is removed
         :type positionn: int 
@@ -164,7 +163,7 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
         :type rows: int 
         :returns: True
         :rtype: bool
-        """
+        '''
        
         self.beginRemoveRows(parent, position, position + rows - 1)
         
@@ -177,8 +176,8 @@ class TeamGeneratorModel(QtCore.QAbstractTableModel):
 
     
     def sort(self, Ncol, order):
-         """Sort table by given column number.
-         """
+         '''Sort table by given column number.
+         '''
          #self.emit(SIGNAL("layoutAboutToBeChanged()"))
          self.__ptable = sorted(self.__ptable, key=QtCore.operator.itemgetter(Ncol))        
          if order == QtCore.Qt.DescendingOrder:
@@ -427,8 +426,6 @@ class calculateTeamWind:
     def refreshGUI(self):
         ''' Shows refreshed data in the two TableViews (tableView_A, tableView_B) 
         
-        :params : -
-        :returns: -        
         '''        
         #: Data of teamA.players is connected with the View tableView_A
         #: in three steps: 
@@ -598,10 +595,7 @@ class playerSelectWind:
         self.refreshGUI()
       
     def refreshGUI(self):
-        ''' Shows refreshed data in the two TableViews (tableView_full, tableView_A) 
-        
-        :params : -
-        :returns: -        
+        ''' Shows refreshed data in the two TableViews (tableView_full, tableView_A)         
         '''
         #: Data of fullTeam.players is connected with the View tableView_full
         #: in three steps: 

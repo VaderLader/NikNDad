@@ -21,3 +21,40 @@ Some sphinx examples
 
 *Kursiv*
 
+emphasis – alternate spelling for *emphasis*
+
+strong – alternate spelling for **strong**
+
+literal – alternate spelling for ``literal``
+
+subscript – subscript text
+
+superscript – superscript text
+
+title-reference – for titles of books, periodicals, and other materials
+
+///////////////////////////////////////////////////////////////////////
+
+one asterisk: *text* for emphasis (italics),
+
+two asterisks: **text** for strong emphasis (boldface), and
+
+backquotes: ``text`` for code samples.
+
+////////////////////////////////////
+
+# with overline, for parts
+###############################
+
+* with overline, for chapters
+******************************
+
+
+for subsections
+---------------
+
+for subsubsections
+^^^^^^^^^^^^^^^^^^
+
+for paragraphs
+""""""""""""""

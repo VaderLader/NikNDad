@@ -43,9 +43,10 @@ class Team:
 
     def inputPlayer(self):
         """
-        Nicht benutzt
+        add a player by console input 
+		
         :returns: The newly input player.
-        :rtype: Player.
+        :rtype: Player
         """
         #TODO: Delete or not?
         name = input('Wie heißt der neue Spieler?\n')
@@ -103,7 +104,7 @@ class Team:
         #self.players.pop( self.players.index(p) )
         
     def removeAllPlayers(self):
-        '''Removes all players of a team
+        '''Removes all players of it's team
         
         :param: None
         :returns: None

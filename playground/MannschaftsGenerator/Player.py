@@ -1,10 +1,7 @@
 class Player:
     """Class for Players
     
-       Usage: Player({'name': 'Vorname Name',
-                      'attackpoints': 0,
-                      'defencepoints': 0, 
-                      'keeperpoint': 0})
+       Usage:  Player({'name': 'Vorname Name', 'attackpoints': 0, 'defencepoints': 0, 'keeperpoint': 0})
     """
     player_counter = 0  #: static member
     weight_attack = 3 #: Gewichtung

@@ -5,9 +5,24 @@ import json
 from collections import OrderedDict
 
 class OrderedEncoder(json.JSONEncoder):
-    ''' Encoding objects by using OrderedDict'''
+    ''' Encoding objects by using a OrderedDict
+        Any object can be passed to this class and it becomes encoded
+    '''
+        #: Example for encoding myObject and writing it to file: 
+        #: encoded_object = OrderedEncoder().encode(self.__dict__['myObject'])
+        #: f = open("c:\file.json","w")
+        #: f.write(encoded_object)
+        #: f.flush()
     
     def default(self, obj):
+        ''' This method defines how the object is encoded
+        
+        :param obj: object you want to serialize
+        :type obj:  object
+        :returns: other object wich can be serialized
+        :rtype: object
+        
+        '''
         #print ('default(', repr(obj), ')')
         d = OrderedDict()
                 
@@ -24,15 +39,30 @@ class OrderedEncoder(json.JSONEncoder):
 
 
 class OrderedDecoder(json.JSONDecoder):
-    ''' Decoding objects by using OrderedDict '''
+    ''' Decoding objects by using OrderedDict
+        Any object which was encoded by the "OrderedEncoder" can be decoded 
+    '''    
+       
+       # Example for decoding from file and creating myObject: 
+               
+        #f = open("c:\file.json","r")
+        #self.__dict__["myObject"] = OrderedDecoder().decode(f.read())        
+        
+        
+
     
     def __init__(self):
         json.JSONDecoder.__init__(self, object_pairs_hook=self.dict_to_object)
 
     def dict_to_object(self, dd):
-        """ Argument is an dictionary with all memberattributes necessary to
-        construct the object
-        """        
+        ''' Instantiates the object using the encoded data
+        
+        :param dd: dictionary with all memberattributes necessary to construct the object
+        :type obj:  OrderedDict
+        :returns: encoded object
+        :rtype: type of the object
+
+        '''        
         #print("___ OrderedDecoder.dict_to_object(dd) ___")
         #print(dd) 
         d = OrderedDict(dd)

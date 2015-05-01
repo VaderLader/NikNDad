@@ -9,8 +9,7 @@ import itertools
 
 
 class TeamGenerator:
-    ''' TeamGenerator class for Calculating best team distributions 
-        COOOL!    
+    ''' TeamGenerator class for Calculating best team distributions    
     '''   
     def __init__(self):
         ''' Constructor: TeamGenerator() '''
