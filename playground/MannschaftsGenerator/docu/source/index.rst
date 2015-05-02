@@ -3,15 +3,28 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Mannschafts Generator's documentation!
-=================================================
-Willkomen zur Mannschafts-Generator-Dokumentation
+.. |SB| replace:: S\ :sup:`ohny`\ B\ :sub:`ohny`
 
+Mannschafts Generator Dokumentation
+====================================
+:Author: SohnyBohny
+:Release: 1.0.0
+
+**Willkommen** am |today| zur **Mannschafts-Generator-Dokumentation**.
+
+///////////////////////////////////////////////////////////////////////
+
+| Dieses Programm unterstützt Sie beim Erstellen von Mannschaften.
+| Wenn Sie x Mitspieler haben und daraus 2 etwa gleich starke Mannschaften zusammenstellen wollen,
+| dann wird Ihnen hier geholfen.
+
+| **Viel Spaß**
+| |SB|
 
 Contents:
 =========
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    
    modules
    References

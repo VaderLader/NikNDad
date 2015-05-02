@@ -1,7 +1,9 @@
 JSON Codierung und Encodierung 
 =====================================
-Beispiel für eine Codierung in json format für das Object ``myObject``
-----------------------------------------------------------------
+Encoding
+---------
+Beispiel für eine Encodierung ins json format für das Object ``myObject``
+
 ::
 	
 	# Example for encoding myObject and writing it to file: 
@@ -11,8 +13,9 @@ Beispiel für eine Codierung in json format für das Object ``myObject``
 	f.flush()
 		
 		
-Beispiel für das Erzeugen von ``myObject`` aus einem json-file
----------------------------------------------------------------
+Decoding
+--------	
+Beispiel für das Dekodieren eines json-file und daraus der Erzeugung von ``myObject``
 ::
 	
 	# Example for decoding from file and creating myObject: 

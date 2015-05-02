@@ -1,8 +1,15 @@
 .. toctree::
-   :maxdepth: 4
+	:maxdepth: 5
 
-   Player
-   Team
-   TeamGenerator
-   TeamGenerator_GUI
-   json_object_en_n_decoder
+	Hilfsfuntionen
+	==============
+	
+	Player
+	Team
+	TeamGenerator
+	json_object_en_n_decoder
+	
+	Hauptprogramm und GUI
+	=====================
+	
+	TeamGenerator_GUI

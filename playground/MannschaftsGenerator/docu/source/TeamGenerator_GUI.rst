@@ -94,7 +94,11 @@ Für einen View ist ein Proxy model Objekt das gleiche wie ein Model. Der View k
 
 2.4 Von den Daten bis zum View
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Table der verschiedenen benutzten Fälle:
+Die Daten **[Liste von Spielern eine Teams]** sind mit dem Daten Model **[TeamGeneratorModel]** verbunden. Das Daten Model ist über einen zwischen geschalteten proxy **[PlayerFilterProxyModel]** mit dem View **[QtableView]** verbunden.
+
+Das Model regelt wie und welche Daten im View dargestellt werden. Dazu muss mann verschiedene Methoden implementieren die vom View benutzt werden.
+
+*Table der verschiedenen benutzten Fälle:*
 
 	================= ====== ========= ===== ======== ====== ==============
 	data              <-->   model     <-->  proxy    <-->   view
@@ -103,8 +107,9 @@ Table der verschiedenen benutzten Fälle:
 	teamA.players     <-->   tgmA      <-->  proxyA   <-->   tableView_A
 	teamB.players     <-->   tgmB      <-->  proxyB   <-->   tableView_B
 	================= ====== ========= ===== ======== ====== ==============
+/////////////////////////////////////////////////////////
 
-Gesammt sieht das dann zum Beispiel so aus::
+*Gesammt sieht das dann zum Beispiel so aus*::
 
 		#: Data of teamA.players is connected with the View tableView_A
         #: in three steps: 
@@ -119,29 +124,6 @@ Gesammt sieht das dann zum Beispiel so aus::
 		#: teamA.players <--> tgmA <--> proxyA <--> tableView_A
         playerSelectWindow.tableView_A.setModel(proxyA)
 		
-		
-		
-
-
-
-
-2. Qt 
------
-
-
-
-
-
-
-	
-
- Die Daten [tg.fullTeam.players] sind mit dem Daten Model [TeamGeneratorModel] verbunden und das Daten Model ist mit dem View [QtableView] verbunden.
-	Daten <------> Model <------> View
- 	Daten <------> Model <------> Proxy <----> , ... , Proxy <----> View
- 
- 
-Das Model regelt wie und welche Daten im View dargestellt werden. Dazu muss mann verschiedene Methoden implementieren die vom View benutzt werden.
-
 
 
 3. TeamGenerator_GUI module
