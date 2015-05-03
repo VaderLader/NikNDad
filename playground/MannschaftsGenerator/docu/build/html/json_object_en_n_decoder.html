@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JSON Codierung und Encodierung &mdash; Mannschafts Generator 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.2.0/flatly/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="_static/Fussball.ico"/>
+    <link rel="top" title="Mannschafts Generator 1.0.0 documentation" href="index.html" />
+    <link rel="up" title="&lt;no title&gt;" href="modules.html" />
+    <link rel="next" title="TeamGenerator_GUI" href="TeamGenerator_GUI.html" />
+    <link rel="prev" title="TeamGenerator module" href="TeamGenerator.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Mannschafts Generator</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Player.html">Player module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Team.html">Team module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator.html">TeamGenerator module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">JSON Codierung und Encodierung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TeamGenerator_GUI.html">TeamGenerator_GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">Quellen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sphinx_examples.html">Beispiele zur Formatierung mit <cite>sphinx</cite></a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">JSON Codierung und Encodierung</a><ul>
+<li><a class="reference internal" href="#encoding">Encoding</a></li>
+<li><a class="reference internal" href="#decoding">Decoding</a></li>
+<li><a class="reference internal" href="#module-json_object_en_n_decoder">json_object_en_n_decoder module</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="TeamGenerator.html" title="Previous Chapter: TeamGenerator module"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; TeamGenerator mo...</span>
+    </a>
+  </li>
+  <li>
+    <a href="TeamGenerator_GUI.html" title="Next Chapter: TeamGenerator_GUI"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">TeamGenerator_GU... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/json_object_en_n_decoder.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="json-codierung-und-encodierung">
+<h1>JSON Codierung und Encodierung<a class="headerlink" href="#json-codierung-und-encodierung" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="encoding">
+<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this headline">¶</a></h2>
+<p>Beispiel für eine Encodierung ins json format für das Object <code class="docutils literal"><span class="pre">myObject</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Example for encoding myObject and writing it to file:</span>
+<span class="n">encoded_object</span> <span class="o">=</span> <span class="n">OrderedEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&#39;myObject&#39;</span><span class="p">])</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;c:</span><span class="se">\f</span><span class="s">ile.json&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">encoded_object</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decoding">
+<h2>Decoding<a class="headerlink" href="#decoding" title="Permalink to this headline">¶</a></h2>
+<p>Beispiel für das Dekodieren eines json-files und daraus die Erzeugung von <code class="docutils literal"><span class="pre">myObject</span></code></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Example for decoding from file and creating myObject:</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;c:</span><span class="se">\f</span><span class="s">ile.json&quot;</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&quot;myObject&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDecoder</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-json_object_en_n_decoder">
+<span id="json-object-en-n-decoder-module"></span><h2>json_object_en_n_decoder module<a class="headerlink" href="#module-json_object_en_n_decoder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="json_object_en_n_decoder.OrderedDecoder">
+<em class="property">class </em><code class="descclassname">json_object_en_n_decoder.</code><code class="descname">OrderedDecoder</code><a class="reference internal" href="_modules/json_object_en_n_decoder.html#OrderedDecoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#json_object_en_n_decoder.OrderedDecoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">json.decoder.JSONDecoder</span></code></p>
+<p>Decoding objects by using OrderedDict
+Any object which was encoded by the &#8220;OrderedEncoder&#8221; can be decoded</p>
+<dl class="method">
+<dt id="json_object_en_n_decoder.OrderedDecoder.dict_to_object">
+<code class="descname">dict_to_object</code><span class="sig-paren">(</span><em>dd</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/json_object_en_n_decoder.html#OrderedDecoder.dict_to_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#json_object_en_n_decoder.OrderedDecoder.dict_to_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiates the object using the encoded data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dd</strong> &#8211; dictionary with all memberattributes necessary to construct the object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">encoded object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">type of the object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="json_object_en_n_decoder.OrderedEncoder">
+<em class="property">class </em><code class="descclassname">json_object_en_n_decoder.</code><code class="descname">OrderedEncoder</code><span class="sig-paren">(</span><em>skipkeys=False</em>, <em>ensure_ascii=True</em>, <em>check_circular=True</em>, <em>allow_nan=True</em>, <em>sort_keys=False</em>, <em>indent=None</em>, <em>separators=None</em>, <em>default=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/json_object_en_n_decoder.html#OrderedEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#json_object_en_n_decoder.OrderedEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">json.encoder.JSONEncoder</span></code></p>
+<p>Encoding objects by using a OrderedDict
+Any object can be passed to this class and it becomes encoded</p>
+<dl class="method">
+<dt id="json_object_en_n_decoder.OrderedEncoder.default">
+<code class="descname">default</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/json_object_en_n_decoder.html#OrderedEncoder.default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#json_object_en_n_decoder.OrderedEncoder.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method defines how the object is encoded</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><em>object</em></a>) &#8211; object you want to serialize</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">other object wich can be serialized</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)">object</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, SohnyBohny.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -14,9 +14,9 @@ Mannschafts Generator Dokumentation
 
 ///////////////////////////////////////////////////////////////////////
 
-| Dieses Programm unterstützt Sie beim Erstellen von Mannschaften.
-| Wenn Sie x Mitspieler haben und daraus 2 etwa gleich starke Mannschaften zusammenstellen wollen,
-| dann wird Ihnen hier geholfen.
+| Dieses Programm unterstützt das Erstellen von Mannschaften.
+| Wenn man x Mitspieler hat und daraus 2 etwa gleich starke Mannschaften zusammenstellen will,
+| dann wird einem hier geholfen.
 
 | **Viel Spaß**
 | |SB|

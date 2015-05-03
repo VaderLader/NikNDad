@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TeamGenerator &mdash; Mannschafts Generator 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.2.0/flatly/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/Fussball.ico"/>
+    <link rel="top" title="Mannschafts Generator 1.0.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Mannschafts Generator</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../Player.html">Player module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Team.html">Team module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TeamGenerator.html">TeamGenerator module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../json_object_en_n_decoder.html">JSON Codierung und Encodierung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TeamGenerator_GUI.html">TeamGenerator_GUI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">Quellen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx_examples.html">Beispiele zur Formatierung mit <cite>sphinx</cite></a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <h1>Source code for TeamGenerator</h1><div class="highlight"><pre>
+<span class="c">#To start from within PythonShell 3.4.2 type:</span>
+<span class="c">#</span>
+<span class="c">#exec(open(&quot;/home/pi/GitHub/NikNDad/playground/MannschaftsGenerator/MannschaftsGenerator.py&quot;).read())</span>
+<span class="c">#</span>
+<span class="kn">import</span> <span class="nn">Team</span>
+<span class="kn">import</span> <span class="nn">Player</span>
+<span class="kn">import</span> <span class="nn">json_object_en_n_decoder</span> <span class="kn">as</span> <span class="nn">myjson</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+
+<div class="viewcode-block" id="TeamGenerator"><a class="viewcode-back" href="../TeamGenerator.html#TeamGenerator.TeamGenerator">[docs]</a><span class="k">class</span> <span class="nc">TeamGenerator</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39; TeamGenerator class for Calculating best team distributions    </span>
+<span class="sd">    &#39;&#39;&#39;</span>   
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Constructor: TeamGenerator() &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span> <span class="o">=</span> <span class="n">Team</span><span class="o">.</span><span class="n">Team</span><span class="p">({</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;A-Team&#39;</span><span class="p">,</span> 
+                                <span class="s">&#39;players&#39;</span><span class="p">:</span> <span class="p">[]</span>
+                                <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">teamB</span> <span class="o">=</span> <span class="n">Team</span><span class="o">.</span><span class="n">Team</span><span class="p">({</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;B-Team&#39;</span><span class="p">,</span> 
+                                <span class="s">&#39;players&#39;</span><span class="p">:</span> <span class="p">[]</span>
+                                <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fullTeam</span> <span class="o">=</span> <span class="n">Team</span><span class="o">.</span><span class="n">Team</span><span class="p">({</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Full-Team&#39;</span><span class="p">,</span> 
+                                <span class="s">&#39;players&#39;</span><span class="p">:</span> <span class="p">[]</span>
+                                <span class="p">})</span>
+        
+<span class="c">#==============================================================================   </span>
+<div class="viewcode-block" id="TeamGenerator.binomial"><a class="viewcode-back" href="../TeamGenerator.html#TeamGenerator.TeamGenerator.binomial">[docs]</a>    <span class="k">def</span> <span class="nf">binomial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Calculate (n k) = n!/((n-k)!*k!) </span>
+<span class="sd">            = ( n*(n-1)*...*(n-k+1) )/(1*2*3...*n)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">res</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="n">i</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;binomial(&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="s">&quot;,&quot;</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="s">&quot;)=&quot;</span><span class="p">,</span> <span class="n">res</span> <span class="p">)</span>       
+        <span class="k">return</span> <span class="n">res</span>
+            
+         </div>
+<div class="viewcode-block" id="TeamGenerator.berechneMannschaften"><a class="viewcode-back" href="../TeamGenerator.html#TeamGenerator.TeamGenerator.berechneMannschaften">[docs]</a>    <span class="k">def</span> <span class="nf">berechneMannschaften</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Method to calculate and select two teams which are most equal.</span>
+<span class="sd">            At the beginning all players have to be in teamA.</span>
+<span class="sd">            After the calculation some players are in teamB also.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;In berechneMannschaften()&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">Player</span><span class="o">.</span><span class="n">Player</span><span class="p">({</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;NullPlayer&#39;</span><span class="p">,</span>
+                                           <span class="s">&#39;attackpoints&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                           <span class="s">&#39;defencepoints&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+                                           <span class="s">&#39;keeperpoints&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}))</span>
+        
+        <span class="n">spielerliste</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)))</span> 
+        <span class="c">#print(&quot;self.teamA.players=&quot;,spielerliste)</span>
+        
+        <span class="c"># lTeamA keeps the List of all possible TeamAs, wich can be setup</span>
+        <span class="c"># with different player combinations        </span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">combos</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">))),</span><span class="n">k</span><span class="p">)</span>
+                                        
+        <span class="n">lTeamA</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combos</span><span class="p">)</span>  
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Anzahl der verschiedenen Teams = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lTeamA</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="c">#print(&quot;Verschiedene Teams lTeamA =&quot;,lTeamA)</span>
+        
+        <span class="c"># Erzeuge das jeweils passenden Team B</span>
+        <span class="n">lTeamB</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">lTeamA</span><span class="p">:</span>
+            <span class="n">dummy</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">spielerliste</span><span class="p">)</span>
+            <span class="c">#print(&quot;e=&quot;,e)</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
+              <span class="c">#  print (&quot;p=&quot;,str(p))</span>
+                <span class="n">dummy</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+            <span class="n">lTeamB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dummy</span><span class="p">))</span>
+        <span class="c">#print(&quot;lTeamB =&quot;,lTeamB)</span>
+
+        <span class="c"># Berechnung von der Teamstärkendifferenz</span>
+        <span class="n">teampointsDif</span> <span class="o">=</span> <span class="p">[]</span>
+             
+        
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">lTeamA</span><span class="p">:</span>
+            <span class="n">tDif</span>  <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">tDif</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">playerpoints</span>
+            <span class="n">teampointsDif</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tDif</span><span class="p">)</span>
+        <span class="c">#print(&quot;teampointsDif=&quot;,teampointsDif)</span>
+        
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">lTeamB</span><span class="p">:</span>
+            <span class="n">tDif</span>  <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c">#print (&quot;p=&quot;,p)</span>
+                <span class="n">tDif</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">playerpoints</span>
+            <span class="n">teampointsDif</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">teampointsDif</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">-</span> <span class="n">tDif</span><span class="p">)</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span><span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;len(teampointsDif)=&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">teampointsDif</span><span class="p">))</span>
+        <span class="c">#print(&quot;teampointsDif=&quot;,teampointsDif)</span>
+        
+       
+        <span class="c"># Search for the minimum difference</span>
+        <span class="n">indexmin</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">valuemin</span> <span class="o">=</span> <span class="n">teampointsDif</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">teampointsDif</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">e</span> <span class="o">&lt;</span> <span class="n">valuemin</span><span class="p">:</span>
+                <span class="n">valuemin</span> <span class="o">=</span> <span class="n">e</span>
+                <span class="n">indexmin</span> <span class="o">=</span> <span class="n">index</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span> 
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Valuemin=&quot;</span><span class="p">,</span> <span class="n">valuemin</span><span class="p">,</span> <span class="s">&quot;  indexmin=&quot;</span><span class="p">,</span> <span class="n">indexmin</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Best Team:&quot;</span><span class="p">,</span> <span class="n">lTeamA</span><span class="p">[</span><span class="n">indexmin</span><span class="p">],</span> <span class="s">&quot; vs. &quot;</span><span class="p">,</span><span class="n">lTeamB</span><span class="p">[</span><span class="n">indexmin</span><span class="p">])</span>
+
+        <span class="c"># Shift Players from teamA to teamB</span>
+        <span class="c">#     </span>
+        <span class="n">poplist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lTeamB</span><span class="p">[</span><span class="n">indexmin</span><span class="p">])</span>
+        <span class="c">#print(&quot;poplist=&quot;,poplist)</span>
+        <span class="n">poplist</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="c">#print(&quot;poplist=&quot;,poplist)</span>
+        
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span>  <span class="n">poplist</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">removeByIndex</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        
+
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">players</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;NullPlayer&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">attackpoints</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">defencepoints</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">keeperpoints</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            
+                            <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">removePlayer</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+                            <span class="k">print</span> <span class="p">(</span><span class="s">&#39;pop&#39;</span><span class="p">)</span>
+                
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">players</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;NullPlayer&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">attackpoints</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">defencepoints</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">keeperpoints</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="n">removePlayer</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+                            <span class="k">print</span> <span class="p">(</span><span class="s">&#39;pop&#39;</span><span class="p">)</span>
+                
+                
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">())</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="k">print</span><span class="p">())</span>          
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;End of berechneMannschaften()&quot;</span><span class="p">)</span>
+<span class="c">#==============================================================================</span>
+    </div>
+<div class="viewcode-block" id="TeamGenerator.sampleTeamSetup"><a class="viewcode-back" href="../TeamGenerator.html#TeamGenerator.TeamGenerator.sampleTeamSetup">[docs]</a>    <span class="k">def</span> <span class="nf">sampleTeamSetup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Method to put some dummy players in teamA&#39;&#39;&#39;</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;-------- sampleTeamSetup called ----&#39;</span><span class="p">)</span>
+        <span class="n">Otto</span> <span class="o">=</span> <span class="n">Player</span><span class="o">.</span><span class="n">Player</span><span class="p">({</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Otto de Motto&#39;</span><span class="p">,</span>
+                              <span class="s">&#39;attackpoints&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                              <span class="s">&#39;defencepoints&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> 
+                              <span class="s">&#39;keeperpoints&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">})</span>
+        <span class="n">Popo</span> <span class="o">=</span> <span class="n">Player</span><span class="o">.</span><span class="n">Player</span><span class="p">({</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Popo di Mare&#39;</span><span class="p">,</span>
+                              <span class="s">&#39;attackpoints&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+                              <span class="s">&#39;defencepoints&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> 
+                              <span class="s">&#39;keeperpoints&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+        <span class="n">Roko</span> <span class="o">=</span> <span class="n">Player</span><span class="o">.</span><span class="n">Player</span><span class="p">({</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Roko de Popo&#39;</span><span class="p">,</span>
+                              <span class="s">&#39;attackpoints&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+                              <span class="s">&#39;defencepoints&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> 
+                              <span class="s">&#39;keeperpoints&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">})</span>
+        <span class="n">Beka</span> <span class="o">=</span> <span class="n">Player</span><span class="o">.</span><span class="n">Player</span><span class="p">({</span><span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Beka am Weka&#39;</span><span class="p">,</span>
+                              <span class="s">&#39;attackpoints&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                              <span class="s">&#39;defencepoints&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> 
+                              <span class="s">&#39;keeperpoints&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">Otto</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">Popo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">Roko</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">addPlayer</span><span class="p">(</span><span class="n">Beka</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">())</span>
+   
+<span class="c">#==============================================================================</span>
+    </div>
+<div class="viewcode-block" id="TeamGenerator.dumpTeams"><a class="viewcode-back" href="../TeamGenerator.html#TeamGenerator.TeamGenerator.dumpTeams">[docs]</a>    <span class="k">def</span> <span class="nf">dumpTeams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s">&#39;./&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; method to write the two teams to disk &#39;&#39;&#39;</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;-------- Calling dumpTeams(&quot;</span><span class="p">,</span><span class="n">location</span><span class="p">,</span> <span class="s">&quot;) ----&quot;</span><span class="p">)</span>
+        <span class="c"># teamA</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dumpTeam</span><span class="p">(</span><span class="s">&#39;teamA&#39;</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="s">&#39;ATeam.json&#39;</span><span class="p">)</span>
+      
+        <span class="c"># teamB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dumpTeam</span><span class="p">(</span><span class="s">&#39;teamB&#39;</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="s">&#39;BTeam.json&#39;</span><span class="p">)</span>
+        
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;----- Encoding finished and written to file !!!-----------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="TeamGenerator.dumpTeam"><a class="viewcode-back" href="../TeamGenerator.html#TeamGenerator.TeamGenerator.dumpTeam">[docs]</a>    <span class="k">def</span> <span class="nf">dumpTeam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">teamName</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; dumpTeam(&lt;Name of the Team Variable&gt;, &lt;filesystem path&gt;,</span>
+<span class="sd">                     &lt;jason filename&gt;) &#39;&#39;&#39;</span>        
+        <span class="n">encoded_object</span> <span class="o">=</span> <span class="n">myjson</span><span class="o">.</span><span class="n">OrderedEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">teamName</span><span class="p">])</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>        
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;File &#39;&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span><span class="s">&quot;&#39; written with &quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">encoded_object</span><span class="p">),</span><span class="s">&quot; Chars&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        </div>
+<div class="viewcode-block" id="TeamGenerator.loadTeam"><a class="viewcode-back" href="../TeamGenerator.html#TeamGenerator.TeamGenerator.loadTeam">[docs]</a>    <span class="k">def</span> <span class="nf">loadTeam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">teamName</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; loadTeam(&lt;Name of the Team Variable&gt;, &lt;filesystem path&gt;,</span>
+<span class="sd">                     &lt;jason filename&gt;)&#39;&#39;&#39;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">location</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>         
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">teamName</span><span class="p">]</span> <span class="o">=</span> <span class="n">myjson</span><span class="o">.</span><span class="n">OrderedDecoder</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="c">#print(&#39;self.__dict__[teamName]= &#39;,self.__dict__[teamName].print())</span>
+        
+        <span class="c">#print(&#39;-------- loadTeam: self.__dict__[&#39;,teamName,&#39;].print()\n&#39;,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">teamName</span><span class="p">]</span><span class="o">.</span><span class="k">print</span><span class="p">()</span>
+        <span class="c">#print(&#39;-------- loadTeam: self.fullTeam.print()&#39;,self.fullTeam.print(),&#39;\n&#39;)</span>
+              
+        </div>
+<div class="viewcode-block" id="TeamGenerator.loadTeams"><a class="viewcode-back" href="../TeamGenerator.html#TeamGenerator.TeamGenerator.loadTeams">[docs]</a>    <span class="k">def</span> <span class="nf">loadTeams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">):</span>    
+        <span class="sd">&#39;&#39;&#39; method to load the two teams from disk &#39;&#39;&#39;</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;-------- Calling loadTeams(&quot;</span><span class="p">,</span><span class="n">location</span><span class="p">,</span> <span class="s">&quot;) --------&quot;</span><span class="p">)</span>
+        
+        <span class="c"># teamA</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadTeam</span><span class="p">(</span><span class="s">&#39;teamA&#39;</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="s">&quot;ATeam.json&quot;</span><span class="p">)</span>
+        <span class="c">#print(self.teamA.print())</span>
+        
+        <span class="c"># teamB        </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loadTeam</span><span class="p">(</span><span class="s">&#39;teamB&#39;</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="s">&quot;BTeam.json&quot;</span><span class="p">)</span>        
+        <span class="c">#print(self.teamB.print())</span>
+     
+<span class="c"># main</span></div></div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    
+    
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---- START ----&#39;</span><span class="p">)</span>
+    <span class="n">tg</span> <span class="o">=</span> <span class="n">TeamGenerator</span><span class="p">()</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">45</span>
+    
+    <span class="c">#tg.sampleTeamSetup()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---- Load all Players into &quot;fullTeam&quot; as they have been the saved to file ----&#39;</span><span class="p">)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">loadTeam</span><span class="p">(</span><span class="s">&#39;fullTeam&#39;</span><span class="p">,</span><span class="s">&#39;./Input/&#39;</span><span class="p">,</span> <span class="s">&#39;VerySmallTeam.json&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---+++&#39;</span><span class="p">,</span> <span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="o">.</span><span class="k">print</span><span class="p">())</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">dumpTeam</span><span class="p">(</span><span class="s">&#39;fullTeam&#39;</span><span class="p">,</span><span class="s">&#39;./Input/&#39;</span><span class="p">,</span> <span class="s">&#39;VerySmallTeam_out.json&#39;</span><span class="p">)</span>
+    <span class="c">#print(&#39;---+++&#39;, tg.fullTeam.print())</span>
+    <span class="c">#print(tg.teamA.print())</span>
+    <span class="c">#print(tg.teamB.print())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">---- Shift players from fullTeam to teamA ----&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;len(tg.fullTeam.players)&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="n">shiftNPlayersFromTeam</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">fullTeam</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">------</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>    
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---teamA---</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">------</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>    
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---teamB---</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="k">print</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">------</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---- berechneMannschaften &#39;</span><span class="p">)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">berechneMannschaften</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">---- Result after berechneMannschaften:</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamA</span><span class="o">.</span><span class="k">print</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">tg</span><span class="o">.</span><span class="n">teamB</span><span class="o">.</span><span class="k">print</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---- dumpTeams &#39;</span><span class="p">)</span>
+    <span class="n">tg</span><span class="o">.</span><span class="n">dumpTeams</span><span class="p">(</span><span class="s">&#39;./Result/&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---- &#39;</span><span class="p">)</span>
+    
+    
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---- END ----&#39;</span><span class="p">)</span>
+    
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015, SohnyBohny.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

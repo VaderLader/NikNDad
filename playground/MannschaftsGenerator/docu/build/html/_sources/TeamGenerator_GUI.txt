@@ -59,9 +59,9 @@ http://pyqt.sourceforge.net/Docs/PyQt4/qmainwindow.html#details
 ================================	=========================================================================================================
 Untermenü							Funktion
 ================================	=========================================================================================================
-``Datei`` ``Speichern``				generiert ein .json file mit den generierten Manschaften in .\Result (TeamA.json; TeamB.json)
-``Datei`` ``Speichern unter`` 		generiert ein .json file mit den generierten Manschaften
-``Datei`` ``print to .txt`` 		generiert ein .txt file mit den generierten Manschaften
+``Datei`` ``Speichern``				generiert ein .json file mit den generierten Mannschaften in .\Result (TeamA.json; TeamB.json)
+``Datei`` ``Speichern unter`` 		generiert ein .json file mit den generierten Mannschaften
+``Datei`` ``print to .txt`` 		generiert ein .txt file mit den generierten Mannschaften
 ================================	=========================================================================================================
 
 2. Qt Model-View-Programming
@@ -73,8 +73,8 @@ http://doc.qt.io/qt-4.8/model-view-programming.html
 ^^^^^^^^^
 Das Model ist die Schnittstelle über die ein View auf die Daten zugreift. Die Daten gehören nicht zum Model sondern zu einer anderen Klasse.
 Wenn man die Daten in einer Tabelle darstellen will benutzt man am besten das **QAbstractTableModel**.
-Ein **Team** hat ja eine Liste von playern und die sollen  immer in einer Tabelle aufgelistet werden.
-Das Model heist ``TeamGeneratorModel`` und implementiert ``QtCore.QAbstractTableModel``.
+Ein **Team** hat ja eine Liste von playern und die sollen immer in einer Tabelle aufgelistet werden.
+Das Model heißt ``TeamGeneratorModel`` und implementiert ``QtCore.QAbstractTableModel``.
 
 Das Model regelt also wie und welche Daten im View dargestellt werden. Dazu muss man verschiedene Methoden implementieren die vom View benutzt werden.
 
@@ -83,14 +83,14 @@ http://doc.qt.io/qt-4.8/images/modelview-models.png
   
 2.2 View
 ^^^^^^^^
-Für die Darstellung der Daten in Tabellen Form wird ein ``QTableView`` implementiert.  
+Für die Darstellung der Daten in Tabellenform wird ein ``QTableView`` implementiert.  
 
 http://pyqt.sourceforge.net/Docs/PyQt4/qtableview.html
 
 2.3 Proxy model
 ^^^^^^^^^^^^^^
 Für einen View ist ein Proxy model Objekt das gleiche wie ein Model. Der View kann über ein oder viele Proxy model auf das Grundmodel und darüber auf die die Daten zugreifen.
-``QtGui.QSortFilterProxyModel`` ist ein solches ProxyModel das verschiedene Sortierungen bereitstellt.
+``QtGui.QSortFilterProxyModel`` ist ein solches Proxy model das verschiedene Sortierungen bereitstellt.
 
 2.4 Von den Daten bis zum View
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -109,7 +109,7 @@ Das Model regelt wie und welche Daten im View dargestellt werden. Dazu muss mann
 	================= ====== ========= ===== ======== ====== ==============
 /////////////////////////////////////////////////////////
 
-*Gesammt sieht das dann zum Beispiel so aus*::
+*Gesamt sieht das dann zum Beispiel so aus*::
 
 		#: Data of teamA.players is connected with the View tableView_A
         #: in three steps: 
